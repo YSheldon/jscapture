@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head width="915" height="516">
+<head width="920" height="600">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="msapplication-tap-highlight" content="no">
     <!--<meta http-equiv="pragma" content="no-cache">-->
@@ -284,7 +284,7 @@
                 </div>
                 <div class="vdo_r">
                     <div class="vdo_r_callOut">
-                        <div class="vdo_r_callOutD">正在呼叫…</div>
+						<p align="center"><video id="video" autoplay/></p>
                     </div>
                     <div class="vdo_r_t">
                         <h3>赵晨威</h3>
@@ -701,34 +701,33 @@
         var oplayX = document.getElementsByClassName('vdo_r_callOut')[0];
 
         try {
-
 			    var parm = {"userUniId":"36@2.uniform11-lanxin"};
                 window.URL = window.URL || window.webkitURL;
-				setInterval(function () {
-						
-						try {
+				navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.getUserMedia;
+          	navigator.getUserMedia({
+                   	audio: false,
+                   	video: {
+                       	mandatory: {
+                           	chromeMediaSource: 'desktop',
+							chromeMediaSourceId: 'window:267442:0',
+                           	minWidth: 1280,
+                           	minHeight: 720,
+                           	maxWidth: 1280,
+                           	maxHeight: 720
+                       	},
+                       	optional: []
+                   	}
+               	}, function(stream) {
+                   	document.getElementById('video').src = window.URL.createObjectURL(stream);;
+                   	
+               	}, function() {
+					var tip = 'Error, Screen stream is not available.'
+                   	my_layer({message: tip}, 'warn');
 
-							window.lxpc.exebusinessaction('VideoConf', 'GetVideoImg', '0', JSON.stringify(parm), 1, function (status, result, targ) {
+                 	}
+          	)
+			//oplayX.style.backgroundImage='url(' + result + ')'
 
-								if (status == 0) {
-
-									//var result=result+'?t='+new Date().getTime();
-                                    oplay.style.backgroundImage='url(' + result + ')'
-	                                    oplayX.style.backgroundImage='url(' + result + ')'
-								
-								} else {
-
-									console.log(status)
-								}
-
-							})
-						}
-						catch (e) {
-							console.log(e.message)
-						}
-						
-						
-					}, 50)
 				
 
 		
