@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head width="722"  height="560">
+    <meta charset="UTF-8">
+    <title>创建通知</title>
+    <style>
+
+        textarea::-webkit-input-placeholder,input::-webkit-input-placeholder{
+            font-size: 13px;
+            color: #999999;
+            letter-spacing: -0.26px;
+        }
+        /*.sendTo li{*/
+            /*width:38px;*/
+        /*}*/
+
+    </style>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/contacts.css">
+    <link rel="stylesheet" href="css/notification.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/layer.css">
+
+
+
+    <!--表情-->
+    <!--<script src="js/emoji.js"></script>-->
+    <!--<script src="js/emoji-list-with-image.js"></script>-->
+    <!--<script src="js/punycode.js"></script>-->
+    <!--zTree-->
+    <!--<link rel="stylesheet" href="./css-2/contacts.css-2">-->
+    <link rel="stylesheet" href="css/zTreeStyle.css">
+    <script src="js/jQuery-2.1.4.min.js"></script>
+    <script src="./js/iscroll-5.1.3.min.js"></script>
+    <script src="js/jquery.ztree.core.js"></script>
+    <script src="js/jquery.ztree.excheck.js"></script>
+    <script src="js/application.js"></script>
+    <script src="js/my_layer.js"></script>
+    <script src="js/questionnaire.js"></script>
+    <script src="js/contacts.js"></script>
+    <script type="text/javascript" src="./js/xss.min.js"></script>
+
+</head>
+<body>
+
+<div class="out_box "  typeInfo="" >
+    <div class="send_title" style=" -webkit-app-region:drag;">
+        <span style="background: url(./images/logo.png) no-repeat 5px center;padding-left: 30px">创建通知</span>
+        <ul class="tool">
+            <li class="Winmin" style=""></li>
+            <li class="Winmax" style="display: none"></li>
+            <li class="Winclose" style=""></li>
+        </ul>
+    </div>
+    <!--<div id="send_Scroll" style="position: relative;overflow: hidden" class="send_Scroll">-->
+        <div id="send_Scroll" class="send_Scroll" >
+        <div id="send_content" enable >
+            <ul class="send_content">
+                <li >
+                    <span>标题</span>
+                    <input type="text" placeholder="请填写通知标题" id="NoticeTheme" maxlength="60"  style="width:89% ;">
+                </li>
+                <li>
+                    <span style="vertical-align: top">正文</span>
+                    <textarea placeholder="请填写通知正文" style="resize: none;height: 154px;width: 89%;outline: none" id="NoticeContent" maxlength="5000" ></textarea>
+                    <div class="clear:both"></div>
+                    <h4 class="attach">添加附件<small>( 只能上传一个附件 )</small></h4>
+                    <a class="color_h  quest">添加问卷</a>
+                    <div class="add_vote disN " id="add_vote">
+
+                        <ul class="aV_question">
+                            <!--<li class="queCon_Q">-->
+                                <!--<div class="aV_queCon">-->
+                                    <!--<div class="aV_quesL">-->
+                                        <!--<h4>Q1:</h4>-->
+                                        <!--<div class="aV_qL_btn"><a href="javascript:;" class="aV_del"></a></div>-->
+                                    <!--</div>-->
+                                    <!--<div class="aV_quesR">-->
+                                        <!--<div class="aV_title aV_t_editable">-->
+                                            <!--<div class="aV_issue_title" contenteditable="true">请填写问答题标题</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</li>-->
+                            <!--<li class="queCon_R">-->
+                                <!--<div class="aV_queCon">-->
+                                    <!--<div class="aV_quesL">-->
+                                        <!--<h4>Q2:</h4>-->
+                                        <!--<div class="aV_qL_btn"><a href="javascript:;" class="aV_del"></a></div>-->
+                                    <!--</div>-->
+                                    <!--<div class="aV_quesR aV_quesRradio">-->
+                                        <!--<div class="aV_title aV_t_editable">-->
+                                            <!--<div class="aV_queTitle T_edit" >请填写单选题标题</div>-->
+                                            <!--&lt;!&ndash;<div class="add_editDiv">-->
+                                                <!--<div class="add_edit th4 q_title" contenteditable="true" style="min-height:20px;"></div>-->
+                                            <!--</div>&ndash;&gt;-->
+                                        <!--</div>-->
+                                        <!--<ul class="aV_qOption">-->
+                                            <!--<li class="aV_qOption_li"><div class="aV_radioDiv"><div class="aV_radioDiv_opt"><span class="aV_qOptionType"><a href="javascript:;" class="aV_radio"></a><input type="radio" class="opc0" /></span></div>-->
+                                                <!--<div class="aV_title aV_t_editOpa aV_optTitle">-->
+                                                    <!--<label class="aV_queTitle T_edit" opt="选项1">选项1</label>-->
+                                                    <!--&lt;!&ndash;<div class="add_editDiv">-->
+                                                        <!--<div class="add_edit th4 q_title" contenteditable="true" style="min-height:20px;">选项1<div id="preview"></div></div>-->
+                                                        <!--<div class="add_edit_btn"><span class="aV_edit_img"><a href="javascript:;"></a><input type="file" class="opc0" /></span><a href="javascript:;" class="aV_del"></a></div>-->
+                                                    <!--</div>&ndash;&gt;-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--</li>-->
+                                            <!--<li class="aV_qOption_li"><div class="aV_radioDiv"><div class="aV_radioDiv_opt"><span class="aV_qOptionType"><a href="javascript:;" class="aV_radio"></a><input type="radio" class="opc0" /></span></div>-->
+                                                <!--<div class="aV_title aV_t_editOpa aV_optTitle">-->
+                                                    <!--<label class="aV_queTitle T_edit" opt="选项2">选项2</label>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--</li>-->
+                                        <!--</ul>-->
+                                        <!--<div class="operationH"><a href="javascript:;" class="cq_add"><i class="add-icon-active"></i></a></div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</li>-->
+                            <!--<li class="queCon_C">-->
+                                <!--<div class="aV_queCon">-->
+                                    <!--<div class="aV_quesL">-->
+                                        <!--<h4>Q3:</h4>-->
+                                        <!--<div class="aV_qL_btn"><a href="javascript:;" class="aV_del"></a></div>-->
+                                    <!--</div>-->
+                                    <!--<div class="aV_quesR aV_quesRcheck">-->
+                                        <!--<div class="aV_title aV_t_editable">-->
+                                            <!--<div class="aV_queTitle T_edit">请填写多选题标题</div>-->
+                                            <!--&lt;!&ndash;<div class="add_editDiv">-->
+                                                <!--<div class="add_edit th4 q_title" contenteditable="true" style="min-height:20px;"></div>-->
+                                            <!--</div>&ndash;&gt;-->
+                                        <!--</div>-->
+                                        <!--<ul class="aV_qOption">-->
+                                            <!--<li class="aV_qOption_li"><div class="aV_radioDiv"><div class="aV_radioDiv_opt"><span class="aV_qOptionType"><a href="javascript:;" class="aV_check"></a><input type="checkbox" class="opc0" /></span></div>-->
+                                                <!--<div class="aV_title aV_t_editOpa aV_optTitle">-->
+                                                    <!--<label class="aV_queTitle T_edit" opt="选项1">选项1</label>-->
+                                                    <!--&lt;!&ndash;<div class="add_editDiv">-->
+                                                        <!--<div class="add_edit th4 q_title" contenteditable="true" style="min-height:20px;">选项1<div id="preview"></div></div>-->
+                                                        <!--<div class="add_edit_btn"><span class="aV_edit_img"><a href="javascript:;"></a><input type="file" class="opc0" /></span><a href="javascript:;" class="aV_del"></a></div>-->
+                                                    <!--</div>&ndash;&gt;-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--</li>-->
+                                            <!--<li class="aV_qOption_li"><div class="aV_radioDiv"><div class="aV_radioDiv_opt"><span class="aV_qOptionType"><a href="javascript:;" class="aV_check"></a><input type="checkbox" class="opc0" /></span></div>-->
+                                                <!--<div class="aV_title aV_t_editOpa aV_optTitle">-->
+                                                    <!--<label class="aV_queTitle T_edit" opt="选项2">选项2</label>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--</li>-->
+                                        <!--</ul>-->
+                                        <!--<div class="operationH"><a href="javascript:;" class="cq_add"><i class="add-icon-active"></i></a><div class="operationNum"><select><option>最多选2项</option></select></div></div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</li>-->
+                        </ul>
+                        <div class="aV_btn">
+                            <div class="fl"><a href="javascript:;" class="btn1 add_s">添加单选题</a><a href="javascript:;" class="btn1 add_d">添加多选题</a><a href="javascript:;" class="btn1 add_q">添加问答题</a></div>
+                            <div class="fr">
+                                <div class="aV_radioCon radio_clickable">
+                                    <div class="aV_radioDiv"><span class="aV_qOptionType"><a href="javascript:;" class="aV_radio aV_radioEd"></a><input type="radio" class="opc0" /></span><label>实名</label></div>
+                                    <div class="aV_radioDiv"><span class="aV_qOptionType"><a href="javascript:;" class="aV_radio"></a><input type="radio" class="opc0" /></span><label>匿名</label></div>
+                                </div>
+                                <a href="javascript:;" class="aV_delVote aV_a">删除问卷</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <span>发给谁</span>
+                    <small>(点击头像可删除)</small>
+                    <!--<ul class="sendTo" style="zoom: 1;overflow: hidden">-->
+                    <ul class="sendTo" style="zoom: 1;overflow: hidden">
+                        <li class="addPerson">
+                            <div></div>
+                            <span>添加人</span>
+                        </li>
+
+                        <!--<li style="clear: both;height: 10px;background:red;"></li>-->
+
+                    </ul>
+                    <div style="clear: both"></div>
+                </li>
+
+            </ul>
+            <!--<div style="clear: both;"></div>-->
+        </div>
+    </div>
+    <div class="btn_send ">
+        <button class="btn_active">发送通知</button>
+    </div>
+</div>
+<div id="addcontacts" class="out_box " style="display: none;" typeInfo="">
+</div>
+
+</body>
+</html>
+<script type="application/javascript" charset="utf-8">
+
+   $(function(){
+
+       $(window).resize(function(){
+
+           recomputebox();
+       })
+       recomputebox();
+       function recomputebox(){
+           var oboxH=$('.out_box')[0].clientHeight,
+                   titleH=$('.send_title')[0].offsetHeight,
+                   btnH=$('.btn_send')[0].offsetHeight;
+
+           var scrollH=oboxH-titleH-btnH-18+'px'
+
+           $('#send_Scroll').css('height',scrollH)
+       }
+
+      var maxlength;
+              try{
+                  var parm={};
+           window.lxpc.exebusinessaction('createnotice', 'InitFinished', '0', JSON.stringify(parm), 0, function (status, jsondata, targ) {
+               if(status==0){
+                  
+                   var data=JSON.parse(jsondata);
+                   maxlength=data.resourceMaxSize
+
+
+
+               }else{
+                   my_layer({message:'调取接口出错，错误码'+ status},'error')
+               }
+           })
+       }catch(e){
+           my_layer({message:'调取接口出错，错误码'+ e.message},'error')
+       }
+       //关闭页面
+       TitleTools();
+
+       //添加附件
+       $(".send_content .attach").on("click", function () {
+
+           var _that = this;
+
+           if ($(_that).data('targ') == true) {
+
+               return;
+           }
+
+           new Promise(function (resolve, reject) {
+               try {
+
+                   var parm = {};
+                   window.lxpc.exebusinessaction('Notice', 'OpenFileDialog', '0', JSON.stringify(parm), 0, function (status, data, targ) {
+                       if (status == 0) {
+
+                           //在添加附件之前不可发送通知
+                           $('.send_content .btn_send').addClass('noclick');
+//
+                           data = JSON.parse(data);
+                           var Filepath = data["filePath"]
+                           var FileName = Filepath.substring(Filepath.lastIndexOf('\\') + 1);
+
+                           var FileSize = data['fileSize'];
+                           var max=RsetFileSize(maxlength)
+
+                           if(FileSize>maxlength){
+                               $(_that).data('targ', false);
+                               my_layer({message:'文件大小不能超过'+max},'warn')
+                               return;
+                           }
+                           if(FileSize==0){
+                               $(_that).data('targ', false);
+                               my_layer({message:'不能上传空文件'},'warn')
+                               return;
+                           }
+
+
+                           var str = '<div class="attachInfo"><span id="AttName">' + FileName + ' ' + '</span><span id="AttSize">' + RsetFileSize(FileSize) + '</span><span id="AttDel" onclick="delAttanch()" style="color: #C6CAD2;cursor: default">取消</span><span id="AttSpeed"></span></div>';
+
+                           $('.send_content .attach').after(str);
+                           scroll_send.refresh();
+                           var file = {};
+                           file.path = Filepath;
+                           file.size = FileSize;
+
+                           $('.attach').addClass('click_N');
+
+                           resolve(file)
+                       } else {
+                           my_layer({message:'调用接口失败，错误码'+ e.message},'error');
+                       }
+                   });
+
+
+               } catch (e) {
+                   console.log(e.message)
+               }
+
+           }).then(function (file) {
+
+               var totalSize = 0;
+               var FileID = createGuid();
+
+               var parm = {resourceList: [{fileNamePath: file['path'], fileResId: FileID, fileSize: file['size']}]};
+               $(' .send_content .attachInfo').attr('guid', FileID);
+               try {
+                   window.lxpc.exebusinessaction('UploadResource', 'Attachment', '0', JSON.stringify(parm), 1, function (status, data, targ) {
+
+                       if (status == 0) {
+                           data=JSON.parse(data)
+                           if(Object.prototype.toString.call(data)=='[object Array]'){
+
+
+                           }else{
+
+                               totalSize=totalSize+data;
+                               var size = RsetFileSize(totalSize) + '/' + RsetFileSize(file['size']);
+                               if (totalSize >= file['size']) {
+
+                                   $('.send_content .btn_send').removeClass('noclick');
+                                   $(' .send_content #AttSpeed').html(RsetFileSize(file['size']) + '/' + RsetFileSize(file['size']));
+                                   $('.send_content #AttDel').css({color:'#067CEB',cursor: 'pointer'});
+                                   $(_that).data('targ', true);
+
+                               } else {
+                                   $(' .send_content #AttSpeed').html(size);
+                               }
+                           }
+
+
+
+
+                           $('.send_content .btn_send').removeClass('noclick');
+
+                       } else {
+                           console.log(status);
+                       }
+                   });
+
+
+               } catch (e) {
+                   console.log(e.message)
+               }
+
+
+           });
+
+
+
+
+       })
+       
+       var option = scrollSetings();
+
+       var  scroll_send = new IScroll('#send_Scroll', option);
+       var Contactlist=[];
+
+       var temquestion=null;
+       //添加问卷
+       $('.quest').click(function () {
+           //创建调查问卷
+           var $ele = $(this);
+
+           if($ele.hasClass('questionstatus')){
+
+               return;
+           }
+           $ele.addClass('questionstatus').removeClass('color_h').html('已添加的问卷')
+
+           if (temquestion) {
+
+               var tem = temquestion.cloneNode(true)
+               $ele.after(tem)
+               scroll_send.refresh();
+           } else {
+
+               $('.add_vote').show();
+               scroll_send.refresh();
+
+               temquestion = $('.add_vote ')[0].cloneNode(true);
+           }
+           $('.add_vote').show();
+
+           var questionnaire = new Questionnaire(scroll_send);
+
+       })
+
+
+
+//选择联系人
+       $('.addPerson').on('click',function(){
+           $('#addcontacts').show();
+           var contact=new Contacts('#addcontacts')
+
+           contact.Closecontacts('#addcontacts');
+           contact.ConfirmContact('#addcontacts',function(Contactslist){
+
+
+               if(Contactslist.length==0){
+                   my_layer({message:'请选择联系人或组织'},'warn')
+                   return;
+               }
+               $('#addcontacts').hide();
+               Contactlist =Contactslist;
+
+               var str = '';
+               for (var i = 0; i < Contactslist.length; i++) {
+                   var curContact = Contactslist[i];
+                   var userUniId = curContact.userUniId;
+                   var name = curContact.name;
+                   var ImgePath = curContact.ImgePath;
+                   var isexisted=false;
+                   $(".sendTo li:not('.addPerson')").each(function(index,ele){
+
+                       if($(ele).attr('userid')==userUniId){
+                           isexisted=true;
+                       }
+                   })
+
+                   if(!isexisted){
+                       if(curContact.type==1){
+                           name=name+'<i class="contact_info">外</i>'
+           }
+
+                       str += '<li userid="' + curContact.userUniId + '" onclick="delCotants(\'' + userUniId + '\')"><img src="' + ImgePath + '" alt=""><span>' + name + '</span></li>'
+                   }
+
+               }
+
+               $('.sendTo').append(str);
+               scroll_send.refresh();
+           });
+
+
+
+       })
+
+       //发送通知
+
+       $('.btn_send button').on('click',function(){
+
+           var that = this;
+           var stheme = $('#NoticeTheme').val();
+           var smainContent = $('#NoticeContent').val();
+
+
+           if (smainContent == '') {
+
+               my_layer({message:'请填写通知正文'},'warn')
+               return;
+           }
+
+           //获取通知实体的信息
+           var resId = $(' .attachInfo').attr('guid');
+           var residname = $(' .attachInfo #AttName ').html();
+
+           //判断是不是有问卷
+           var isQuestion = false;
+           if ($('.quest').hasClass('questionstatus')) {
+               isQuestion = true;
+           }
+
+           var topicList = [];
+
+
+           var sendtype = 0;
+
+
+           if (isQuestion) {
+
+
+               var stype = $('.aV_btn .aV_radioEd').parents('.aV_qOptionType').next().html();
+
+               if (stype == '实名') {
+                   sendtype = 1;
+               } else {
+                   sendtype == 0;
+               }
+
+               var lilist = $('.aV_question >li')
+               for (var i = 0; i < lilist.length; i++) {
+
+                   var $ele = $(lilist[i]);
+
+                   var optionList = [],
+                           content = '',
+                           type = '',
+                           voteLimit = 0,
+
+                           resourceName = '';
+
+
+                   if ($ele.hasClass('queCon_Q')) {//简答题
+                       content = $ele.find('.aV_issue_title').html();
+                       if (content == '请填写问答题标题') {
+                           my_layer({message: '请完善简答题'}, 'error')
+                           return;
+                       }
+
+
+                       type = 0;
+                       var obj = {content: content, type: type};
+                       topicList.push(obj)
+
+                   } else if ($ele.hasClass('queCon_R')) {//单选题
+
+                       content = $ele.find('.T_edit').html();
+
+                       if (content == '请填写单选题标题') {
+                           my_layer({message: '请完善单选题标题'}, 'error')
+                           return;
+                       }
+
+                       type = 1;
+                       voteLimit = 1;
+
+                       var optlist = $ele.find('li');
+
+                       for (var j = 0; j < optlist.length; j++) {
+                           var $item = $(optlist[j]);
+
+                           var optlabel = $item.find('.T_edit'),
+                                   optTitle = optlabel.html(),
+                                   optdefault = optlabel.attr('opt'),
+                                   optresId = $item.attr('resId');
+
+                           if (optTitle == optdefault) {
+
+                               my_layer({message: '请完善单选题可选项信息'}, 'error')
+                               return;
+                           }
+                           //optTitle = $('.aV_queTitle').html();
+                           if (typeof(optresId) == 'undefined' || optresId == '') {
+
+                               optionList.push({content: optTitle});
+                           } else {
+                               optionList.push({content: optTitle, resId: optresId});
+                           }
+
+
+                       }
+
+
+                       topicList.push({
+                           content: content,
+                           type: type,
+                           voteLimit: voteLimit,
+                           optionList: optionList
+                       });
+
+
+                   } else {//多选题
+                       content = $ele.find('.T_edit').html();
+                       if (content == '请填写多选题标题') {
+                           my_layer({message: '请完善多选题标题'}, 'error')
+                           return;
+                       }
+
+                       type = 1;
+                       voteLimit = $('.operationNum option:selected').val().replace(/\D+/g, '');
+                       ;
+
+                       var optlist = $ele.find('li');
+
+                       for (var k = 0; k < optlist.length; k++) {
+                           var $item = $(optlist[k]);
+
+                           var optlabel = $item.find('.T_edit'),
+                                   optTitle = optlabel.html(),
+                                   optdefault = optlabel.attr('opt'),
+                                   optresId = $item.attr('resId');
+
+                           if (optTitle == optdefault) {
+                               my_layer({message: '请完善多选题可选项信息'}, 'error')
+                               return;
+                           }
+
+                           if (typeof(optresId) == 'undefined' || optresId == '') {
+
+                               optionList.push({content: optTitle});
+                           } else {
+                               optionList.push({content: optTitle, resId: optresId});
+                           }
+
+                       }
+
+                       topicList.push({
+                           content: content,
+                           type: type,
+                           voteLimit: voteLimit,
+                           optionList: optionList
+                       });
+
+                   }
+
+
+               }
+
+
+           }
+
+           var noticeEntity = {
+//               "recordDomain": "804.unicom-lanxin",
+               "uuid": "",
+               "title": stheme,
+               "content": smainContent,
+               "resId": resId,
+               "creatorUniId": "",
+               "expiresDate": 0,
+               "appType": 0,
+               "sendType": 0,
+               "forbidForward": 0,
+               "forbidCopy": 0,
+               "monitorScreen": 0,
+               "expiresType": 0,
+               "createTime": 0,
+               "modifyTime": 0,
+               "lastReplyTime": 0,
+               "lastConfirmTime": 0,
+               "sortedTime": 0,
+               "status": 0,
+               "realName": sendtype,
+               "topicCount": 0,
+               "receiverMemberCount": 0,
+               "confirmCount": 0,
+               "replyCount": 0,
+               "readReplyCount": 0,
+               "topicList": topicList,
+           };
+
+           var userUniIdList = [],invitedGroups=[];
+
+           if ($('.sendTo li:not(".addPerson") ').length > 0) {
+               $('.sendTo li:not(".addPerson") ').each(function (index, ele) {
+
+                   for(var i=0; i<Contactlist.length;i++){
+                       var Contact=Contactlist[i];
+                       var obj={};
+                       if(Contact['isstruct']){
+                           obj={
+                               "id": 0,
+                               "qunId": 0,
+                               "groupId":Contact['userUniId'],
+                               "name": "",
+                               "type": 2,
+                               "orgType": 0,
+                               "createTime": 0,
+                               "modifyTime": 0
+                           }
+                           invitedGroups.push(obj)
+                       }else{
+                           userUniIdList.push(Contact['userUniId'])
+                       }
+
+                   }
+
+
+               });
+           } else {
+
+               my_layer({message:'请选择联系人'},'warn')
+               return
+           }
+
+
+           var parm = {invitedGroups: invitedGroups, noticeEntity: noticeEntity, userUniIdList: userUniIdList};
+
+           try {
+               window.lxpc.exebusinessaction('notice', 'SendNotice', '0', JSON.stringify(parm), 0, function (status, Notice, targ) {
+                   if (status == 0) {
+                       window.lxpc.closewnd();
+                   } else {
+
+                       my_layer({message:'请选择联系人'},'error')
+                   }
+               });
+               $(that).off();
+
+           } catch (e) {
+               console.log(e.message)
+           }
+
+       })
+
+
+
+
+   })
+
+   //删除附件
+   function delAttanch() {
+       $(".send_content .attachInfo").remove();
+       $('.attach').removeClass('click_N');
+       $(".send_content .attach").data('targ',false);
+//       scroll_send.refresh();
+
+   };
+//删除选中的联系人
+   function delCotants(id) {
+
+       $(".sendTo li:not('.addPerson')").each(function (index, ele) {
+           if ($(ele).attr('userid') == id) {
+               $(ele).remove();
+
+           }
+
+       })
+
+
+   };
+
+
+
+</script>

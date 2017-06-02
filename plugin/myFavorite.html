@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head width="852" height="591">
+    <meta charset="UTF-8">
+    <title>我的收藏</title>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css"/>    <!--默认-->
+    <link rel="stylesheet" type="text/css" href="./css/common.css"/>    <!--通用-->
+    <link rel="stylesheet" type="text/css" href="./css/workdoc.css"/>    <!--内容样式：主要内容-->
+    <link rel="stylesheet" type="text/css" href="./css/smartMenu.css"/>    <!--右键菜单-->
+    <link rel="stylesheet" type="text/css" href="./css/myFavorite.css">
+    <script type="text/javascript" src="./js/jQuery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="./js/iscroll-5.1.3.min.js"></script>
+    <script type="text/javascript" src="js/iscroll-probe.js"></script><!--滚动条-->
+    <script type="text/javascript" src="./js/jquery-smartMenu.js"></script>    <!--右键菜单-->
+    <script type="text/javascript" src="./js/application.js"></script>
+    <script type="text/javascript" src="./js/clipboard.js"></script>
+    <script type="text/javascript" src="./js/xss.min.js"></script>
+    <!--<script type="text/javascript" src="./js/vue.min.js"></script>-->
+    <!--<script type="text/javascript" src="./js/myFavorite.js"></script>-->
+</head>
+<body>
+<div class="out_box">
+    <div class="top_title">
+        <span>我的收藏</span>
+        <ul class="tool">
+            <li class="Winmin"></li>
+            <li class="Winmax"></li>
+            <li class="Winclose"></li>
+        </ul>
+    </div>
+    <div class="con_box">
+        <div class="fav_head">
+            <!--<span>共</span><span id="fav_count">0</span><span></span>条收藏</span>-->
+            <span class="fav_count">共<span id="fav_count">0</span>条收藏</span>
+            <span class="disN">
+
+                <input type="text" class="fav_search" value="搜索">
+                <em class="search"></em>
+                <em class="del"></em>
+            </span>
+
+        </div>
+        <div class="fav_con" id="wrapper">
+            <div class=" con_Normal">
+                <div class="updataFav ">
+                    <em class="loadMore disN"></em><span class="loadTile">更新收藏</span>
+                </div>
+                <ul class="fav_con_list" id="app1">
+                    <!--<li class="action_Nocopy">-->
+                    <!--<h3>-->
+                    <!--<span class="fav_Name">赵鹏</span>-->
+                    <!--<span class="fav_CreatTime">11-25 11:46</span>-->
+                    <!--<span class="fav_Time">收藏于:2016/12/18</span>-->
+                    <!--</h3>-->
+                    <!--<div class="fav_det">-->
+                    <!--<p>开会</p>-->
+
+                    <!--&lt;!&ndash;<div class="fav_voice">&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<img src="../../images/message_voice_bg.png" alt="">&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;<span class="voice_play" onclick="playVoice(this)" style="background-position: -32px center;"></span>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<span class="voice_time">6''</span>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<div class="fav_voice">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<img src="./images/message_voice_bg.png" alt="">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<span class="voice_play"></span>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<span class="voice_time">6''</span>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                    <!--</div>-->
+                    <!--</li>-->
+                </ul>
+                <div class="loadHistory disN">
+                    <em class="loadMore "></em><span class="loadTile">加载更多</span>
+                </div>
+            </div>
+            <div class=" con_Search disN">
+                <ul class="fav_con">
+
+                </ul>
+            </div>
+            <div style="position:absolute ;top: 0;left: 0;right: 0;bottom: 0;text-align: center" class="NoMsgFav disN">
+                <img src="./images/fav_icon.png" alt="" style="margin-top: 20%;">
+                <p style="font-size: 14px;margin-top: 12px ;color: #999;">还没有收藏信息</p>
+                <p style="margin-top: 10px;font-size: 12px;color: #ccc;" class="">在消息上右键点击收藏，即可将消息收藏到这里</p>
+            </div>
+            <div class="loading ">
+                <img src="./images/ajax-loader_smail.gif" alt="">
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
+<script>
+
+
+    var myF = null;
+
+    $(function () {
+
+        TitleTools();
+
+        function MyF() {
+            this.mainScroll = null;
+            this.imgId = -1;
+            this.imgList = [];
+            this.FileId = -1;
+            this.voiceId = -1;
+            this.init();
+
+        }
+
+        MyF.prototype = {
+            constructor: MyF,
+            init: function () {
+                this.loadScroll();
+                this.bindevent();
+//                this.smartRightclick();
+                this.getdata();
+            },
+            loadScroll: function () {
+
+                var option = scrollSetings();
+                this.mainScroll = new IScroll("#wrapper", option);
+            },
+            bindevent: function () {
+                var _this = this;
+                //搜索
+                var $search = $('.search'),
+                        $del = $('.del'),
+                        $favSearch = $('.fav_search'),
+                        strSearch = '搜索';
+
+                $favSearch.focusin(function () {
+
+                    if ($(this).val() == strSearch) {
+                        $(this).val('')
+                    }
+
+                }).focusout(function () {
+                    if ($(this).val() == '') {
+                        $(this).val(strSearch)
+                    }
+                })
+
+                $del.click(function () {
+                    $favSearch.val('')
+                })
+
+//                滚动条加载更多
+
+                this.mainScroll.on("scroll", function () {
+
+
+                    var isLoad = false
+
+                    if (this.directionY == 1) {
+                        if (this.y == this.maxScrollY) {
+                            isLoad = true;
+                        }
+                    } else {
+                        if (this.directionY == 0 && this.directionX == 1) {
+                            isLoad = true;
+                        }
+                    }
+
+                    var loadH = $('.loadHistory')
+//
+                    if (isLoad) {
+
+                        var $ele = $('.loadMore');
+
+                        if ($ele.data('targ') == 0) {//没有更多内容
+
+                            return;
+                        } else {
+                            $ele.show();
+
+                            loadMore();
+                        }
+
+
+                    }
+
+
+                })
+
+//监听窗体变化
+                window.onresize = function () {
+
+                    var contentH = $('.con_Normal')[0].clientHeight
+                    var boxH = $('.fav_con')[0].clientHeight
+
+                    if (boxH - contentH > 2) {
+                        $('.loadMore').hide()
+                    }
+
+                }
+
+                $('.loadHistory .loadTile').click(function () {
+
+                    loadMore()
+                })
+
+                function loadMore() {
+                    var lastFavId = $('.con_Normal .fav_con_list>li:last').data('favid')
+
+                    if (typeof(lastFavId) != 'undefined') {
+                        var loadH = $('.loadHistory')
+                        var parm = {favoriteId: lastFavId, count: 5}
+                        $('.loadMore').data('targ', 0)
+
+                        window.lxpc.exebusinessaction('MyFavorite', 'QueryPreFavorite', '0', JSON.stringify(parm), 0, function (status, jsondata, targ) {
+
+                            if (status == 0) {
+                                loadH.hide()
+//                                    $('.loadMore').hide();
+                                var datalist = JSON.parse(jsondata).favorites
+//                                    document.querySelector('.fav_con_list').innerHTML = '';
+                                var isEmpty = false
+
+                                if (jsondata) {
+                                    if (JSON.parse(jsondata).favorites) {
+                                        if (JSON.parse(jsondata).favorites.length == 0) {
+                                            isEmpty = true
+                                        }
+
+                                    } else {
+                                        isEmpty = true
+                                    }
+
+                                }
+
+                                var NoMsgFav = $('.NoMsgFav');
+                                loadH.show()
+                                if (isEmpty) {
+                                    $('.loadTile').html('没有更多内容').css('color', '#999')
+
+                                    $('.loadMore').data('targ', 0)
+                                    $('.loadMore').hide()
+
+                                } else {
+
+                                    $('.loadTile').html('加载更多')
+                                    var isLoad = true
+                                    _this.bindData(datalist, isLoad)
+                                    $('.loadMore').data('targ', 1)
+
+
+                                }
+
+
+                            } else {
+                                console.log(status)
+                            }
+
+
+                        })
+
+
+                    } else {
+                        console.log(status)
+                    }
+                }
+
+
+            },
+            //获取数据
+            getdata: function () {
+                var _this = this;
+                try {
+                    var parm = {};
+
+
+                    window.lxpc.exebusinessaction('MyFavorite', 'InitFinished', '0', JSON.stringify(parm), 0, function (status, jsondata, targ) {
+
+                        if (status == 0) {
+
+                            var $count = $('#fav_count')
+                            if ($count.data('targ')) {
+                                return;
+                            }
+                            var parm = {count: 5}
+
+
+                            window.lxpc.exebusinessaction('MyFavorite', 'QueryPreFavorite', '0', JSON.stringify(parm), 0, function (status, jsondata, targ) {
+
+                                if (status == 0) {
+
+                                    $('.loading').hide()
+                                    $count.data('targ', 1)
+                                    $count.html(0);
+                                    var datalist = JSON.parse(jsondata).favorites
+                                    document.querySelector('.fav_con_list').innerHTML = '';
+                                    var isEmpty = false
+
+                                    if (jsondata) {
+                                        if (JSON.parse(jsondata).favorites) {
+                                            if (JSON.parse(jsondata).favorites.length == 0) {
+                                                isEmpty = true
+                                            }
+
+                                        } else {
+                                            isEmpty = true
+                                        }
+
+                                    }
+
+                                    var NoMsgFav = $('.NoMsgFav')
+                                    if (isEmpty) {
+                                        $('.loadMore').data('targ', 0)
+                                        NoMsgFav.show()
+                                        $('.loadHistory').hide()
+                                        $('.loadMore').hide()
+                                    } else {
+                                        NoMsgFav.hide();
+                                        if (JSON.parse(jsondata).favorites.length < 5) {
+                                            $('.loadTile').html('没有更多内容').css('color', '#999')
+                                            $('.loadMore').data('targ', 0)
+                                        } else {
+                                            $('.loadMore').data('targ', 1)
+                                        }
+
+                                        _this.bindData(datalist);
+                                        $('.loadHistory').show()
+                                        $('.loadMore').hide()
+
+                                    }
+
+//
+                                } else {
+                                    console.log(status)
+                                }
+
+
+                            })
+
+
+                        } else {
+                            console.log(status)
+                        }
+
+
+                    })
+                } catch (e) {
+                    console.log(e.mesage)
+                }
+
+            },
+            bindData: function (datalist, isLoad) {
+                var _this = this;
+
+                var ocount = document.getElementById('fav_count')
+                var fav_count = parseInt(ocount.innerHTML) + datalist.length;
+                ocount.innerHTML = fav_count;
+
+
+                var str = ''
+                for (var i = 0; i < datalist.length; i++) {
+
+                    var data = datalist[i];
+
+                    var type = getType(data)
+
+                    var strStatus = ''
+                    if (type == 0 || type == 2 || type == 4) {
+
+                        if(type==4){
+                            if(data.extraContent){
+                                strStatus = 'action_noCopy'
+                            }else{
+                                strStatus = 'action_other'
+                            }
+                        }else{
+                            strStatus = 'action_other'
+                        }
+
+                    } else if (type == 7) {
+                        strStatus = 'action_noTransmit'
+                    }else if(type==6){
+                        strStatus = 'action_other'
+                    } else
+                    {
+                        strStatus = 'action_noCopy'
+                    }
+
+//                    if(type==7){
+//                        ocount.innerHTML = fav_count-1;
+//                        continue;
+//                    }
+
+                    str += `<li class="${strStatus} fav_msg" data-favid="${data.id}" onmousedown="rightclick(this)"><h3><span class="fav_Name">${XssToString(data.authorName)}</span>
+                        <span class="fav_CreatTime">${FormatTime(data.sourceCreateTime, 'yyyy-mm-dd hh:mm')}</span>
+                <span class="fav_Time">收藏于:${resetTime(data.createTime, 'yyyy/mm/dd')}</span>
+                </h3>`
+
+
+                    var extraContent = data.extraContent ? JSON.parse(data.extraContent) : ''
+
+                    var content=data.content
+//                   var  result=content.replace("\"",'\'')
+
+                   var result= XssToString(content)
+
+
+                    switch (type) {
+                        case 0:
+
+                            var urllist = getUrl(result);
+
+                            if (urllist.length == 0) {
+                                newresult = result;
+
+                            } else {
+                                newresult = _this.resetResult(result);
+                            }
+
+                            str += `<div class="fav_det"><p>${newresult}</p></div>`
+
+                            break;
+                        case 1://蓝名片
+
+                            _this.imgId += 1;
+                            var mime = extraContent.mimeType
+                            if (!mime) {
+                                mime = 'image/png'
+                            }
+                            _this.imgList.push({resId: extraContent.photoResId, mineType: mime})
+
+
+                            str += `<div class="fav_det">
+                            <div class="fav_card">
+                                <span>用户名片</span>
+                                <hr>
+                                <div class="card_det">
+                                    <img src="./images/defuser.png" alt="" imgId="${_this.imgId}" onload="getimage(\'${extraContent.photoResId}\',\'${extraContent.mimeType}\',this,96)">
+                                    <span>${extraContent.name}</span>
+                                    <span>${extraContent.branchPath || extraContent.orgName || ''}</span>
+                                </div>
+
+                            </div>
+
+                        </div>`
+                            break;
+                        case 2://地址
+
+                            var reg = /\{([^}|]*)\|(\d{1,3}\.\d+,\d{1,3}\.\d+)\}/g
+                            var resetcontent = result.replace(reg, function () {
+
+                                var item = arguments[0].split('|')[0].replace('{', '');
+                                return '<em style="background: url(./images/locationfill.png)" class="att_map"></em><a href="javascript:;" class="att_map_con"  data-locat="' + arguments[2] + '" onclick="openAddress(this)" >' + item + '</a>'
+                            })
+
+                            str += `<div class="fav_det">
+                                   <p>${resetcontent}</p>
+                                </div>  `
+
+                            break;
+                        case 3://文件
+
+                            var fileName = data.attachmentName.split(',')
+
+
+                            str += ` <div class="fav_det"><p>${data.content}</p>
+                            <div class="fav_file" data-resid="${data.resId}" data-filename="${fileName[0]}" >
+                                <img src="./images/ml_file_zip.png" class="file_icon" alt="" onload="CheckResource(\'${data.resId}\',this)">
+                                <div>
+                                    <div><span class="file_name" >${fileName[0]}</span>
+                                        <span class="file_time">${resetTime(data.createTime, 'yyyy/mm/dd')}</span>
+                                    </div>
+                                    <div><span class="file_size">${fileName[1]}</span>
+                                     <a href="javascript:;" class="aV_a" class="saveAs" data-action="saveAs" onclick="saveAsOrOPenDir(\'${data.resId}\',\'${fileName[0]}\',this)">另存为</a>
+                                        <a href="javascript:;" class="aV_a" class="down" data-action="down" onclick="loadOrOpenFile(\'${data.resId}\',\'${fileName[0]}\',this)">下载</a>
+                                       </div>
+                                </div>
+                            </div>`
+
+
+                            break;
+                        case 4://图片
+
+                            var imgclass = ''
+
+                            if (data.extraContent) {
+                                if (extraContent.length <= 4) {
+                                    imgclass = 'fav_imgs con_img4'
+                                } else {
+                                    imgclass = 'fav_imgs con_img9'
+                                }
+
+                                str += '<ul class="' + imgclass + '" >'
+
+                                for (var j = 0; j < extraContent.length; j++) {
+                                    var item = extraContent[j];
+
+                                    _this.imgId += 1;
+                                    var mime = item.mimeType
+                                    if (!mime) {
+                                        mime = 'image/png'
+                                    }
+                                    _this.imgList.push({resId: item.resourceId, mineType: mime})
+
+
+                                    str += `<li><img src="./images/defuser.png" alt="" imgId="${_this.imgId}" onload="getimage(\'${item.resourceId}\',\'${mime}\',this,96)"></li>`
+//                                       str+=`<!--<li><img src="./images/defuser.png" alt="" ></li>-->`
+                                }
+
+                                str += '</ul>'
+
+                            } else {
+
+
+                                var resid = data.resId, mime = data.mimeType;
+                                var size = mime ? (mime.indexOf('gif') > -1 ? 0 : 300) : 300;
+
+                                _this.imgId += 1;
+
+                                if (!mime) {
+                                    mime = 'image/png'
+                                }
+                                _this.imgList.push({resId: resid, mineType: mime})
+
+
+                                str += ` <div class="fav_det">
+                            <p>${result}</p>
+                            <ul class="fav_imgs con_img1">
+                                <li>
+                                    <!--<img src="./images/defuser.png" alt=""  >-->
+                                    <img src="./images/defuser.png" alt="" imgId="${_this.imgId}" onload="getimage(\'${resid}\',\'${mime}\',this,${size})">
+                                </li>
+                            </ul>
+                        </div>`
+
+                            }
+
+
+                            break;
+                        case 5://卡片
+
+                            var newresult = ''
+                            var urllist = getUrl(result);
+
+                            if (urllist.length == 0) {
+                                newresult = result;
+
+
+                            } else {
+                                newresult = _this.resetResult(result);
+                            }
+
+
+                            str += `<div class="fav_card">
+
+                                <span>链接</span>
+                                <hr>
+                                <div class="card_det">
+                                    <img src="./images/micro_card.png" alt="">
+                                    <span>${newresult}</span>
+
+                                </div>
+
+                            </div>`
+                            break;
+                        case 6://动图
+                            var resid = data.resId, mime = data.mimeType;
+
+                            var size = mime ? (mime.indexOf('gif') > -1 ? 0 : 300) : 300
+//                            size=300
+                            _this.imgId += 1;
+
+                            if (!mime) {
+                                mime = 'image/png'
+                            }
+                            _this.imgList.push({resId: resid, mineType: mime})
+
+                            str += ` <div class="fav_det">
+                            <p>${result}</p>
+                            <ul class="fav_imgs con_img1">
+                                <li>
+                                    <!--<img src="./images/defuser.png" alt=""  >-->
+                                    <img src="./images/defuser.png" alt="" imgId="${_this.imgId}" onload="getimage(\'${resid}\',\'${mime}\',this,${size})">
+                                </li>
+                            </ul>
+                        </div>`
+                            break;
+                        case 7://语音
+
+                            str += `  <div class="fav_det">
+                            <p>${result ? result : ''}</p>
+
+                            <div class="fav_voice" data-resid="${data.resId}" onclick="playOrStopVoice(this,\'${data.resId}\')">
+
+                                <span class="voice_play" ></span>
+                                <span class="voice_time">0''</span>
+                            </div>
+
+
+                        </div>`
+
+                            break;
+                        default:
+
+                            break;
+                    }
+
+                    str += '</li>'
+
+                }
+
+                var $list = $(str).appendTo('.fav_con_list');
+
+                for (var i = 0; i < $list.length; i++) {
+                    var oitem = $list[i];
+
+                    var $item = $(oitem)
+                    var $voice = $item.find('.fav_voice');
+
+                    if ($voice.length > 0) {
+
+                        var resId = $voice.data('resid')
+                        var res_parm = {resourceList: [{resourceType: 'res_file', photoResId: resId, fileName: resId}]};
+                        //获取音频时长
+                        var path = '';
+                        var size;
+
+                        _this.voiceId += 1;
+                        var targ = _this.voiceId
+                        $voice.attr('voiceId', targ)
+
+                        getVoiceLength(res_parm, function (result, targ) {
+
+                            var $ele = $('.fav_con_list .fav_voice[voiceId="' + targ + '"]')
+
+                            size = result.size;
+                            var time = ReSizeforTime(size);
+                            path = result.filePath;
+
+                            $('.voice_time', $ele).html(time);
+                            $ele.data('info', result);
+
+                        }, targ)
+                    }
+
+                }
+
+
+                this.mainScroll.refresh();
+
+                function getType(data) {
+
+                    var type = 0;
+
+
+                    if (data.contentType == 19) {
+                        type = 1//蓝名片
+
+                    } else if (data.contentType == 0) {
+                        var ismap = mapAddress(data.content)
+                        if (ismap) {
+                            type = 2//地图
+                        } else {
+                            type = 0//文本
+                        }
+                    } else if (data.contentType == 3) {
+                        type = 5//卡片
+
+                    } else if (data.contentType == 10) {//表情消息
+                        type = 6
+                    } else if (data.contentType == 1 && data.mimeType.indexOf('application') > -1) {
+                        type = 3//文件
+                    } else if (data.contentType == 1 && data.mimeType.indexOf('image') > -1) {
+                        type = 4//图片
+                    } else if (data.contentType == 1 && data.mimeType.indexOf('voice') > -1) {
+                        type = 7//语音
+                    } else {
+
+                        type == 0//其他
+                    }
+
+                    return type
+
+                }
+
+                //右键
+//                _this.smartRightclick();
+
+
+            },
+            //支持右键
+//            smartRightclick: function smartRightclick() {
+//
+//                var _this = this;
+//                //复制
+////                var fav_copy = [
+////                    [{
+////                        text: "复制",
+////                        func: function (ele) {
+////
+////
+////                        }
+////                    }, {
+////                        text: "转发",
+////                        func: function () {
+////
+////                        }
+////                    }, {
+////                        text: "取消收藏",
+////                        func: function () {
+////                            var ele = this;
+////                            RemoveFavorite(ele)
+////                        }
+////                    }]
+////                ];
+////                var fav_Nocopy = [
+////                    [{
+////                        text: "转发",
+////                        func: function () {
+////
+////                        }
+////                    }, {
+////                        text: "取消收藏",
+////                        func: function () {
+////                            var ele = this;
+////                            RemoveFavorite(ele)
+////
+////                        }
+////                    }]
+////                ];
+//                var fav_copy, fav_Nocopy
+//                fav_copy = fav_Nocopy = [
+//                    [{
+//                        text: "取消收藏",
+//                        func: function () {
+//                            var ele = this;
+//                            RemoveFavorite(ele)
+//
+//                        }
+//                    }]
+//                ];
+//
+//
+//                function RemoveFavorite(ele) {
+//                    var parm = {favoriteId: parseInt(ele.dataset['favid'])}
+//                    _this.RemoveFavorite(parm, function () {
+//
+//                        var ocount = document.getElementById('fav_count')
+//                        var fav_count = parseInt(ocount.innerHTML) - 1;
+//                        ocount.innerHTML = fav_count;
+//                        showtips('取消收藏成功')
+//                        ele.remove()
+//                        _this.mainScroll.refresh()
+//                    })
+//                }
+//
+//
+//                $(".action_copy").smartMenu(fav_copy, {
+//                    name: "action_copy"
+//                });
+//
+//
+//                $('.action_Nocopy').smartMenu(fav_Nocopy, {
+//                    name: 'action_Nocopy'
+//                })
+//            },
+            //打开文件
+            OpenFile: function (parm) {
+
+                try {
+                    window.lxpc.exebusinessaction('ChatRecord', 'OpenFile', '0', JSON.stringify(parm), 0, function (status, result, targ) {
+
+                    })
+
+                } catch (e) {
+                    console.log(e.message)
+                }
+            },
+            //下载文件
+            loadFile: function (parm, $filebox) {
+                var _this = this
+                var str = '<img src="images/ajax-loader_smail.gif" alt="" class="mlr_Downfile">';
+                //console.log($filebox)
+
+                $filebox.append(str);
+
+                var targ = parseInt($filebox.attr('FileId'))
+
+                try {
+                    window.lxpc.exebusinessaction('DownloadResource', 'MyFavorite', '0', JSON.stringify(parm), targ, function (status, result, targ) {
+
+                        var $eleTem = $('.fav_file[FileId="' + targ + '"]')
+
+
+                        if (status == 0) {
+
+                            if (result.indexOf('\\') > -1) {
+
+                                showtips('文件下载成功')
+
+                                var $down = $eleTem.find('.aV_a').eq(1),
+                                        $saveAs = $eleTem.find('.aV_a').eq(0)
+
+                                $saveAs.html('打开文件夹');
+                                $saveAs.data('action', 'openfileDir');
+                                $saveAs.data('path', result);
+
+                                $down.html('打开');
+                                $down.data('action', 'openfile');
+                                $down.data('path', result);
+
+
+                                $('.mlr_Downfile').remove();
+
+
+                            }
+
+                        } else {
+//                            var $box = $('.mlR_CMsg_fileR', $filebox)
+//                            //$box.append(str);
+//                            chat.showErrorforDownfile($box)
+                        }
+                    })
+
+                } catch (e) {
+//                    var $box = $('.mlR_CMsg_fileR', $filebox)
+//                    chat.showErrorforDownfile($box)
+                }
+            },
+            //打开文件夹
+            OpenFileDir: function (parm) {
+                try {
+                    window.lxpc.exebusinessaction('ChatRecord', 'OpenFileDir', '0', JSON.stringify(parm), 0, function (status, result, targ) {
+
+                    })
+
+                } catch (e) {
+                    console.log(e.message)
+                }
+            },
+            //另存为
+            OpenSaveAsWnd: function (parm, $filebox) {
+                var _this = this;
+//                var FileId=$filebox.attr('FileId')
+
+                try {
+                    window.lxpc.exebusinessaction('ChatRecord', 'OpenSaveAsWnd', '0', JSON.stringify(parm), 0, function (status, result, targ) {
+
+                        if (status == 0) {
+
+
+                            var data = JSON.parse(result),
+                                    filePath = data.filePath;
+
+                            var index = filePath.lastIndexOf('\\'),
+                                    path = filePath.substring(0, index)
+
+                            var filename = $filebox.data('filename'),
+                                    resId = $filebox.data('resid');
+
+                            var parm = {
+                                resourceList: [{
+                                    resourceType: 'res_file',
+                                    fileName: filename,
+                                    photoResId: resId,
+                                    filePath: path
+                                }]
+                            }
+
+                            _this.loadFile(parm, $filebox)
+
+                        } else {
+                            console.log(status)
+                        }
+
+                    })
+
+
+                } catch (e) {
+                    console.log(e.message)
+                }
+
+            },
+            //检查文件是不是已经下载
+            CheckResource: function (parm, parent) {
+                var _this = this;
+                //var parm = {fileResId: resId};
+                _this.FileId += 1;
+                parent.setAttribute('FileId', _this.FileId)
+
+
+                try {
+                    window.lxpc.exebusinessaction('ChatRecord', 'CheckResource', '0', JSON.stringify(parm), _this.FileId, function (status, result, targ) {
+                        if (status == 0) {
+
+                            var data = JSON.parse(result);
+
+                            if (data.filePath) {
+//                                var $eleTem = $('.fav_file[targ="' + targ + '"] ')
+                                var $eleTem = $('.fav_file[FileId="' + targ + '"]')
+                                var filename = $eleTem.attr('filename'),
+                                        resId = $eleTem.attr('ResId');
+
+                                var $down = $eleTem.find('.aV_a').eq(1),
+                                        $saveAs = $eleTem.find('.aV_a').eq(0),
+                                        $fileBox = $eleTem;
+
+                                $down.html('打开');
+                                $saveAs.html('打开文件夹');
+                                $down.data('path', data.filePath);
+                                $saveAs.data('path', data.filePath);
+                                $down.data('action', 'openfile');
+                                $saveAs.data('action', 'openfileDir');
+
+
+                            } else {
+
+                            }
+
+                        } else {
+                            console.log(status)
+                        }
+                    })
+                } catch (e) {
+                    console.log(e.message)
+                }
+
+
+            },
+            resetResult: function resetResult(str_url, reg) {
+
+                //var strRegex = /(http|ftp|https)?:?\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/g
+                //var strRegex=reg=/((http|ftp|https):\/\/)?[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/g
+                //var strRegex=reg=/((http|ftp|https):\/\/)|(www\.)[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/g
+                var strRegex = /(((http|ftp|https):\/\/)|(www\.))[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/g
+//
+
+                var newstr = str_url.replace(strRegex, function () {
+                    var cururl = arguments[0];
+
+                    var newresult = cururl.replace(reg, function (content, index, str) {
+
+                        return '<span class="sec_link">' + arguments[0] + '</span>'
+                    })
+
+                    return '<a href="javascript:;" class="aV_a"  onclick="openUrl(\'' + cururl + '\')">' + newresult + '</a>'
+                })
+
+                return newstr
+
+            },
+            //取消收藏
+            RemoveFavorite: function (parm, cb) {
+
+
+//var parm={favoriteId:''}
+
+                try {
+                    window.lxpc.exebusinessaction('MyFavorite', 'RemoveFavorite', '0', JSON.stringify(parm), 0, function (status, result, targ) {
+                        if (status == 0) {
+
+                            if (Object.prototype.toString.call(cb) == '[object Function]') {
+                                cb()
+                            }
+
+                        } else {
+                            console.log(status)
+                        }
+                    })
+                } catch (e) {
+                    console.log(e.mesage)
+                }
+            },
+            viewPicture: function (parm) {
+
+
+                //var parm = {picturePath: path, resIdAry: [{resId: resId, mineType: 'image/png'}], index: 0};
+
+                try {
+                    window.lxpc.exebusinessaction('ChatRecord', 'ViewSrcPicture', '0', JSON.stringify(parm), 0, null)
+                }
+                catch (e) {
+
+                    console.log(e.message);
+                }
+            },
+
+
+        }
+
+
+        myF = new MyF()
+
+    })
+
+
+        //获取图像
+        function getimage(resId, mimeType, ele, size) {
+
+            if (resId == '' || resId == null || typeof(resId) == 'undefined' || resId == 'undefined') {
+                return;
+            }
+
+
+            var parm = {resourceList: [{photoResId: resId}], size: size}
+
+//
+            var targ = parseInt($(ele).attr('imgId'))
+
+            try {
+                window.lxpc.exebusinessaction('DownloadResource', 'contentImage', '0', JSON.stringify(parm), targ, function (status, result, targ) {
+
+                    if (status == 0) {
+
+                        if (result.indexOf('\\') > -1) {
+
+                            var img = document.querySelector('.fav_con_list img[imgId="' + targ + '"]')
+                            img.src = result;
+                            img.onload = function () {
+
+                                if (img.getAttribute('imgId') == myF.imgId) {
+
+//
+                                    myF.mainScroll.refresh();
+                                }
+                                img.onload = null;
+                            }
+
+                            img.onerror = function () {
+                                this.src = './images/defuser.png'
+                            }
+                            img.onclick = function () {
+                                var index = this.getAttribute('imgId')
+                                var parm = {picturePath: result, resIdAry: myF.imgList, index: parseInt(index)};
+
+                                myF.viewPicture(parm)
+                            }
+
+                        }
+
+
+                    } else {
+
+                        console.log(status)
+
+                    }
+                })
+            } catch (e) {
+                console.log(e.message)
+
+                my_layer({message: '调用接口出错，错误码' + e.message}, 'error')
+            }
+
+
+        }
+
+        //检查文件是否存在
+        function CheckResource(resId, ele) {
+
+            var parm = {fileResId: resId};
+            var parent = ele.parentNode;
+            myF.CheckResource(parm, parent)
+        }
+
+        //下载文件或打开文件
+        function loadOrOpenFile(resId, filename, ele) {
+
+            var $ele = $(ele)
+            var parent = $ele.parents('.fav_file');
+            var action = $ele.data('action')
+
+            if (action == 'down') {
+                var parm = {resourceList: [{resourceType: 'res_file', fileName: filename, photoResId: resId}]};
+
+                myF.loadFile(parm, parent)
+
+            } else {
+                var parm = {filePath: $ele.data('path')}
+
+                myF.OpenFile(parm)
+            }
+
+
+        }
+
+//另存为或打开文件夹
+        function saveAsOrOPenDir(resId, filename, ele) {
+
+            var $ele = $(ele)
+            var parent = $ele.parents('.fav_file');
+            var action = $ele.data('action')
+
+
+            if (action == 'saveAs') {
+//                var parm = {resourceList: [{resourceType: 'res_file', fileName: filename, photoResId: resId}]};
+                var parm = {fileName: filename}
+
+                myF.OpenSaveAsWnd(parm, parent)
+
+            } else {
+                var parm = {filePath: $ele.data('path')}
+
+                myF.OpenFileDir(parm)
+            }
+
+
+        }
+
+        //打开连接
+        function openAddress(ele) {
+
+            var local = ele.dataset.locat
+            var map_parm = {url: 'http://ditu.so.com/?q=' + local}
+
+            openMap(map_parm, null)
+
+        }
+
+        function openUrl(surl) {
+            var map_parm = {url: surl}
+            openMap(map_parm, 'chat')
+
+        }
+
+//        播放音频
+        var timer_play = null;
+
+        function playOrStopVoice(ele, resId) {
+            stopVoice();
+            var $ele = $(ele)
+            var info = $ele.data('info');
+            var $play = $ele.find('.voice_play')
+
+            $('.fav_voice').each(function () {
+
+                if (this.dataset['resid'] == $ele.data('resid')) {
+
+                } else {
+                    if (this.timer) {
+                        clearInterval(this.timer);
+                        this.timer = null;
+                        var $play = $(this).find('.voice_play')
+                        $play.css('backgroundPositionX', '-32px');
+                    }
+                }
+
+
+            })
+
+            if (ele.timer) {
+
+                clearInterval(ele.timer);
+                ele.timer = null;
+
+                $play.css('backgroundPositionX', '-32px');
+                stopVoice();
+                clearTimeout(timer_play);
+                timer_play = null;
+
+            } else {
+
+                //音频播放动画
+                ele.timer = setInterval(function () {
+                    var back = parseFloat($play.css('backgroundPositionX'))
+
+                    if (back + 16 == 0) {
+                        back = 0
+                    }
+                    back = (back + 16) + 'px';
+
+                    $play.css('backgroundPositionX', back);
+
+
+                }, 200)
+                var play_parm = {filePath: info.filePath}
+
+                playVoice(play_parm, function () {
+                    timer_play = setTimeout(function () {
+                        clearInterval(ele.timer);
+                        ele.timer = null;
+                        $play.css('backgroundPositionX', '-32px');
+                    }, info.size)
+
+                })
+            }
+
+
+        }
+
+
+        //右键菜单
+
+        function rightclick(ele) {
+
+            var $ele = $(ele);
+
+            var favId = parseInt(ele.dataset['favid'])
+
+            var str = ''
+            if (ele.classList.contains('action_other')) {
+                str = `<div class="smart_menu_body" style="position:absolute;width: 100px; ">
+    <ul class="smart_menu_ul">
+        <li class="smart_menu_li"><a href="javascript:;" class="smart_menu_a smart_copy" >复制</a></li>
+        <li class="smart_menu_li"><a href="javascript:;" class="smart_menu_a smart_transmit" onclick="smartTtransmit(this)">转发</a></li>
+        <li class="smart_menu_li"><a href="javascript:;" class="smart_menu_a" onclick="RemoveFavorite(this,${favId})">取消收藏</a></li>
+    </ul>
+</div>`
+            } else if (ele.classList.contains('action_noTransmit')) {
+                str = `<div class="smart_menu_body" style="position:absolute;width: 100px; ">
+    <ul class="smart_menu_ul">
+        <li class="smart_menu_li"><a href="javascript:;" class="smart_menu_a" onclick="RemoveFavorite(this,${favId})">取消收藏</a></li>
+    </ul>
+</div>`
+            } else if (ele.classList.contains('action_noCopy')){
+                str = `<div class="smart_menu_body" style="position:absolute;width: 100px; ">
+    <ul class="smart_menu_ul">
+        <li class="smart_menu_li"><a href="javascript:;" class="smart_menu_a smart_transmit" onclick="smartTtransmit(this)">转发</a></li>
+        <li class="smart_menu_li"><a href="javascript:;" class="smart_menu_a" onclick="RemoveFavorite(this,${favId})">取消收藏</a></li>
+    </ul>
+</div>`
+            }
+
+
+            if (window.event) {
+                if (event.button == 2) {
+
+                    $('.smart_menu_body').remove();
+                    var newSmart = $(str).appendTo($ele);
+                    console.log(newSmart[0].outerHTML)
+                    var offset = myF.mainScroll.y
+                    newSmart.css({
+                        top: event.pageY - ele.offsetTop - 75 - offset + "px",
+                        left: event.pageX - ele.offsetLeft + "px"
+                    });
+
+
+                    var clipboard = new Clipboard('.smart_copy', {
+                        target: function () {
+                            var content = $ele.find('.fav_det')[0];
+                            return content;
+                        }
+                    });
+                    clipboard.on('success', function () {
+                        var clearSlct = "getSelection" in window ? function () {
+                            window.getSelection().removeAllRanges();
+                            $ele.find('.smart_menu_body').remove();
+                        } : function () {
+                            document.selection.empty();
+                        };
+                        clearSlct();
+                    })
+
+                }
+            }
+
+
+            document.captureEvents(Event.MOUSEUP)
+            event.preventDefault();
+            event.stopPropagation()
+        }
+
+        window.oncontextmenu = function () {
+            return false;
+        }
+        document.body.onselectstart = function () {
+            return false;
+        };
+        document.body.onclick = function () {
+            $('.smart_menu_body').remove()
+        }
+//取消收藏
+        function RemoveFavorite(ele, favId) {
+
+            var $ele = $(ele);
+            var $li = $ele.parents('.fav_msg')
+            var parm = {favoriteId: favId}
+
+            myF.RemoveFavorite(parm, function () {
+
+                var ocount = document.getElementById('fav_count')
+                var fav_count = parseInt(ocount.innerHTML) - 1;
+                ocount.innerHTML = fav_count;
+                showtips('取消收藏成功')
+                $li.remove()
+                myF.mainScroll.refresh()
+            })
+        }
+
+        //转发
+        function smartTtransmit(ele) {
+
+        }
+
+</script>

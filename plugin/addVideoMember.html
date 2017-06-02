@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head width="640"  height="507">
+    <meta charset="UTF-8">
+    <title>选择会议成员</title>
+    <style>
+        .G_box{
+            position:absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            box-sizing: border-box;
+            /*overflow: hidden;*/
+        }
+        .contact_title{
+            -webkit-app-region:drag;
+        }
+
+    </style>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/contacts.css">
+    <link rel="stylesheet" href="css/zTreeStyle.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/layer.css">
+    <script src="js/jQuery-2.1.4.min.js"></script>
+    <script src="js/iscroll-5.1.3.min.js"></script>
+    <script src="js/jquery.ztree.core.js"></script>
+    <script src="js/jquery.ztree.excheck.js"></script>
+    <script src="js/contacts.js"></script>
+    <script src="js/application.js"></script>
+    <script src="js/my_layer.js"></script>
+    <script type="text/javascript" src="./js/xss.min.js"></script>
+
+</head>
+<body>
+<div class="G_box shadow" id="G_box">
+
+</div>
+</body>
+</html>
+<script>
+    $(function () {
+
+        var parm = {};
+        var id;
+        try {
+
+            window.lxpc.exebusinessaction('VideoConf', 'InitFinished', '0', JSON.stringify(parm), 0, function (status, jsondata, targ) {
+                if (status == 0) {
+
+                    var initData = JSON.parse(jsondata);
+                    var contacts = null;
+                    var curUserUniID = initData['curUserUniID'];
+
+                    var newmemberlist=[]
+
+                    parm={dialogId:initData.dialogId,userUniId:initData.curUserUniID}
+                      var promise= getMemberDetailInfo(parm)
+                 promise.then(function(jsondata){
+
+var data=JSON.parse(jsondata)[0]
+                     var obj = {
+                         userUniId: data.userUniId,
+                         ImgePath: data.photoResId,
+                         name: data.name,
+                         isstruct: false
+                     }
+
+                     newmemberlist.push(obj);
+                     getcontacts();
+                 },function(status){
+                     console.log(status)
+
+                 })
+
+                    function getcontacts(){
+                        contacts = new Contacts('#G_box', {
+                            title: '视频会议成员', logoicon: './images/logo.png', tool: {
+                                isclose: true,
+                                ismax: false,
+                                ismin: true,
+                            },data:[{tab:'群成员',type:'QunMember',dialogId:initData.dialogId}]
+                        },newmemberlist);
+                        contacts.ConfirmContact('#G_box', function (Contactlist) {
+
+                            var memberlist = [],
+                                    structlist = [];
+
+                            if (Contactlist.length == 0 || (Contactlist.length == 1 && curUserUniID == Contactlist[0].userUniId)) {
+                                my_layer({message: '请选择联系人'}, 'warn', function () {
+                                })
+                                return;
+                            }
+
+
+                            for (var i = 0; i < Contactlist.length; i++) {
+                                var curContact = Contactlist[i];
+
+                                if (curContact.isstruct) {
+                                    var obj = {
+                                        type: 2, groupId: parseInt(curContact.userUniId), orgType: 0
+                                    }
+                                    structlist.push(obj)
+                                } else {
+//
+                                    memberlist.push(curContact.userUniId);
+                                }
+                            }
+
+                            initData.code='video_meeting';
+                            initData.userUniIdList=memberlist;
+                            initData.invitedGroups=structlist;
+
+                            var result=JSON.stringify(initData)
+
+
+                            window.lxpc.exebusinessaction('VideoConf', 'ConfirmVideoMeetingPeople', '0', result, 0, function (status, jsondata, targ) {
+                                if (status == 0) {
+
+                                    try {
+
+                                        window.lxpc.closewnd();
+                                    }
+                                    catch (e) {
+                                        console.log(e.message)
+                                    }
+
+                                }else{
+                                    console.log(status)
+                                }
+                            })
+
+
+                        });
+                        contacts.Cancelcontacts('#G_box', function () {
+                            try {
+
+                                window.lxpc.closewnd();
+                            }
+                            catch (e) {
+                                console.log(e.message)
+                            }
+
+                        })
+                    }
+
+                } else {
+                    console.log(status)
+                }
+
+
+            })
+
+        } catch (e) {
+            console.log(e.message)
+        }
+
+
+    })
+
+    function getMemberDetailInfo(parm){
+
+        var promise=new Promise(function(resolve, reject){
+            try {
+                window.lxpc.exebusinessaction('VideoConf', 'GetQunMemberInfo', '0', JSON.stringify(parm), 1, function (status, jsondata, targ) {
+
+                    if (status == 0) {
+                        resolve(jsondata)
+
+                    }else{
+                        console.log(status)
+                        reject(status)
+                    }
+                })
+            }catch(e){
+                console.log(e.message)
+            }
+
+
+        })
+
+return promise;
+
+    }
+
+</script>

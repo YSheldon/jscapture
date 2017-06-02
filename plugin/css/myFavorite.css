@@ -1,0 +1,269 @@
+@charset "utf-8";
+/*工作文档*/
+body {
+    overflow: hidden;
+}
+.fav_head{
+    height:42px;
+    line-height: 42px;
+    background: #F5F5F5;
+    padding:0 23px 0 29px;
+    color: #666;
+    font-size: 12px;
+    border-bottom:1px solid #D9DCE2;
+    display:flex;
+}
+.fav_count{
+    display: inline-block;
+    flex: 1;
+    min-width: 80px;
+}
+.fav_head span:nth-of-type(1){
+
+
+}
+.fav_head span:nth-of-type(2){
+    position: relative;
+
+}
+
+.fav_con{
+    position: absolute;
+    top:43px;
+    left: 0;
+    bottom: 0;
+    right:0;
+    padding-bottom: 16px;
+    padding: 0 23px 0 29px;
+    background: #F8F8FB;
+    overflow: hidden;
+}
+.fav_con_list >li{
+    position: relative;
+    padding:18px 0;
+    border-bottom: 1px solid ;
+    border-bottom-color:  #D9DCE2 ;
+    color: #000;
+    font-size: 13px;
+}
+.fav_con_list >li:last-of-type{
+
+    border-bottom: none ;
+    /*border-bottom-color:  #D9DCE2 ;*/
+
+}
+.fav_con h3{
+    font-weight: normal;
+}
+.fav_Name{
+    color: #067CEB;
+    font-size: 13px;
+}
+.fav_CreatTime{
+    margin-left:6px;
+    font-size: 13px;
+    color: #999999;
+}
+.fav_Time{
+    font-size: 12px;
+    color: #999999;
+    float: right;
+
+
+}
+.fav_file{
+    position: relative;
+    border:1px solid #DEE0E4 ;
+    background: #fff;
+    display: flex;
+    padding:12px 14px;
+    width:274px;
+    border-radius: 5px;
+}
+.file_icon{
+    margin-right:12px ;
+}
+.fav_file >div{
+    flex: 1;
+}
+.file_name {
+    display: inline-block;
+    width:120px;
+    font-size: 14px;
+    color: #222222;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.file_size{
+    font-size: 13px;
+    color: #000000;
+}
+.file_time{
+    font-size: 12px;
+    color: #000000;
+    float: right;
+}
+.fav_file a{
+    float: right;
+    display: inline-block;
+    margin-left:12px ;
+}
+.fav_imgs {
+    display: flex;
+    flex-wrap: wrap;
+}
+.con_img1 li{
+    max-width:300px;
+
+}
+.con_img4{
+    max-width: 200px;
+}
+.con_img9{
+    max-width: 300px;
+}
+.con_img4 li,.con_img9 li{
+    width:100px;
+    height:100px;
+
+}
+.fav_voice{
+    position: relative;
+    width:200px;
+    height:34px;
+    background: url("../images/message_voice_bg.png");
+}
+.voice_play{
+    display: block;
+    background: url("../images/amr_receive_play.png");
+    background-position: -32px 0;
+    width:16px;
+    height:16px;
+    position: absolute;
+    top:0;
+    bottom:0;
+    margin: auto;
+    margin-left: 22px;
+}
+.voice_time{
+    position: absolute;
+    right: 22px;
+    height: 34px;
+    line-height: 34px;
+    top:0;
+}
+.fav_card{
+    width: 213px;
+    border: 1px solid #DEE0E4;
+    height: 72px;
+    padding: 11px 14px;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+.fav_card span{
+    height: 20px;
+    display: block;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.fav_card img{
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 10px;
+}
+.card_det {
+    margin-top: 9px;
+}
+.fav_search{
+    height:26px;
+    width: 214px;
+    border-style: ridge;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 1px;
+    padding-left:25px;
+    position: relative;
+    font-size: 13px;
+    color: #999;
+}
+.search{
+    display: inline-block;
+    height:14px;
+    width:14px;
+    position: absolute;
+    top:15px;
+    left:9px;
+    background: url("../images/search.png");
+}
+.del {
+    display: inline-block;
+    height:16px;
+    width:16px;
+    position: absolute;
+    top:14px;
+    right:9px;
+    background: url("../images/../images/del_search.png");
+}
+.del:hover{
+    background-position: -16px 0;
+}
+.del:active{
+    background-position: -32px 0;
+}
+.att_map{
+    display:inline-block;
+    width:16px;
+    height:16px;
+}
+.con_img4 img,.con_img9 img{
+    width:100%;
+    height: 100%;
+}
+/*//加载更多*/
+.loadHistory ,.updataFav {
+    text-align: center;
+    padding: 5px;
+    color: #067CEB;
+    font-size: 13px;
+    /*position: absolute;*/
+    /*bottom: 0px;*/
+    margin-top: 8px;
+    width: 100%;
+
+}
+.loadHistory .loadTile{
+    cursor: pointer;
+}
+.updataFav{
+ margin-top: -23px;
+}
+.loadMore{
+    display: inline-block;
+    width:16px;
+    height:16px;
+    background: url("../images/loading.gif");
+    vertical-align: middle;
+    margin-right: 4px;
+
+}
+.loading{
+    position: absolute;
+    top:0px;
+    bottom:0;
+    left:0;
+    right:0;
+    /*text-align: center;*/
+}
+.loading img{
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+
+}

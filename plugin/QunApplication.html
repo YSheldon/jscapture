@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head width="419" height="542">
+    <meta charset="UTF-8">
+    <title>加群申请</title>
+
+    <link rel="stylesheet" type="text/css" href="./css/reset.css"/>    <!--样式初始化-->
+    <link rel="stylesheet" type="text/css" href="./css/common.css">   <!--通用样式-->
+    <script type="text/javascript" src="./js/jQuery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="./js/iscroll-5.1.3.min.js"></script>   <!--滚动条-->
+    <script type="application/javascript" src="js/iscroll-probe.js"></script>
+    <script type="application/javascript" src="js/application.js"></script>
+    <script type="text/javascript" src="./js/xss.min.js"></script>
+    <style>
+        .top_title h4 {
+            background: none;
+            font-weight: normal;
+            height: 32px;
+            text-align: center;
+            line-height: 32px;
+        }
+
+        .con_box {
+            padding: 0 12px;
+            overflow: hidden;
+
+        }
+
+        .con_box table {
+            width: 100%;
+            margin-top: 0;
+        }
+
+        .con_box table td {
+            padding: 9px 0;
+        }
+
+        .con_box table img {
+            width: 45px;
+            overflow: hidden;
+        }
+
+        .con_tab tr td:nth-of-type(1) {
+            width: 45px;
+
+        }
+
+        .con_tab tr td:nth-of-type(2) {
+            padding-left: 20px;
+            min-width: 120px;
+        }
+
+        .con_name, .con_path {
+            display: block;
+
+        }
+
+        .con_tab tr td:nth-of-type(3) {
+            width: 300px;
+            text-align: right;
+            padding-right: 20px;
+            min-width: 200px;
+        }
+
+        .con_tab button {
+            border: none;
+            margin-left: 12px;
+        }
+
+        .top_title {
+            position: relative;
+        }
+
+        .tool {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .load {
+            text-align: center;
+            height: 20px;
+
+        }
+
+        .load_tip {
+            color: #666;
+        }
+
+        /*.load h4 {*/
+        /*font-weight: normal;*/
+        /*text-align: center;*/
+        /*height: 20px;*/
+        /*line-height: 20px;*/
+        /*}*/
+
+        .loadimg {
+
+        }
+    </style>
+
+</head>
+<body>
+<div class="out_box">
+    <div class="top_title">
+        <h4>加群申请</h4>
+        <ul class="tool">
+            <li class="Winclose"></li>
+        </ul>
+    </div>
+    <div class="con_box" id="con_box">
+        <div class="scroll">
+            <table class="con_tab">
+                <!--<tr>-->
+                    <!--<td><img src="./images/defuser.png" alt=""></td>-->
+                    <!--<td>-->
+                        <!--<span class="con_name">高日新</span>-->
+                        <!--<span class="con_path">蓝信</span>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<span>	03-07,10:45</span>-->
+                        <!--<button class="btn2">同意</button>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td><img src="./images/defuser.png" alt=""></td>-->
+                    <!--<td>-->
+                        <!--<span class="con_name">高日新</span>-->
+                        <!--<span class="con_path">蓝信</span>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<span>	03-07,10:45</span>-->
+                        <!--<button class="btn2">同意</button>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td><img src="./images/defuser.png" alt=""></td>-->
+                    <!--<td>-->
+                        <!--<span class="con_name">高日新</span>-->
+                        <!--<span class="con_path">蓝信</span>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<span>	03-07,10:45</span>-->
+                        <!--<button class="btn2">同意</button>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td><img src="./images/defuser.png" alt=""></td>-->
+                    <!--<td>-->
+                        <!--<span class="con_name">高日新</span>-->
+                        <!--<span class="con_path">蓝信</span>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<span>	03-07,10:45</span>-->
+                        <!--<button class="btn2">同意</button>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td><img src="./images/defuser.png" alt=""></td>-->
+                    <!--<td>-->
+                        <!--<span class="con_name">高日新</span>-->
+                        <!--<span class="con_path">蓝信</span>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<span>	03-07,10:45</span>-->
+                        <!--<button class="btn2">同意</button>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td><img src="./images/defuser.png" alt=""></td>-->
+                    <!--<td>-->
+                        <!--<span class="con_name">高日新</span>-->
+                        <!--<span class="con_path">蓝信</span>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<span>	03-07,10:45</span>-->
+                        <!--<button class="btn2">同意</button>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td><img src="./images/defuser.png" alt=""></td>-->
+                    <!--<td>-->
+                        <!--<span class="con_name">高日新</span>-->
+                        <!--<span class="con_path">蓝信</span>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<span>	03-07,10:45</span>-->
+                        <!--<button class="btn2">同意</button>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td><img src="./images/defuser.png" alt=""></td>-->
+                    <!--<td>-->
+                        <!--<span class="con_name">高日新</span>-->
+                        <!--<span class="con_path">蓝信</span>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<span>	03-07,10:45</span>-->
+                        <!--<button class="btn2">同意</button>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td><img src="./images/defuser.png" alt=""></td>-->
+                    <!--<td>-->
+                        <!--<span class="con_name">高日新</span>-->
+                        <!--<span class="con_path">蓝信</span>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<span>	03-07,10:45</span>-->
+                        <!--<button class="btn2">同意</button>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td><img src="./images/defuser.png" alt=""></td>-->
+                    <!--<td>-->
+                        <!--<span class="con_name">高日新</span>-->
+                        <!--<span class="con_path">蓝信</span>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<span>	03-07,10:45</span>-->
+                        <!--<button class="btn2">同意</button>-->
+                    <!--</td>-->
+                <!--</tr>-->
+            </table>
+            <div class="noData disN">
+                <h3 style="font-weight: normal;text-align: center;margin-top: 30%">无未处理的加群申请</h3>
+
+            </div>
+            <div class="load disN">
+                <img src="./images/loading.gif" alt="">
+                <span class=" color_h ">加载更多</span></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>
+<script>
+    var imgId = 0;
+    var initData = null, mainScroll = null;
+    $(function () {
+
+        TitleTools();
+        loadSroll();
+        Initdata();
+        loadMore();//加载更多
+
+
+    })
+
+    function loadSroll() {
+        var option = scrollSetings();
+        mainScroll = new IScroll('#con_box', option);
+
+    }
+
+    function Initdata() {
+        try {
+
+            window.lxpc.exebusinessaction('QunApplication', 'InitFinished', '0', JSON.stringify({}), 0, function (status, jsondata, targ) {
+
+                var data = JSON.parse(jsondata)
+
+                if (initData && initData.qunId == data.qunId) {
+                    return;
+
+
+                } else {
+
+                    initData = data
+                }
+
+                $('.con_tab  tr').empty();
+                var parm = {
+                    qunId: data.qunId, status: 0, baseApplicationId: 0, count: 10, direction: 1
+                }
+
+                getData(parm)
+
+            })
+        } catch (e) {
+            console.log(e.message)
+
+        }
+    }
+
+    function getData(parm, isload) {
+
+        $('.load').data('complate', false)
+        try {
+
+            window.lxpc.exebusinessaction('QunApplication', 'QueryQunApplication', '0', JSON.stringify(parm), 0, function (status, jsondata, targ) {
+
+                var datalist = JSON.parse(jsondata).qunApplicationList;
+
+                var str = ''
+
+                $('.noData').hide();
+
+                if (datalist.length == 0) {
+                    if (isload) {//没有更多加载内容
+                        $('.load h4').html('没有更多内容')
+                        $('.load h4').removeClass('color_h');
+                        $('.load span').removeClass('color_h')
+                        $('.load img').hide()
+                        return;
+                    } else {
+                        $('.noData').show()
+                    }
+
+                }
+
+                for (var i = 0, ln = datalist.length; i < ln; i++) {
+
+                    var curitem = datalist[i];
+
+                    var time = FormatTime(curitem.applyTime, 'mm-dd hh:mm', 'yyyy');
+
+                    str += `<tr class="con_tr" data-appid="${curitem.id}">
+                <td onclick="openCard(this)"><img src="./images/defuser.png" alt="" data-resid="${curitem.photoResId}" onload="getImg(this)"></td>
+                <td>
+                    <span class="con_name">${XssToString(curitem.name)}</span>
+                    <span class="con_path">${XssToString(curitem.path)}</span>
+                </td>
+                <td>
+                    <span>${time}</span>
+                    <button class="btn2" onclick="AuditQunApplication(this,${curitem.id})">同意</button>
+                </td>
+            </tr>`
+                }
+                var $box = $('.con_tab ')
+                $box.append(str);
+                $('.load').data('complate', true)
+
+                mainScroll.refresh();
+
+                if (isload) {
+                    if (Math.abs(mainScroll.maxScrollY) < 2) {
+                        $('.load').hide()
+                    } else {
+                        $('.load').show()
+                        $('.load h4').addClass('color_h')
+                    }
+                }
+
+            })
+        } catch (e) {
+            console.log(e.message)
+
+        }
+    }
+
+    //审核群申请
+    function AuditQunApplication(ele, id) {
+
+        var $ele = $(ele);
+
+
+        try {
+            var parm = {
+                applicationId: id, status: 1, content: ''
+            }
+
+            window.lxpc.exebusinessaction('QunApplication', 'AuditQunApplication', '0', JSON.stringify(parm), 0, function (status, jsondata, targ) {
+
+                var data = JSON.parse(jsondata)
+
+                console.log(jsondata)
+
+
+                if (status == 0) {
+
+                    var $tr = $ele.parents('.con_tr');
+                    $tr.remove();
+                    mainScroll.refresh();
+                    if ($('.con_tab tr').length == 0) {
+                        $('.noData').show();
+                    }
+
+                } else {
+
+                    console.log(status)
+                }
+
+
+            })
+        } catch (e) {
+            console.log(e.message)
+
+        }
+    }
+    //获取头像
+    function getImg(ele) {
+
+        var $ele = $(ele);
+        var resId = $ele.data('resid')
+        imgId += 1
+        $ele.attr('imgId', imgId);
+
+        var photoparm = {resourceList: [{photoResId: resId}], size: 96}
+        downresource(photoparm, imgId, function (result, targ) {
+
+            if (result.indexOf('\\') > -1) {
+                var $img = $('.con_tab tbody img[imgId=' + targ + ']')
+                $img.attr('src', result)
+                $img[0].onload = null;
+            }
+
+        })
+
+    }
+
+    //打开蓝名片
+    function openCard(ele) {
+        var $ele = $(ele);
+
+    }
+
+    //滚动加载更多
+    function loadMore() {
+        $('.load').data('complate',true)
+        mainScroll.on("scroll", function () {
+
+            if (this.maxScrollY == this.y && this.y < 0) {
+                var lasttr = $('.con_tab tr:last')
+                var lastId = lasttr.data('appid');
+
+                $('.load').show();
+
+                mainScroll.refresh();
+                mainScroll.scrollTo(0, mainScroll.maxScrollY )
+                setTimeout(function(){
+                    var isload = $('.load').data('complate')
+                    if (isload) {
+                    var parm = {
+                        qunId: initData.qunId, status: 0, baseApplicationId: lastId, count: 10, direction: 1
+                    }
+                    var load = true;
+                    getData(parm, load)
+
+                    }
+                },500)
+
+            } else {
+
+                $('.load span').removeClass('color_h')
+                $('.load img').hide()
+
+            }
+
+        })
+    }
+
+</script>
