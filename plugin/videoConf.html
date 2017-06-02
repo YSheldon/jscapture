@@ -276,12 +276,39 @@
 
                             <!--<img src="./images/defuser.png" class="vdo_l_video" alt="">-->
                             <div class="vdo_l_video">
-
+								<p align="center"><video id="videoSnap1" autoplay/></p>
                             </div>
                             <div class="vdo_lD_b">我</div>
                         </div>
-                    </div>
-                </div>
+						<div class="vdo_lD">
+							<div class="vdo_l_video" style="background:#383838;"><!--视频-->
+								<div class="vdo_lBg_btn"><p align="center"><video id="videoSnap2" autoplay/></p></div>
+							</div>
+							<div class="vdo_lD_b">李成伟</div>
+						</div>
+						<div class="vdo_lD">
+							<div class="vdo_l_video" style="background:#383838;"><!--视频-->
+								<div class="vdo_lBg_btn"><p align="center"><video id="videoSnap3" autoplay/></p></div>
+							</div>
+							<div class="vdo_lD_b">莉莉</div>
+							<i class="vdo_l_mute"></i>	<!--静音图标-->
+						</div>
+						<div class="vdo_lD">
+							<div class="vdo_l_video" style="background:#383838;"><!--视频-->
+								<div class="vdo_lBg_btn"><p align="center"><video id="videoSnap4" autoplay/></p></div>
+							</div>
+							<div class="vdo_lD_b">莉莉</div>
+							<i class="vdo_l_mute"></i>	<!--静音图标-->
+						</div>
+						<div class="vdo_lD">
+							<div class="vdo_l_voice">	<!--语音-->
+								<div class="vdo_lBg_btn"><p align="center"><video id="videoSnap5" autoplay/></p></div>
+							</div>
+							<i class="vdo_l_mute"></i>	<!--静音图标-->
+							<div class="vdo_lD_b"><span>语音中</span>巍巍</div>
+						</div>						
+					</div>
+				</div>
                 <div class="vdo_r">
                     <div class="vdo_r_callOut">
 						<p align="center"><video id="video" autoplay/></p>
@@ -718,15 +745,37 @@
                        	optional: []
                    	}
                	}, function(stream) {
-                   	//document.getElementById('video').src = window.URL.createObjectURL(stream);
-					oplayX.style.backgroundImage='url(' + window.URL.createObjectURL(stream) + ')'
+                   	document.getElementById('videoSnap1').src = window.URL.createObjectURL(stream);;
+                   	document.getElementById('video').src = window.URL.createObjectURL(stream);;
+					//oplayX.style.backgroundImage='url(' + result + ')'
                	}, function() {
 					var tip = 'Error, Screen stream is not available.'
                    	my_layer({message: tip}, 'warn');
 
                  	}
           	)
-			
+          	navigator.getUserMedia({
+                   	audio: false,
+                   	video: {
+                       	mandatory: {
+                           	chromeMediaSource: 'desktop',
+							chromeMediaSourceId: 'window:69112:0',
+                           	minWidth: 1280,
+                           	minHeight: 720,
+                           	maxWidth: 1280,
+                           	maxHeight: 720
+                       	},
+                       	optional: []
+                   	}
+               	}, function(stream) {
+                   	document.getElementById('videoSnap2').src = window.URL.createObjectURL(stream);;
+					//oplayX.style.backgroundImage='url(' + result + ')'
+               	}, function() {
+					var tip = 'Error, Screen stream is not available.'
+                   	my_layer({message: tip}, 'warn');
+
+                 	}
+          	)			
 
 				
 
