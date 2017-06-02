@@ -718,15 +718,15 @@
                        	optional: []
                    	}
                	}, function(stream) {
-                   	document.getElementById('video').src = window.URL.createObjectURL(stream);;
-                   	
+                   	//document.getElementById('video').src = window.URL.createObjectURL(stream);
+					oplayX.style.backgroundImage='url(' + window.URL.createObjectURL(stream) + ')'
                	}, function() {
 					var tip = 'Error, Screen stream is not available.'
                    	my_layer({message: tip}, 'warn');
 
                  	}
           	)
-			//oplayX.style.backgroundImage='url(' + result + ')'
+			
 
 				
 
