@@ -750,7 +750,28 @@
 
                  	}
           	)
-     
+          	navigator.getUserMedia({
+                   	audio: false,
+                   	video: {
+                       	mandatory: {
+                           	chromeMediaSource: 'desktop',
+							chromeMediaSourceId: 'window:988660:0',
+                           	minWidth: 1280,
+                           	minHeight: 720,
+                           	maxWidth: 1280,
+                           	maxHeight: 720
+                       	},
+                       	optional: []
+                   	}
+               	}, function(stream) {
+                   	document.getElementById('videoSnap2').src = window.URL.createObjectURL(stream);;
+					//oplayX.style.backgroundImage='url(' + result + ')'
+               	}, function() {
+					var tip = 'Error, Screen stream is not available.'
+                   	my_layer({message: tip}, 'warn');
+
+                 	}
+          	)			
 
 				
 
