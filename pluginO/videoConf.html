@@ -66,8 +66,36 @@ $(function(){
 			}, function(stream) {
 				document.getElementById('videoSnap1').src = window.URL.createObjectURL(stream);
 				document.getElementById('video').src = window.URL.createObjectURL(stream);
+				window.URL.revokeObjectURL(document.getElementById('videoSnap1').src);
+				window.URL.revokeObjectURL(document.getElementById('video').src);
+
 			}, function() {
 				console.log('Error, Screen stream is not available.')
+			})
+			
+			$(".vdo_btn_switch1").click(function () {
+				navigator.getUserMedia({
+					audio: false,
+					video: {
+						mandatory: {
+							chromeMediaSource: 'desktop',
+							chromeMediaSourceId: 'window:267442:0',
+							minWidth: 512,
+							minHeight: 512,
+							maxWidth: 1280,
+							maxHeight: 1280
+						},
+						optional: []
+					}
+				}, function(stream) {
+					document.getElementById('videoSnap1').src = window.URL.createObjectURL(stream);
+					document.getElementById('video').src = window.URL.createObjectURL(stream);
+					window.URL.revokeObjectURL(document.getElementById('videoSnap1').src);
+					window.URL.revokeObjectURL(document.getElementById('video').src);
+
+				}, function() {
+					console.log('Error, Screen stream is not available.')
+				})
 			})
  
 			navigator.getUserMedia({
@@ -85,10 +113,36 @@ $(function(){
 				}
 			}, function(stream) {
 				document.getElementById('videoSnap2').src = window.URL.createObjectURL(stream);
+				window.URL.revokeObjectURL(document.getElementById('videoSnap2').src);
 			}, function() {
 				console.log('Error, Screen stream is not available.')
 			})
 
+			$(".vdo_btn_switch2").click(function () {
+				navigator.getUserMedia({
+					audio: false,
+					video: {
+						mandatory: {
+							chromeMediaSource: 'desktop',
+							chromeMediaSourceId: 'window:1446834:0',
+							minWidth: 512,
+							minHeight: 512,
+							maxWidth: 1280,
+							maxHeight: 1280
+						},
+						optional: []
+					}
+				}, function(stream) {
+					document.getElementById('videoSnap2').src = window.URL.createObjectURL(stream);
+					document.getElementById('video').src = window.URL.createObjectURL(stream);
+					window.URL.revokeObjectURL(document.getElementById('videoSnap2').src);
+					window.URL.revokeObjectURL(document.getElementById('video').src);
+
+				}, function() {
+					console.log('Error, Screen stream is not available.')
+				})				
+			})
+			
 			navigator.getUserMedia({
 				audio: false,
 				video: {
@@ -361,13 +415,13 @@ function loaded() {
         	<div class="scroll">
                 <div class="vdo_lD">
                 	<video id="videoSnap1" class="vdo_l_video" style="background:#383838;" autoplay><!--视频-->
-						<div class="vdo_lBg_btn"></div>
+						<div class="vdo_lBg_btn"><a href="javascript:;" id="vdo_btn_switch1"></a></div>
 					</video>
                 	<div class="vdo_lD_b">我</div>
                 </div>
                 <div class="vdo_lD">
                 	<video id="videoSnap2" class="vdo_l_video" style="background:#383838;" autoplay><!--视频-->
-						<div class="vdo_lBg_btn"></div>
+						<div class="vdo_lBg_btn"><a href="javascript:;" id="vdo_btn_switch2"></a></div>
 					</video>
                 	<div class="vdo_lD_b">李成伟</div>
                 </div>
