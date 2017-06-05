@@ -66,8 +66,8 @@ $(function(){
 			}, function(stream) {
 				document.getElementById('videoSnap1').src = window.URL.createObjectURL(stream);
 				document.getElementById('video').src = window.URL.createObjectURL(stream);
-				window.URL.revokeObjectURL(document.getElementById('videoSnap1').src);
-				window.URL.revokeObjectURL(document.getElementById('video').src);
+				//window.URL.revokeObjectURL(document.getElementById('videoSnap1').src);
+				//window.URL.revokeObjectURL(document.getElementById('video').src);
 
 			}, function() {
 				console.log('Error, Screen stream is not available.')
@@ -113,7 +113,7 @@ $(function(){
 				}
 			}, function(stream) {
 				document.getElementById('videoSnap2').src = window.URL.createObjectURL(stream);
-				window.URL.revokeObjectURL(document.getElementById('videoSnap2').src);
+				//window.URL.revokeObjectURL(document.getElementById('videoSnap2').src);
 			}, function() {
 				console.log('Error, Screen stream is not available.')
 			})
