@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>工作文档</title>
+<link rel="stylesheet" type="text/css" href="styles/reset.css" />	<!--默认-->
+<link rel="stylesheet" type="text/css" href="styles/common.css" />	<!--通用-->
+<link rel="stylesheet" type="text/css" href="styles/layout.css" />	<!--内容样式：主要内容-->
+<link rel="stylesheet" type="text/css" href="styles/scrollbar.css" />	<!--自定义滚动条-->
+<link rel="stylesheet" type="text/css" href="styles/smartMenu.css" />	<!--右键菜单-->
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/iscroll.js"></script>	<!--自定义滚动条-->
+<script type="text/javascript" src="js/jquery-smartMenu.js"></script>	<!--右键菜单-->
+</head>
+
+<body>
+<div class="doc_main">
+	<div class="doc_L">
+        <ul class="docL_list">
+            <li><em></em><div>工作文档</div></li>
+        </ul>
+    </div>
+    <div class="doc_R">
+		<div class="docR_top">
+            <div class="docR_btnSec"><span class="docR_btn unclick"><a href="javascript:;" class="btn2">上传文件</a><input type="file" /></span></div>
+            <div class="doc_secCon">
+                <div class="doc_secIpt"><em></em><input type="text" id="secText" class="ipt" value="空" /><a href="javascript:;" class="sec_del" style="visibility:visible;"></a></div>
+            </div>
+        </div>
+        <div class="docR_nav"><a href="index.html" class="opc4">工作文档<em></em></a><span>搜索“空”的结果<em></em></span></div>
+        <div class="docR_msgList">
+            <div class="search_null">无搜索结果</div>
+        </div>
+    </div>
+</div>
+
+<script  type="text/javascript">
+// 搜索
+var secText = "搜索";
+//$("#secText").val(secText);
+$(function(){
+    $("#secText").focusin(function() {
+        if($(this).val() == secText) {
+            $(this).val('');
+			$(this).addClass("ipt")
+        }
+		$(this).parents(".doc_secIpt").addClass("doc_secIpt2")
+		
+    }).focusout(function(){
+		$(this).parents(".doc_secIpt").removeClass("doc_secIpt2")
+        if($(this).val() == ''){
+            $(this).val(secText);
+			$(this).removeClass("ipt")
+			
+        }
+    });
+	$("#secText").each(function(){
+		$(this).keyup(function(){
+			if($(this).val() != secText && $(this).val() != ''){
+				$(".sec_del").css({"visibility":"visible"})
+			}
+			else{
+				$(".sec_del").css({"visibility":"hidden"})
+			}
+		})
+	})
+	
+	//点击删除按钮时，删除按钮隐藏，文本框文字为“搜索”
+	$(".sec_del").on("click",function(){
+		$("#secText").val(secText);
+		$(this).parents(".doc_secIpt").removeClass("doc_secIpt2")
+		$(this).css({"visibility":"hidden"})
+		$(this).siblings("#secText").removeClass("ipt")
+	})
+})
+</script>
+</body>
+</html>

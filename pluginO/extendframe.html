@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head width="800" height="600">
+    <meta charset="UTF-8">
+    <title>ERP</title>
+    <style>
+        .G_box {
+            position: absolute;
+            top: 32px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+            /*overflow: hidden;*/
+        }
+
+        .contact_title {
+            -webkit-app-region: drag;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
+    <link rel="stylesheet" href="css/reset.css">
+
+    <link rel="stylesheet" href="css/common.css">
+    <script src="js/jQuery-2.1.4.min.js"></script>
+
+    <script src="js/application.js"></script>
+
+
+</head>
+<body>
+<nav class="top_title">
+    <span class="ef_top"></span>
+    <ul class="tool">
+        <li class="Winmin"></li>
+        <li class="Winmax"></li>
+        <li class="Winclose"></li>
+    </ul>
+</nav>
+
+<div class="G_box shadow" id="G_box">
+
+    <iframe id="iframe" scrolling="no" frameborder="0" style=""></iframe>
+
+</div>
+</body>
+</html>
+
+<script>
+
+    $(function () {
+
+        var parm = {};
+        try {
+
+            window.lxpc.exebusinessaction('extend', 'InitFinished', '0', JSON.stringify(parm), 0, function (status, jsondata, targ) {
+
+                if (status == 0) {
+
+                    console.log(jsondata);
+                    var data = JSON.parse(jsondata);
+
+                    var title = data.title,
+                            id = data.id,
+                            url = data.url;
+
+                    $('.ef_top').html(title);
+
+                    var oiframe = document.getElementById('iframe');
+                    oiframe.contentWindow.document.location.href = url;
+
+                } else {
+                    console.log(status)
+                }
+
+
+            })
+
+        } catch (e) {
+            e.message
+        }
+
+
+        TitleTools();
+    })
+
+
+</script>

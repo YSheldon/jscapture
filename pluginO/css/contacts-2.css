@@ -1,0 +1,230 @@
+
+.contact_title{
+    height:32px;
+    line-height: 32px;
+    /*text-align: center;*/
+    background: #476294;
+    /*box-shadow: 0px 1px 0px 0px #DADADA;*/
+    /*border-radius: 2px 2px 0px 0px;*/
+}
+.contact_title span{
+    /*text-align: center;*/
+    /*display: inline-block;*/
+    height:32px;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+.contact_title span:nth-of-type(1){
+
+    margin-left:13px ;
+
+}
+.clossContact{
+    overflow: hidden;
+    padding:0;
+    width:26px;
+    height:100%;
+    background: url('../images/btn_lx_close.png') center center no-repeat ;
+    background-position: 0 0;
+    float: right;
+    margin-right:14px ;
+    cursor: pointer;
+}
+.contacts_left{
+    float: left;
+    width:46%;
+    padding:0;
+    background: #E9E9EC ;
+    border-right: 1px solid  #D4D5D8;
+
+}
+.search{
+    width:97.3%;
+    height:26px;
+    line-height: 26px;
+    margin:5px;
+    /*text-align: center;*/
+    border: 1px solid #D5D5D5;
+    border-radius: 5px;
+
+}
+.search::-webkit-input-placeholder{
+    font-size: 13px;
+    color:  #BCBCBC;
+    padding-left: 52%;
+    background: url("../images/ic.png") no-repeat left 48% center  #FFFFFF ;
+}
+.contact_tab{
+
+    font-size: 13px;
+    color: #222222;
+    zoom: 1;
+    overflow: hidden;
+    border-bottom: 1px solid  #D4D5D8;
+}
+.contact_tab li{
+    height:40px;
+    line-height: 40px;
+    float: left;
+    width:50%;
+    text-align: center;
+    cursor: pointer;
+    /*border-bottom: 1px solid  #D4D5D8;;*/
+}
+
+.contact_Select{
+    border-bottom: 2px solid #60ACEF;
+}
+
+.contactcontent{
+    background: #E9E9EC;
+    position: absolute;
+
+    left:0;
+}
+.contacts_right {
+    position: relative;
+    margin-left: 46%;
+    background: #F2F0F0;
+    font-size: 13px;
+    color: #222;
+}
+.contacts_right h5{
+    padding: 9px 10px 12px;
+    font-size: 13px;
+    color: #222222;
+}
+.SelecedContact li{
+    margin-bottom: 10px;
+}
+.SelecedContact img {
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.SelecedContact span {
+    display: inline-block;
+    vertical-align: middle;
+}
+.SelecedContact em {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    float: right;
+    margin-right: 10px;
+    margin-top: 4px;
+    background: url(../images/delContact.png) no-repeat;
+}
+.SelecedContact em:hover {
+    background-position:-12px 0 ;
+}
+.contacts_person_scroll li ,.contacts_search_scroll li{
+    height:54px;
+    /*padding:10px 0 9px 9px;*/
+    padding-left:9px;
+    /*padding-right: 5px;*/
+    font-size: 0;
+    -webkit-text-size-adjust:none;
+}
+.contacts_person_scroll em ,.contacts_search_scroll em{
+    display: inline-block;
+    width:12px;
+    height:12px;
+    vertical-align: middle;
+}
+
+.checked{
+
+    background: url("../images/btn_checkbox.png") no-repeat;
+    background-position: -24px 0;
+}
+.unchecked{
+
+    background: url("../images/btn_checkbox.png") no-repeat;
+    background-position: 0 0;
+}
+
+
+/*.contacts_person_scroll em:hover{*/
+    /*background: url("../images/btn_checkbox.png") no-repeat;*/
+    /*background-position: -12px;*/
+/*}*/
+
+.contacts_person_scroll em:active ,.contacts_search_scroll em:active{
+    background: url("../images/btn_checkbox.png") no-repeat;
+    background-position:-36px ;
+}
+.ConcactSlected{
+    background-position: 24px;
+}
+
+/*.contacts_person_scroll .check{*/
+/*display: inline-block;*/
+/*width:12px;*/
+/*height:12px;*/
+/*background: url("../images/btn_checkbox.png") no-repeat center;*/
+/*vertical-align: middle;*/
+/*}*/
+.contacts_person_scroll img ,.contacts_search_scroll img{
+    display: inline-block;
+    vertical-align: middle;
+    width:32px;
+    height: 32px;
+    margin:8px;
+
+}
+.contacts_person_scroll li span ,.contacts_search_scroll  li span{
+    display: block;
+
+    margin-left:60px;
+
+}
+.contacts_person_scroll li span:nth-of-type(1) ,.contacts_search_scroll li span:nth-of-type(1){
+    margin-top: -40px;
+    font-size: 13px;
+    color: #222222;
+    margin-bottom: 2px;
+
+}.contacts_person_scroll li span:nth-of-type(2) , .contacts_search_scroll li span:nth-of-type(2){
+
+     font-size: 12px;
+     color: #666666;
+
+     word-break:keep-all;/* 不换行 */
+     white-space:nowrap;/* 不换行 */
+     overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+     text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+
+ }
+.contactType{
+
+    font-size: 12px;
+    height:20px;
+    background: #D6D6D8;
+    padding-left: 6px;
+    color: #666666;
+    line-height: 20px;
+}
+.contacts_right .btn_container{
+    display: block;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    padding: 12px 0;
+    background: #F2F0F0;
+    border-radius: 0px 0px 2px 0px;
+    border-top: 1px solid #D9DCE2;
+}
+
+.contacts_right .btnOK{
+    height:26px;
+    width:80px;
+    background: #60ACEF;
+    border-radius: 2px;
+    border: none;
+    font-size: 13px;
+    color: #FFFFFF;
+    letter-spacing: 0px;
+}

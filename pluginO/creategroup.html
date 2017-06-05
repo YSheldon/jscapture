@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head width="640"  height="507">
+    <meta charset="UTF-8">
+    <title>创建群聊</title>
+    <style>
+        .G_box{
+            position:absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            box-sizing: border-box;
+            /*overflow: hidden;*/
+        }
+        .contact_title{
+            -webkit-app-region:drag;
+        }
+
+    </style>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/contacts.css">
+    <link rel="stylesheet" href="css/zTreeStyle.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/layer.css">
+    <script src="js/jQuery-2.1.4.min.js"></script>
+    <script src="js/iscroll-5.1.3.min.js"></script>
+    <script src="js/jquery.ztree.core.js"></script>
+    <script src="js/jquery.ztree.excheck.js"></script>
+    <script src="js/contacts.js"></script>
+    <script src="js/my_layer.js"></script>
+    <script src="js/application.js"></script>
+
+</head>
+<body>
+<div class="G_box shadow" id="G_box">
+
+</div>
+</body>
+</html>
+<script type="application/javascript" charset="utf-8">
+
+    $(function(){
+
+        var parm = {};
+        var id;
+        try {
+
+            window.lxpc.exebusinessaction('createGroup', 'InitFinished', '0', JSON.stringify(parm), 0, function (status, jsondata, targ) {
+                if(status==0){
+
+                    var datalist=JSON.parse(jsondata);
+                    var contacts=null;
+                    var curUserUniID=datalist['curUserUniID'];
+                    if(datalist.dialogId&&datalist.name){//私聊窗口添加联系人创建群
+                        var newmemberlist=[]
+
+                        var curdata=datalist;
+                        var obj={userUniId:curdata.dialogId,ImgePath:curdata.photoResId,name:curdata.name,isstruct:false}
+                        newmemberlist.push(obj);
+                         contacts= new Contacts('#G_box',{title:'创建群聊',logoicon:'./images/logo.png',tool:{
+                            isclose:true,
+                            ismax:false,
+                            ismin:true,
+                        }},newmemberlist);
+                    }else{
+                         contacts= new Contacts('#G_box',{title:'创建群聊',logoicon:'./images/logo.png',tool:{
+                            isclose:true,
+                            ismax:false,
+                            ismin:true,
+                        }});
+
+                    }
+
+                    contacts.ConfirmContact('#G_box',function(Contactlist){
+
+                        var memberlist=[],
+                                structlist=[];
+
+                        if(Contactlist.length==1&&curUserUniID==Contactlist[0].userUniId){
+                            my_layer({message:'请选择联系人'},'warn',function(){})
+                            return;
+                        }
+
+
+                        for(var i=0;i<Contactlist.length;i++){
+                            var curContact=Contactlist[i];
+                            if(curContact.isstruct){
+                                var obj={
+                                    type:2,groupId:parseInt(curContact.userUniId),orgType:0
+                                }
+                                structlist.push(obj)
+                            }else{
+                                memberlist.push(curContact.userUniId);
+                            }
+                        }
+
+                        var parm={userUniIdList:memberlist,
+                            invitedGroups:structlist
+                        }
+
+                        try{
+                            window.lxpc.exebusinessaction('QunChat', 'CreateQun', '0', JSON.stringify(parm), 0, function (status, result, targ) {
+
+                                if(status==0){
+
+                                    var data=JSON.parse(result)
+                                    var diaId = data.dialogId,
+                                                type= 0,
+                                            name=data.name,
+                                            photoResId=data.photoResId;
+
+                                        try{
+//                                            var parm1 = {dialogId:diaId,dialogType:type};
+                                            var parm1 = {dialogId:diaId,name:name,dialogType:type,photoResId:photoResId};
+
+                                            window.lxpc.exebusinessaction('ChatRecord', 'OpenDialogWnd', '0', JSON.stringify(parm1), 0,null )
+//                                            contacts=null;
+//                                            window.lxpc.closewnd();
+
+                                        }catch(e){
+                                            console.log(e.message)
+                                        }
+
+
+                                    contacts=null;
+                                    window.lxpc.closewnd();
+
+                                }else{
+                                    console.log(status)
+                                   if(status==2009){
+//
+                                       my_layer({message:'最大群人数超过500'},'warn',function(){
+
+
+                                       })
+                                   }else {
+                                       console.log(status)
+                                   }
+
+                                }
+
+                            })
+
+                        }catch(e){
+
+                            console.log(e.message)
+                        }
+
+
+                    });
+                    contacts.Closecontacts('#G_box',function(){
+
+                        try {
+
+                            window.lxpc.closewnd();
+                        }
+                        catch (e) {
+                            console.log(e.message)
+                        }
+
+
+                    })
+                    contacts.Cancelcontacts('#G_box',function(){
+                        try {
+
+                            window.lxpc.closewnd();
+                        }
+                        catch (e) {
+                            console.log(e.message)
+                        }
+
+                    })
+
+                    
+                }else{
+                    console.log(status)  
+                }
+               
+                
+
+            })
+           
+        } catch(e){
+        console.log(e.message)
+        }
+        
+        
+        
+
+
+    })
+
+
+</script>

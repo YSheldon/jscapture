@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head width="372" height="537">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="msapplication-tap-highlight" content="no">
+<title>名片</title>
+
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />	<!--通用-->
+	<link rel="stylesheet" type="text/css" href="css/common.css" />	<!--通用-->
+	<link rel="stylesheet" type="text/css" href="css/layer.css">
+	<link rel="stylesheet" type="text/css" href="css/card.css" />	<!--名片-->
+	<script type="text/javascript" src="js/jQuery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/iscroll-5.1.3.min.js"></script>	<!--滚动条-->
+	<script type="application/javascript" src="js/my_layer.js"></script><!--弹窗-->
+	<script type="application/javascript" src="js/application.js"></script>
+	<script type="application/javascript" src="js/card.js"></script>
+</head>
+
+<body>
+<!--群名片-->
+<div class="card_qunMain shadow">
+
+	<div class="card_information card_qunCI">
+		<span class="card_close"></span>
+    	<div class="card_icon"><img src="images/card_qun.png" /><em class="card_icon_edit disN"></em></div>
+    	<div class="card_i_r " id="card_i_r">
+        	<h4 class="card_qunC"><span title="PC蓝信开发组" class="card_i_name caname">PC蓝信开发组</span><em class="card_edit_qunN"></em><span class="card_iR_card"><em></em><div class="card_iR_cSend"><a href="javascript:;">发送该名片</a></div></span></h4>
+        	<p>200人</p>
+        </div>
+    </div>
+    <div class="cardA_tab"><a href="javascript:;" class="cardA_tabLink">群资料</a><a href="javascript:;">群设置</a></div>
+    <div class="cardA_Con">
+        <div class="cardA_data" id="wrapper" style="overflow:hidden; position:relative;">
+            <div class="scroll">
+				<ul class="cardA_dataC">
+					<li >
+						<h4 class="cardA_tit">群主</h4>
+						<div class="cardA_list">
+							<dl>
+								<dt><img src="images/card_icon.png" id="Qun_AImg"/></dt>
+								<dd class="Qun_AName" id="Qun_AName">赵鹏</dd>
+							</dl>
+							<dl class="cardA_list_Mqz" id="transmitQunA">
+								<dt><span class="card_addAdmin"></span></dt>
+								<dd>转让群主</dd>
+							</dl>
+							<div class="clear"></div>
+						</div>
+					</li>
+
+					<li class="cardA_helper">
+						<hr class="card_line" />
+						<h4 class="cardA_tit">群助理</h4>
+						<div class="cardA_list cardA_list_aid">
+							<dl>
+								<dt><img src="images/card_icon.png" /></dt>
+								<dd>瑛泽</dd>
+							</dl>
+							<dl>
+								<dt><img src="images/card_icon.png" /></dt>
+								<dd>欧阳俊铭</dd>
+							</dl>
+							<dl>
+								<dt><img src="images/card_icon.png" /></dt>
+								<dd>马克.李思思思</dd>
+							</dl>
+							<dl>
+								<dt><img src="images/card_icon.png" /></dt>
+								<dd>瑛泽</dd>
+							</dl>
+							<dl class="cardA_list_Mqz" id="addQunAdmi">
+								<dt><span class="card_Mqz"></span></dt>
+								<dd>添加助理</dd>
+							</dl>
+							<div class="clear"></div>
+						</div>
+					</li>
+					<li class="cardA_intro">
+						<hr class="card_line" />
+						<h4 class="cardA_tit">群简介<em class="card_edit_sign" id="introduction"></em></h4>
+						<div class="card_sign cardA_intro"><span class="caname" style="color:#bbb;" id="cardA_intro">暂无简介</span></div><!--暂无简介加上 style="color:#bbb;"-->
+					</li>
+
+				</ul>
+            </div>
+    	</div>
+    </div>
+    <div class="cardA_Con disN">
+        <div class="cardA_set" id="wrapper3" style="overflow:hidden; position:relative;">
+            <div class="scroll">
+            	<div class="cardA_dataC">
+                	<h4 class="cardA_tit">消息设置</h4>
+                    <ul class="cardA_opt cardA_Admin">
+                        <li class="forbidSmsDown" >
+                        	<div class="cardA_opt_chb"><span class="cardA_opt_type"><a href="javascript:;" class="cardA_check" id="forbidSmsDown"></a><input type="checkbox" class="opc0"></span><label>消息免打扰</label></div>
+                        </li>
+                        <li class="topFlag">
+                        	<div class="cardA_opt_chb"><span class="cardA_opt_type"><a href="javascript:;" class="cardA_check" id="topFlag"></a><input type="checkbox" class="opc0"></span><label>消息置顶</label></div>
+                        </li>
+                    </ul>
+                    <hr class="card_line" />
+                	<h4 class="cardA_tit">群管理权限</h4>
+                    <ul class="cardA_opt cardA_setting cardA_Admin">
+                        <li class="maintainType">
+                        	<div class="cardA_opt_chb"><span class="cardA_opt_type"><a href="javascript:;" class="cardA_check" id="maintainType"></a><input type="checkbox" class="opc0"></span><label>仅群主和助理群主可管理群</label></div>
+                            <div class="cardA_opt_hint">（添加、移除成员、修改群名称、简介、头像等）</div>
+                        </li>
+                        <li class="privacyFlag">
+                        	<div class="cardA_opt_chb"><span class="cardA_opt_type"><a href="javascript:;" class="cardA_check" id="privacyFlag"></a><input type="checkbox" class="opc0"></span><label>隐藏成员号码</label></div>
+                        </li>
+                        <li class="openFlag">
+                        	<div class="cardA_opt_chb"><span class="cardA_opt_type"><a href="javascript:;" class="cardA_check cardA_checkEd" id="openFlag"></a><input type="checkbox" class="opc0"></span><label>本群允许被搜索</label></div>
+                        </li>
+                    </ul>
+            	</div>
+            </div>
+    	</div>
+        <div class="card_sendLX"><a href="javascript:;" class="cardA_dissolveQ" id="cardA_dissolveQ">解散退出该群</a></div>
+    </div>
+</div>
+
+<script  type="text/javascript">
+////关闭按钮
+//$(function(){
+//	$(function () {
+//		var card = new Card({type:1});//type：1 群 type ：2 个人
+//		card.bindcloseWIn();
+//
+//
+//	})
+//})
+//
+////发送名片
+//$(function(){
+//	document.onclick = function(){
+//		$(".card_iR_cSend").hide();
+//	};
+//	selectEvent(".card_iR_card em",true);
+//	selectEvent(".card_iR_cSend",false);
+//	ui_select_load(".card_iR_cSend a",".card_iR_card em");
+//
+//
+//
+//	$('.open_Email').click(function(){
+//
+//		var email=$(this).val();
+//
+//		var parm={email:email};
+//
+//		_this.sendEmail(parm)
+//
+//	})
+//
+//})
+//function ui_select_load(Obj,Obj1){
+//	$(Obj).click(function(){
+//		$(".card_iR_cSend").hide();
+//	})
+//}
+//function selectEvent(slt,isTrue){
+//	$(slt).click(function(event){
+//		var e=window.event || event;
+//		if(e.stopPropagation){
+//			e.stopPropagation();
+//		}else{
+//			e.cancelBubble = true;
+//		}
+//		if(isTrue==true){
+//			$(slt).siblings().show();
+//		}
+//	});
+//}
+//
+////编辑群名称
+//$(function() {
+//    $(".card_edit_qunN").click(function() {
+//        var sSign = $(this).siblings(".caname");
+//        var txt = sSign.text();
+//
+//		$(this).parents(".card_qunC").append('<input type="text" value="' + txt +'" class="card_sign_focus2" />');
+//
+//        var input = $(".card_sign_focus2");
+//        input.click(function() { return false; });
+//        input.trigger("focus");
+//        input.blur(function() {
+//			input.remove();
+//            var newtxt = $(this).val();
+//            if (newtxt == '') {
+//                sSign.html(newtxt);
+//            }
+//            else{
+//                sSign.html(newtxt);
+//            }
+//        });
+//    });
+//})
+//
+////群资料/群设置tab切换
+//$(function (){
+//	$(".cardA_tab a").each(function(index){
+//		$(this).click(function(){
+//			$(".cardA_Con").addClass("disN")
+//			$(".cardA_Con:eq("+index+")").removeClass("disN")
+//			$(".cardA_tab a").removeClass("cardA_tabLink")
+//			$(this).addClass("cardA_tabLink")
+//		})
+//	})
+//})
+//
+////群助理
+//$(function(){
+//	$(".cardA_list_del").bind("click",function(){
+//		$(this).parents("dl").remove();
+//	})
+//})
+//
+////编辑群简介
+//$(function() {
+//    $(".card_edit_sign").click(function() {
+//        var canameF = $(".card_sign").find(".caname");
+//        var txt = canameF.text();
+//
+//		if (txt == '暂无简介') {
+//        	var input = $('<div contenteditable="true" class="card_sign_focus3"></div>');
+//		}
+//		else{
+//        	var input = $('<div contenteditable="true" class="card_sign_focus3">' + txt + '</div>');
+//		}
+//
+//        canameF.html(input);
+//
+//        input.click(function() { return false; });
+//        input.trigger("focus");
+//        input.blur(function() {
+//			input.remove();
+//            var newtxt = $(this).text();
+//            if (newtxt == '') {
+//                canameF.html("暂无简介");
+//				canameF.css("color","#bbb")
+//
+//            }
+//            else{
+//                canameF.html(newtxt);
+//				canameF.css("color","#222")
+//            }
+//        });
+//    });
+//})
+//
+////自定义多选按钮，点击改变背景图片
+//$(function(){
+//	$(".cardA_Admin .cardA_check").click(function(){
+//		$(this).toggleClass("cardA_checkEd");
+//	})
+//
+//	$(".cardA_Admin .cardA_opt_chb label").click(function(){
+//		$(this).parents(".cardA_opt_chb").find(".cardA_check").toggleClass("cardA_checkEd");
+//	})
+//})
+
+
+////滚动条
+//$(function(){
+//	loaded();
+//})
+//function loaded() {
+//	var option = {
+//		probeType: 2,
+//		scrollbars: "custom",
+//		mouseWheel: true,
+//		bounce: false,
+//		interactiveScrollbars: true,
+//		shrinkScrollbars: 'scale',
+//		preventDefault: false
+//	};
+//	var myscrol = new IScroll('#wrapper3', option);
+////	var myscroll = new IScroll('#wrapper3', option);
+//}
+//$(function () {
+//	console.log('1111111111111')
+//	var card = new Card();
+//	console.log('2222222222222222')
+//	card.bindcloseWIn()
+//
+//
+//})
+
+$(function () {
+	var card = new QunCard();
+	card.bindcloseWIn()
+
+})
+
+</script>
+</body>
+</html>

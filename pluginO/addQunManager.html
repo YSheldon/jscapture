@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head height="508" width="642">
+    <meta charset="UTF-8">
+    <title>转发</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/contacts.css">
+    <style>
+        .top_title span {
+            padding-left: 13px;
+            background: none;
+        }
+
+        .con_box {
+            position: absolute;
+            top: 32px;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .contacts_leftContent {
+            position: absolute;
+            top: 38px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            /*position: relative;"*/
+        }
+
+        .contacts_right_scroll {
+            position: absolute;
+            top: 41px;
+            bottom: 51px;
+            left: 0;
+            right: 0;
+        }
+
+    </style>
+
+    <link rel="stylesheet" href="css/layer.css">
+    <script type="text/javascript" src="js/iscroll-5.1.3.min.js"></script>
+    <script type="application/javascript" src="js/jQuery-2.1.4.min.js"></script>
+    <script src="js/my_layer.js"></script>
+
+</head>
+<body>
+<div class="out_box">
+    <div class="top_title">
+        <span>转让群主</span>
+        <ul class="tool">
+            <li class="Winclose"></li>
+        </ul>
+    </div>
+    <div class="con_box">
+        <div class="contacts_left tran_l">
+            <div style="height: 38px;line-height: 38px; text-align: center;padding:0 5px ;position: relative"
+                 class="Ct_seach">
+                <em></em><input type="text" class="search" id="search" placeholder="" value="搜索"><em id="search_del"
+                                                                                                     style="display: none"></em>
+            </div>
+            <div class="contacts_leftContent" id="contact_scroll_left" style="display: block">
+
+                <div class="contactcontent ">
+
+                    <div class="contacts_person_scroll contacts_type" id="contacts_person_scroll">
+                        <ul id="con_l">
+                            <li>
+                                <em class="unchecked"></em>
+                                <img src="images/persion.png" alt="">
+                                <span class="name">张雪峰、张海洋、周利红、周利红测试1、乔海丰测试账...等</span>
+                                <span>来袭大叔大婶大的上</span>
+                            </li>
+                            <li>
+                                <em class="unchecked"></em>
+                                <img src="images/persion.png" alt="">
+                                <span class="name">高秀玉、金程、高秀玉哈哈、乔海丰测试账...、季国玉</span>
+                                <span>来袭大叔大婶大的上</span>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                    <!--<div class=" contacts_search_scroll" id="contacts_search_scroll" style="overflow: hidden; width: 100%; border-top: 1px solid rgb(217, 220, 226); display: none; height: 707px;">-->
+                    <!--<div>-->
+                    <!--<div class="contacts_search_con">-->
+                    <!--<li>-->
+                    <!--<em class="unchecked"></em>-->
+                    <!--<img src="images/persion.png" alt="">-->
+                    <!--<span>蓝信</span>-->
+                    <!--<span>来袭大叔大婶大的上</span>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<em class="unchecked"></em>-->
+                    <!--<img src="images/persion.png" alt="">-->
+                    <!--<span>蓝信</span>-->
+                    <!--<span>来袭大叔大婶大的上</span>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<em class="unchecked"></em>-->
+                    <!--<img src="images/persion.png" alt="">-->
+                    <!--<span>蓝信</span>-->
+                    <!--<span>来袭大叔大婶大的上</span>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<em class="unchecked"></em>-->
+                    <!--<img src="images/persion.png" alt="">-->
+                    <!--<span>蓝信</span>-->
+                    <!--<span>来袭大叔大婶大的上</span>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<em class="unchecked"></em>-->
+                    <!--<img src="images/persion.png" alt="">-->
+                    <!--<span>蓝信</span>-->
+                    <!--<span>来袭大叔大婶大的上</span>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<em class="unchecked"></em>-->
+                    <!--<img src="images/persion.png" alt="">-->
+                    <!--<span>蓝信</span>-->
+                    <!--<span>来袭大叔大婶大的上</span>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<em class="unchecked"></em>-->
+                    <!--<img src="images/persion.png" alt="">-->
+                    <!--<span>蓝信</span>-->
+                    <!--<span>来袭大叔大婶大的上</span>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<em class="unchecked"></em>-->
+                    <!--<img src="images/persion.png" alt="">-->
+                    <!--<span>蓝信</span>-->
+                    <!--<span>来袭大叔大婶大的上</span>-->
+                    <!--</li>-->
+
+
+                    <!--</div>-->
+                    <!--<div class="noSearch"-->
+                    <!--style="position: absolute;top: 150px;text-align: center;width: 100%;display: none">-->
+                    <!--<span>没有搜索结果</span>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                </div>
+            </div>
+
+            <div style="top: 30%; text-align: center;position: absolute;width: 100%;display:none" class="Contact_load">
+                <img src="./images/ajax-loader_smail.gif" alt="">
+            </div>
+        </div>
+        <div class="contacts_right">
+            <h5>已选择<span id="sel_count">0</span>/50人</h5>
+            <div id="contacts_right_scroll" class="contacts_right_scroll" style="overflow: hidden;">
+                <ul class="SelecedContact" id="con_r" style="padding-left: 13px">
+                    <!--<li ><img src="../../images/defuser.png" alt=""><span>张雪峰、张海洋、周利红、周利红测试1、乔海丰测试账...等</span><em></em></li>-->
+                    <!--<li ><img src="../../images/defuser.png" alt=""><span>高秀玉、金程、高秀玉哈哈、乔海丰测试账...、季国玉</span><em></em></li>-->
+                </ul>
+            </div>
+            <div style="width: 100%;text-align: center" class="btn_container">
+                <button class="btnCancel" id="btnCancel">取消</button>
+                <button class="btnOK" id="btnOk">确认</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+<script>
+
+
+
+
+    var leftScroll,
+            rightScroll;
+    var memberlist = [];
+
+    function scroll() {
+//    leftscroll=new iscroll
+        var option = {
+            probeType: 2,
+            scrollbars: "custom",
+            mouseWheel: true,
+            bounce: false,
+            interactiveScrollbars: true,
+            shrinkScrollbars: 'scale',
+            preventDefault: false,
+            momentum: false,
+        };
+
+        leftScroll = new IScroll('#contact_scroll_left', option);
+        rightScroll = new IScroll('#contacts_right_scroll', option);
+
+    }
+    var datalist,initdata;
+    window.onload = function () {
+
+        //查询所有的最近联系人或者群;
+        scroll();
+        var parm={}
+        try{
+            window.lxpc.exebusinessaction('Transmit', 'InitFinished', '0', JSON.stringify(parm), 0, function (status, jsondata, targ) {
+
+                if(status==0){
+
+                    initdata=JSON.parse(jsondata);
+                    console.log(jsondata)
+
+                    var parm={dialogId:initdata.dialogId}//查询用户的ID（如果不传此字段，就返回这个群的所有用户信息）”｝
+                    try{
+                        window.lxpc.exebusinessaction('QunCard', 'GetQunMemberInfo', '0', JSON.stringify(parm), targ, function (status, jsondata, targ) {
+                            if (status == 0) {
+                                console.log(jsondata)
+                                console.log('iiiiiiiiiiiiiiiiiiii====================')
+                                datalist = JSON.parse(jsondata);
+                                var str = '';
+                                var ocon_l = document.getElementById('con_l');
+                                ocon_l.innerHTML = ''
+
+                                for (var i = 0; i < datalist.length; i++) {
+
+                                    var curdata = datalist[i];
+
+                                    var defalut = 'images/persion.png'
+                                    if (curdata.dialogType == 3) {
+                                        datalist.splice(i, 1)
+                                        i--;
+                                        continue;
+                                    } else if (curdata.dialogType == 0) {
+                                        if (curdata.photoResId == '') {
+                                            defalut = 'images/ml_qunIcon.jpg'
+                                        }
+                                    }
+                                    var branch = curdata.branchPath;
+                                    if (branch == '' || branch == null || typeof(branch) == 'undefined') {
+                                        branch = ''
+                                    }
+
+                                    str += `<li onclick="changeChecked(this,${i})"><em class="unchecked"  ></em><img  src="${defalut}" alt=""><span class="name">${curdata.name}</span><span>${branch}</span></li>`
+
+                                }
+                                var ocon_l = document.getElementById('con_l');
+                                ocon_l.innerHTML = str;
+
+                                leftScroll.refresh();
+                                QueryDetailInfo(datalist)
+
+                            } else {
+                                console.log(status)
+                            }
+
+                        })
+                    } catch (e) {
+                        console.log(e.message)
+                    }
+                    bindEvent()
+                    bindsearch();
+
+                }else{
+                    my_layer({message: '调用接口出错，错误码' + status}, 'error')
+                }
+
+            })
+        }catch(e){
+            my_layer({message: '调用接口出错，错误码' + e.message}, 'error')
+        }
+
+
+    }
+
+    //check
+    function changeChecked(ele, index) {
+
+        var ocheck = ele.getElementsByTagName('em')[0];
+        if (ocheck.classList.contains('checked')) {
+            ocheck.classList.remove('checked')
+            ocheck.classList.add('unchecked')
+            var ocon_r = document.getElementById('con_r');
+            var oSeled = ocon_r.querySelector('li[userId="' + datalist[index].userUniId + '"]')
+
+            $(oSeled).remove();
+            var oSeled = ocon_r.querySelector('li[userId="' + datalist[index].userUniId + '"]')
+            $(oSeled).remove();
+
+            var ocount = document.getElementById('sel_count');
+            ocount.innerHTML = parseFloat(ocount.innerHTML) - 1
+
+            var id = memberlist.indexOf(datalist[index].userUniId)
+            memberlist.splice(id, 1);
+            rightScroll.refresh();
+
+        } else if (ocheck.classList.contains('unchecked')) {
+
+
+            if(memberlist.length>=50){//超过50不能再选
+                my_layer({message:'超过50人，不能添加'},'warn');
+            }else{
+                ocheck.classList.remove('unchecked')
+                ocheck.classList.add('checked');
+                var contact = datalist[index]
+                addContact(contact, index);
+            }
+        }
+
+    }
+    ;
+
+    var imgId = 0,
+            senderId = 0;
+    //获取头像
+    function getImages(parm, imgId) {
+        try {
+            window.lxpc.exebusinessaction('DownloadResource', 'HeaderImage', '0', JSON.stringify(parm), imgId, function (status, result, targ) {
+
+                if (status == 0) {
+                    if (result == '' || result == null || typeof(result) == 'undefined') {
+                        return;
+                    }
+                    var ocon_l = document.getElementById('con_l');
+                    var oimg = ocon_l.querySelector('img[imgId="' + targ + '"]')
+                    oimg.src = result;
+
+                } else {
+                    my_layer({message: '调用接口出错，错误码' + e.message}, 'error')
+                }
+
+
+            })
+        } catch (e) {
+            my_layer({message: '调用接口出错，错误码' + e.message}, 'error')
+        }
+    }
+    //获取会话的详情
+    function QueryDetailInfo(datalist) {
+        for (var i = 0, ln = datalist.length; i < ln; i++) {
+            var curdata = datalist[i],
+                    ResID = curdata.photoResId;
+
+            if (ResID != '' && typeof(ResID) != 'undefined' && ResID != null) {
+                var parm = {resourceList: [{photoResId: ResID}]};
+
+                imgId += 1;
+                var ocon_l = document.getElementById('con_l');
+                var oimg = ocon_l.getElementsByTagName('img')[i];
+                oimg.setAttribute('imgId', imgId)
+                getImages(parm, imgId)
+            }
+
+        }
+    }
+    ;
+
+    //往右边添加联系人
+    function addContact(contact, index) {
+
+        if (memberlist.indexOf(datalist[index].userUniId) > -1) {
+            return;
+        } else {
+
+            memberlist.push(datalist[index].userUniId);
+
+
+
+        }
+
+        var ocount = document.getElementById('sel_count');
+        ocount.innerHTML = parseFloat(ocount.innerHTML) + 1
+
+
+        var str = '';
+        var ocon_r = document.getElementById('con_r')
+        var imgpath = document.getElementById('con_l').getElementsByTagName('img')[index].getAttribute('src')
+
+        str = `<li ><img src="${imgpath}" alt=""><span>${contact.name}</span><em onclick="delContact(this,${index})"></em ></li>`
+
+        var oli = document.createElement('li');
+        oli.setAttribute('userId', contact.userUniId)
+        oli.innerHTML = str;
+        ocon_r.appendChild(oli);
+        rightScroll.refresh();
+
+    }
+
+    //从左边删除选中的联系人
+    function delContact(ele, index) {
+
+        var oparent = ele.parentNode
+        $(oparent).remove();
+        rightScroll.refresh();
+        var ocount = document.getElementById('sel_count');
+        ocount.innerHTML = parseFloat(ocount.innerHTML) - 1
+
+        var oem = document.getElementById('con_l').getElementsByTagName('em')[index]
+
+        oem.classList.remove('checked')
+        oem.classList.add('unchecked')
+
+        var id = memberlist.indexOf(datalist[index].userUniId)
+        memberlist.splice(id, 1);
+
+    }
+
+    //搜索
+    var search = '';
+    var timer;
+    function bindsearch() {
+        var osearch = document.getElementById('search');
+        var odel = document.getElementById('search_del');
+        osearch.onfocus = function () {
+            if (this.value == '搜索') {
+                search = '';
+                this.value = ''
+                odel.style.display = 'none'
+            }
+        }
+
+        $(osearch).bind('input propertychange', function () {
+
+            search = this.value.trim();
+            var olis = document.getElementById('con_l').getElementsByTagName('li');
+
+            for (var i = 0; i < datalist.length; i++) {
+                var item = datalist[i];
+                if (search == '') {
+                    olis[i].style.display = 'block'
+                    odel.style.display = 'none'
+                } else {
+
+
+                    odel.style.display = 'block'
+
+                    if (item.name.indexOf(search) > -1 || item.abbreviation.indexOf(search) > -1 || item.fullPinyin.indexOf(search) > -1) {
+
+                        olis[i].style.display = 'block'
+
+                    } else {
+                        olis[i].style.display = 'none'
+                    }
+
+                }
+
+
+            }
+
+
+        })
+
+        osearch.onblur = function () {
+            if (this.value == '') {
+                search = '';
+                this.value = '搜索'
+                odel.style.display = 'none'
+            }
+        }
+
+        odel.onclick = function () {
+            osearch.value = '';
+            var olis = document.getElementById('con_l').getElementsByTagName('li');
+            for (var i = 0; i < datalist.length; i++) {
+
+                olis[i].style.display = 'block'
+
+            }
+
+        }
+
+
+    }
+
+    //确认通知
+    function confirmSelectPeople(parm){
+        try{
+            window.lxpc.exebusinessaction('Transmit', 'ConfirmSelectPeople', '0', JSON.stringify(parm), 0, function (status, jsondata, targ) {
+                if(status==0){
+
+                    try {
+                        window.lxpc.closewnd();
+                    }
+                    catch (e) {
+                        console.log(e.message)
+                    }
+
+                }else{
+                    my_layer({message:'调用接口出错，错误码'+ status},'error')
+                }
+
+
+            })
+        }catch(e){
+            my_layer({message:'调用接口出错，错误码'+ e.message},'error')
+        }
+
+    }
+
+    function bindEvent(){
+        var ocloas = document.getElementsByClassName('Winclose')[0];
+        ocloas.onclick = function (ev) {
+            try {
+                window.lxpc.closewnd();
+            }
+            catch (e) {
+                console.log(e.message)
+            }
+        }
+        //取消
+        var btnCancel = document.getElementById('btnCancel');
+        btnCancel.onclick = function () {
+            try {
+                window.lxpc.closewnd();
+
+            } catch (e) {
+                my_layer({message: '调用接口出错，错误码' + e.message}, 'error')
+            }
+
+        }
+
+
+        //确认联系人
+
+        var obtnOk=document.getElementById('btnOk');
+        obtnOk.onclick=function(){
+
+            var parm={
+                fromCode:initdata.fromCode,userlist:memberlist
+            }
+            console.log('确认联系人-----------------------------------')
+            console.log(JSON.stringify(parm))
+            confirmSelectPeople(parm)
+
+
+        }
+
+
+
+
+    }
+
+</script>

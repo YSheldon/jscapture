@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head width="640"  height="507">
+    <meta charset="UTF-8">
+    <title>添加群成员</title>
+    <style>
+        .G_box{
+            position:absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            box-sizing: border-box;
+            /*overflow: hidden;*/
+        }
+        .contact_title{
+            -webkit-app-region:drag;
+        }
+
+    </style>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/contacts.css">
+    <link rel="stylesheet" href="css/zTreeStyle.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/layer.css">
+    <script src="js/jQuery-2.1.4.min.js"></script>
+    <script src="js/iscroll-5.1.3.min.js"></script>
+    <script src="js/jquery.ztree.core.js"></script>
+    <script src="js/jquery.ztree.excheck.js"></script>
+    <script src="js/contacts.js"></script>
+    <script src="js/application.js"></script>
+    <script src="js/my_layer.js"></script>
+
+
+</head>
+<body>
+<div class="G_box shadow" id="G_box">
+
+</div>
+</body>
+</html>
+<script type="application/javascript" charset="utf-8">
+
+    $(function(){
+        var parm = {};
+
+        try {
+
+            window.lxpc.exebusinessaction('addGroupmember', 'InitFinished', '0', JSON.stringify(parm), 0, function (status, jsondata, targ) {
+               
+                var data=JSON.parse(jsondata);
+
+
+                var id=data.qunId,
+                        recordDomain=data.recordDomain;
+
+                var contacts= new Contacts('#G_box',{title:'添加群成员',logoicon:'./images/logo.png',tool:{
+                    isclose:true,
+                    ismax:false,
+                    ismin:true,
+                }})
+                contacts.ConfirmContact('#G_box',function(Contactlist){
+
+                    var memberlist=[],
+                            structlist=[];
+
+                    for(var i=0;i<Contactlist.length;i++){
+                        var curContact=Contactlist[i];
+                        if(curContact.isstruct){
+                            structlist.push(curContact.userUniId)
+                        }else{
+                            memberlist.push(curContact.userUniId);
+                        }
+                    }
+
+                    var parm={qunId:id,userUniIdList:memberlist,invitedGroups:structlist,recordDomain:recordDomain};
+
+                    if(memberlist.length==0&&structlist.length==0){
+
+                        my_layer({message:'请选择联系人或是组织来添加群成员'},'warn',function(){
+                            return;
+                        })
+                        return;
+                    }
+
+                    try{
+                        window.lxpc.exebusinessaction('QunChat', 'AddQunMember', '0', JSON.stringify(parm), 0, function (status, result, targ) {
+
+                            if(status==0){
+
+                                window.lxpc.closewnd();
+                            }else{
+                                my_layer({message:'添加成员失败'},'error',function(){
+                                    return;
+                                })
+                            }
+
+                        })
+
+                    }catch(e){
+                        console.log(e.message)
+                    }
+
+                });
+                contacts.Closecontacts('#G_box',function(){
+                    try {
+
+                        window.lxpc.closewnd();
+                    }
+                    catch (e) {
+                        console.log(e.message)
+                    }
+                })
+                contacts.Cancelcontacts('#G_box',function(){
+                    try {
+
+                        window.lxpc.closewnd();
+                    }
+                    catch (e) {
+                        console.log(e.message)
+                    }
+                })
+            })
+
+        }catch(e){
+console.log(e.message)
+        }
+
+       
+
+    })
+
+
+</script>

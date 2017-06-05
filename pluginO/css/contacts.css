@@ -1,0 +1,348 @@
+*{
+    -webkit-user-select: none;
+}
+.contact_title{
+    height:32px;
+    line-height: 32px;
+    /*text-align: center;*/
+    background: #476294;
+    /*box-shadow: 0px 1px 0px 0px #DADADA;*/
+    /*border-radius: 2px 2px 0px 0px;*/
+}
+.contact_title span{
+    /*text-align: center;*/
+    /*display: inline-block;*/
+    height:32px;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+.contact_title span:nth-of-type(1){
+
+    margin-left:13px ;
+
+}
+/*.clossContact{*/
+/*overflow: hidden;*/
+/*padding:0;*/
+/*width:26px;*/
+/*height:100%;*/
+/*background: url('../images/btn_lx_close.png') center center no-repeat ;*/
+/*background-position: 0 0;*/
+/*float: right;*/
+/*margin-right:14px ;*/
+/*cursor: pointer;*/
+/*}*/
+.contacts_left{
+    position: absolute;
+    float: left;
+    width:46%;
+    top:32px;
+    left:0;
+    bottom:0;
+    padding:0;
+    background: #E9E9EC ;
+    border-right: 1px solid  #D4D5D8;
+
+}
+/*.contacts_right_scroll{*/
+/*margin-left: 46%;*/
+/*}*/
+.Ct_seach em:nth-of-type(1){
+    z-index: 100;
+    position:absolute;
+    width:14px;
+    height:14px;
+    background: url("../images/search.png");
+    top:13px;
+    left:18px;
+}
+.Ct_seach em:nth-of-type(2){
+    position:absolute;
+    width:16px;
+    height:16px;
+    background: url("../images/del_search.png") no-repeat -32px center   ;
+    top:13px;
+    right:10px;
+}
+.Ct_seach em:nth-of-type(2):hover{
+
+    background: url("../images/del_search.png") no-repeat -16px center   ;
+
+}
+.Ct_seach em:nth-of-type(2):active{
+
+    background: url("../images/del_search.png") no-repeat 0 center   ;
+
+}
+.contacts_leftContent{
+
+}
+.search{
+    width:100%;
+    height:26px;
+    line-height: 26px;
+    /*margin:5px;*/
+    /*text-align: center;*/
+    border: 1px solid #D5D5D5;
+    border-radius: 5px;
+    letter-spacing: -0.13px;
+    /*padding-left: 10px;*/
+    position: relative;
+    text-indent: 30px;
+    font-size: 12px;
+    color: #222222;
+    border: none;
+    font-weight: normal;
+
+}
+.search_tip{
+    position: absolute;
+    left:14px;
+    top:0;
+    vertical-align: middle;
+}
+/*.search::-webkit-input-placeholder{*/
+/*!*font-size: 13px;*!*/
+/*color:  #BCBCBC;*/
+/*padding-left: 28px;*/
+/*font-family:PingFangSC-Regular;*/
+/*font-size: 12px;*/
+/*!*color: #BCBCBC;*!*/
+/*letter-spacing: -0.13px;*/
+
+/*}*/
+
+.contact_tab{
+
+    font-size: 13px;
+    color: #222222;
+    zoom: 1;
+    overflow: hidden;
+    border-bottom: 1px solid  #D4D5D8;
+}
+.contact_tab li{
+    height:40px;
+    line-height: 40px;
+    float: left;
+    width:50%;
+    text-align: center;
+    cursor: pointer;
+    /*border-bottom: 1px solid  #D4D5D8;;*/
+}
+
+.contact_Select{
+    border-bottom: 2px solid #60ACEF;
+    color: #60ACEF ;
+}
+
+.contactcontent{
+    background: #E9E9EC;
+    position: absolute;
+    top:0px;
+    right:0px;
+    left:0;
+}
+.contacts_right {
+    position: relative;
+    margin-left: 46%;
+    background: #F2F0F0;
+    font-size: 13px;
+    color: #222;
+    height:100%;
+}
+.contacts_right h5{
+    /*padding: 9px 10px 12px;*/
+    padding-left: 10px;
+    height:41px;
+    line-height: 41px;
+    font-size: 13px;
+    color: #222222;
+}
+.SelecedContact li{
+    position: relative;
+    margin-bottom: 10px;
+}
+.SelecedContact img {
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+    display: block;
+    vertical-align: middle;
+    float: left;
+}
+.SelecedContact span {
+    display: block;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: keep-all;
+    white-space: nowrap;
+    margin-right: 32px;
+}
+.SelecedContact em {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    right:10px;
+    top:3px;
+    /*margin-right: 10px;*/
+    /*margin-top: 3px;*/
+    /*background: url(../images/delContact.png) no-repeat;*/
+    background: url(../images/del_search.png) no-repeat;
+}
+.SelecedContact em:hover {
+    background-position:-16px 0 ;
+}
+.SelecedContact em:active {
+    background-position: -32px 0;
+}
+.contacts_search_scroll{
+    top:38px;
+}
+.contacts_person_scroll li ,.contacts_search_scroll li{
+    height:54px;
+    /*padding:10px 0 9px 9px;*/
+    padding-left:9px;
+    padding-right: 6px;
+    /*padding-right: 5px;*/
+    font-size: 0;
+    -webkit-text-size-adjust:none;
+    cursor: pointer;
+}
+.contacts_person_scroll em ,.contacts_search_scroll em{
+    display: inline-block;
+    width:16px;
+    height:16px;
+    vertical-align: middle;
+}
+
+.checked{
+
+    background: url("../images/checkEd.png") no-repeat;
+    background-position: -32px 0;
+}
+.checked:hover{
+
+    background: url("../images/checkEd.png") no-repeat;
+    background-position: -16px 0;
+}
+
+.unchecked{
+
+    background: url("../images/check.png") no-repeat;
+    background-position: 0 0;
+}
+.unchecked:hover{
+
+    background: url("../images/check.png") no-repeat;
+    background-position: -16px 0;
+}
+
+.contacts_person_scroll em:active ,.contacts_search_scroll em:active{
+    background: url("../images/checkEd.png") no-repeat;
+    background-position:-48px ;
+}
+.ConcactSlected{
+    background-position: 24px;
+}
+
+
+.contacts_person_scroll img ,.contacts_search_scroll img{
+    display: inline-block;
+    vertical-align: middle;
+    width:32px;
+    height: 32px;
+    margin:8px;
+
+}
+.contacts_person_scroll li span ,.contacts_search_scroll  li span{
+    display: block;
+    word-break:keep-all;/* 不换行 */
+    white-space:nowrap;/* 不换行 */
+    overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+    margin-left:60px;
+
+}
+.contacts_person_scroll li span:nth-of-type(1) ,.contacts_search_scroll li span:nth-of-type(1){
+    margin-top: -44px;
+    font-size: 13px;
+    color: #222222;
+    margin-bottom: 2px;
+
+}.contacts_person_scroll li span:nth-of-type(2) , .contacts_search_scroll li span:nth-of-type(2){
+
+     font-size: 12px;
+     color: #666666;
+
+     /*word-break:keep-all;!* 不换行 *!*/
+     /*white-space:nowrap;!* 不换行 *!*/
+     /*overflow:hidden;!* 内容超出宽度时隐藏超出部分的内容 *!*/
+     /*text-overflow:ellipsis;!* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*!*/
+
+ }
+.contactType{
+
+    font-size: 12px;
+    height:20px;
+    background: #D6D6D8;
+    padding-left: 6px;
+    color: #666666;
+    line-height: 20px;
+}
+.contacts_right .btn_container{
+    display: block;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    padding: 12px 0;
+    background: #F2F0F0;
+    border-radius: 0px 0px 2px 0px;
+    border-top: 1px solid #D9DCE2;
+}
+
+.contacts_right button{
+    height:26px;
+    width:80px;
+
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+
+    letter-spacing: 0px;
+    float: right;
+    margin-right: 12px;
+}
+
+.btnCancel{
+    background: #fff;
+    color: #000;
+}
+.btnCancel:hover{
+    background: #60ACEF;
+    color: #fff;
+}
+
+.contacts_right .btnOK{
+    background: #60ACEF;
+    color: #fff;
+}
+
+
+.contact_info{
+    width:16px;
+    height:16px;
+    line-height: 16px;
+    display: inline-block;
+    background: #60ACEF;
+    margin-left: 10px;
+    border-radius: 5px;
+    font-style: normal;
+    color: #fff;
+    font-size: 13px;
+    text-align: center;
+}
+.tran_l{
+    top:0px;
+}

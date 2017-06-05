@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="msapplication-tap-highlight" content="no">
+<title>正在视频通话</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />	<!--通用-->
+<link rel="stylesheet" type="text/css" href="../css/common.css" />	<!--通用-->
+<link rel="stylesheet" type="text/css" href="../css/video.css" />	<!--视频-->
+<link rel="stylesheet" type="text/css" href="../css/powerange.css" />	<!--音量-->
+<script type="text/javascript" src="../js/jQuery-2.1.4.min.js"></script>
+<script type="text/javascript" src="../js/iscroll-5.1.3.min.js"></script>	<!--滚动条-->
+<script type="text/javascript" src="../js/powerange.min.js"></script>		<!--音量-->
+<script>
+//左侧视频的高度：宽/高=1.333333
+function autoHeight() {
+	var h100 = $(".vdo_l").height();	//100%
+	var h = h100 / 4 - 1;					//25%-1px，获取单个视频的高度
+	var w = h * 1.33333;				//视频的宽度
+	
+	$(".vdo_lD").css({width:w,height:h});	//左侧视频的宽 高
+	$(".vdo_r").css({left:w+1});				//右侧视频定位左侧距离
+}
+$(function(){
+	autoHeight();
+	$(window).resize(autoHeight);
+})
+
+$(function(){
+	//右侧成员列表 显示/隐藏
+	$(".vdo_btn_member").click(function(){
+		var opacity =$('.vdo_rList').css('opacity');
+		if(opacity == '0'){
+			$(".vdo_rList").css({opacity:"1",right: "0"})
+			$(this).addClass("on");
+		}else{
+			$(".vdo_rList").css({opacity:"0",right: "-246px"})
+			$(this).removeClass("on");
+		}
+	})
+	
+	//主持人-右侧参会人员tab切换
+	$(".vdo_rL_tTab a").each(function(index){
+		$(this).click(function(){
+			//右侧 默认（背景图标）
+			$(".vdo_rL_tCon").addClass("disN")
+			$(".vdo_rL_tCon:eq("+index+")").removeClass("disN")
+			
+			$(".vdo_rL_tTab a").removeClass("on")
+			$(this).addClass("on")
+		})
+	})
+	
+	//主持人-点击右侧按钮
+		//麦克风
+	$(".vdo_rL_aMute").click(function () {
+		if($(this).is('.on')){
+			$(this).removeClass('on');
+			$(this).attr("title","点击禁言");
+		}else{
+			$(this).addClass('on');
+			$(this).attr("title","恢复通话");
+		}
+	})
+		//摄像头
+	$(".vdo_rL_aVideo").click(function () {
+		if($(this).is('.on')){
+			$(this).removeClass('on');
+			$(this).attr("title","关闭视频");
+		}else{
+			$(this).addClass('on');
+			$(this).attr("title","打开视频");
+		}
+	})
+	
+	//底部图标
+		//麦克风
+	$(".vdo_btn_mic").click(function () {
+		if($(this).is('.on')){
+			$(this).removeClass('on');
+			$(this).attr("title","关闭麦克风");
+		}else{
+			$(this).addClass('on');
+			$(this).attr("title","恢复麦克风");
+		}
+	})
+		//摄像头
+	$(".vdo_btn_camera").click(function () {
+		if($(this).is('.on')){
+			$(this).removeClass('on');
+			$(this).attr("title","关闭摄像头");
+		}else{
+			$(this).addClass('on');
+			$(this).attr("title","恢复摄像头");
+		}
+	})
+		//静音/免提
+	$(".vdo_btn_mute").click(function () {
+		if($(this).is('.on')){
+			$(this).removeClass('on');
+			$(this).attr("title","点击静音");
+		}else{
+			$(this).addClass('on');
+			$(this).attr("title","恢复扬声器");
+		}
+	})
+})
+
+//退出
+$(function(){
+	$(".vdo_btn_quit").click(function(){
+		$(this).parents(".vdo_main").remove();
+	})
+})
+
+//设置
+$(function(){
+	$(".vdo_btn_set").click(function(){
+		$(".vdo_set").show();
+	})
+	$(".vdo_set_close").click(function(){
+		$(this).parents(".vdo_set").remove();
+	})
+})
+
+//虚拟下拉列表-"麦克风选择"
+$(function(){
+	document.onclick = function(){
+		$(".vdo_drop_ModifyThe").removeClass("vdo_drop_aB")
+		$(".vdo_drop_list").hide();
+	};
+	selectEvent(".vdo_drop_M1",true);
+	selectEvent(".vdo_drop_l1",false);	
+	ui_select_load(".vdo_drop_l1 li",".vdo_drop_M1 span");
+})
+function ui_select_load(Obj,Obj1){
+	$(Obj).click(function(){
+		var s_txt = $(this).text();
+		$(Obj1).html(s_txt);
+		$(this).parent(".vdo_drop_l1").hide();
+		$(".vdo_drop_M1").removeClass("vdo_drop_aB")
+	})
+}
+function selectEvent(slt,isTrue){
+	$(slt).click(function(event){
+		var e=window.event || event;
+		if(e.stopPropagation){
+			e.stopPropagation();
+		}else{
+			e.cancelBubble = true;
+		}
+		if(isTrue==true){
+			$(".vdo_drop_list").not($(this).siblings()).hide();
+			$(".vdo_drop_ModifyThe").not($(this)).removeClass("vdo_drop_aB");
+			$(slt).siblings().toggle();
+			$(slt).toggleClass("vdo_drop_aB")
+		}
+	});
+}
+
+//虚拟下拉列表-"扬声器选择"
+$(function(){
+	selectEvent2(".vdo_drop_M2",true);
+	selectEvent2(".vdo_drop_l2",false);	
+	ui_select_load2(".vdo_drop_l2 li",".vdo_drop_M2 span");
+})
+function ui_select_load2(Obj,Obj1){
+	$(Obj).click(function(){
+		var s_txt = $(this).text();
+		$(Obj1).html(s_txt);
+		$(this).parent(".vdo_drop_l2").hide();
+		$(".vdo_drop_M2").removeClass("vdo_drop_aB")
+	})
+}
+function selectEvent2(slt,isTrue){
+	$(slt).click(function(event){
+		var e=window.event || event;
+		if(e.stopPropagation){
+			e.stopPropagation();
+		}else{
+			e.cancelBubble = true;
+		}
+		if(isTrue==true){
+			$(".vdo_drop_list").not($(this).siblings()).hide();
+			$(".vdo_drop_ModifyThe").not($(this)).removeClass("vdo_drop_aB");
+			$(slt).siblings().toggle();
+			$(slt).toggleClass("vdo_drop_aB")
+		}
+	});
+}
+
+//滚动条
+$(function(){
+	loaded();
+})
+function loaded() {
+	var option = {
+		probeType: 2,
+		scrollbars: "custom",
+		mouseWheel: true,
+		bounce: false,
+		interactiveScrollbars: true,
+		shrinkScrollbars: 'scale',
+		preventDefault: false
+	};
+	var myscroll = new IScroll('#wrapper', option);
+	var myscroll2 = new IScroll('#wrapper2', option);
+	var myscroll3 = new IScroll('#wrapper3', option);
+	var myscroll4 = new IScroll('#wrapper4', option);
+}
+</script>
+</head>
+
+<body>
+<!--视频-->
+<div class="vdo_main">
+    <div class="vdo_con">
+    	<div class="vdo_l" id="wrapper">
+        	<div class="scroll">
+                <div class="vdo_lD">
+                	<div class="vdo_l_video" style="background:#383838;"></div><!--视频-->
+                	<div class="vdo_lD_b">我</div>
+                </div>
+                <div class="vdo_lD">
+                	<div class="vdo_l_video" style="background:#383838;"></div><!--视频-->
+                	<div class="vdo_lD_b">李成伟</div>
+                </div>
+                <div class="vdo_lD">
+                	<div class="vdo_l_video" style="background:#383838;"></div><!--视频-->
+                	<div class="vdo_lD_b">莉莉</div>
+                    <i class="vdo_l_mute"></i>	<!--静音图标-->
+                </div>
+                <div class="vdo_lD">
+                	<div class="vdo_l_video" style="background:#383838;"></div><!--视频-->
+                	<div class="vdo_lD_b">莉莉</div>
+                    <i class="vdo_l_mute"></i>	<!--静音图标-->
+                </div>
+                <div class="vdo_lD">
+                    <div class="vdo_l_voice">	<!--语音-->
+                    	<div class="vdo_lBg_btn"></div>
+                    </div>
+                    <i class="vdo_l_mute"></i>	<!--静音图标-->
+                	<div class="vdo_lD_b"><span>语音中</span>巍巍</div>
+                </div>
+            </div>
+        </div>
+        <div class="vdo_r">
+            <!--视频占位-->
+            <div class="vdo_l_video"></div>
+            
+            
+        	<div class="vdo_r_t">
+            	<h3>赵晨威</h3>
+                <p>企业安全-产品部</p>
+                <div><i class="vdo_l_mute"></i></div>
+            </div>
+            
+            <div class="vdo_rList">
+                <!--参会人员-->
+                <div class="PA42">
+                	<div class="vdo_rL_tTit">已加入(5)</div>
+                </div>
+                <div class="vdo_rL_tabC">
+                	<div class="vdo_rL_tCon" id="wrapper4">
+                    	<div class="scroll">
+                        	<ul class="vdo_rL_list">
+                            	<li><span class="vdo_rL_lBtn2"><i class="vdo_rL_iMute" title="音频已被开启"></i><i class="vdo_rL_iVideo" title="视频已被开启"></i></span><img src="../images/card_icon.png" /><p>莉莉(主持人)</p></li>
+                            	<li><span class="vdo_rL_lBtn2"><i class="vdo_rL_iMute" title="音频已被开启"></i><i class="vdo_rL_iVideo on" title="主持人未开启视频"></i></span><img src="../images/card_icon.png" /><p>李成伟</p></li>
+                            	<li><span class="vdo_rL_lBtn2"><i class="vdo_rL_iMute on" title="主持人未开启音频"></i><i class="vdo_rL_iVideo" title="视频已被开启"></i></span><img src="../images/card_icon.png" /><p>赵晨威</p></li>
+                            	<li><span class="vdo_rL_lBtn2"><i class="vdo_rL_iMute on" title="主持人未开启音频"></i><i class="vdo_rL_iVideo on" title="主持人未开启视频"></i></span><img src="../images/card_icon.png" /><p>王月</p></li>
+                            	<li><span class="vdo_rL_lBtn2"><i class="vdo_rL_iMute on" title="主持人未开启音频"></i><i class="vdo_rL_iVideo on" title="主持人未开启视频"></i></span><img src="../images/card_icon.png" /><p>巍巍</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+    <div class="vdo_btn">
+    	<div class="vdo_btn_c"><a href="javascript:;" class="vdo_btn_mic" id="vdo_btn_mic" title="关闭麦克风"><i></i></a><a href="javascript:;" class="vdo_btn_camera" title="关闭摄像头"><i></i></a><span class="volume_con"><a href="javascript:;" class="vdo_btn_mute" title="点击静音"><i></i></a>
+        <div class="volume_div">
+        	<div class="vdo_btn_muteIpt"><em class="volume_btn volume_plus"></em><div class="slider-wrapper vertical-wrapper"><input type="text" class="js-vertical" /></div><em class="volume_btn volume_minus"></em></div>
+        </div></span><a href="javascript:;" class="vdo_btn_set" title="设置"><i></i></a><a href="javascript:;" class="vdo_btn_member on"><i></i><em>5/6</em></a></div>
+    	<div class="vdo_btn_r"><span class="vdo_btn_duration">03:54</span><a href="javascript:;" class="vdo_btn_quit"><i></i>退出</a></div>
+    </div>
+</div>
+
+<!--设置-弹出框-->
+<div class="vdo_set">
+	<h4 class="vdo_set_title"><a href="javascript:;" class="vdo_set_close"></a>设置</h4>
+    <div class="vdo_set_con">
+    	<div class="vdo_set_list">
+            <div class="vdo_set_li">
+                <label class="vdo_set_l">摄像头选择</label>
+                <div class="fl">
+                    <div class="vdo_drop"><div title="没有录音设备" class="vdo_drop_ModifyThe vdo_drop_MNo"><i></i><span>没有录音设备</span></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="vdo_set_li">
+                <label class="vdo_set_l">麦克风选择</label>
+                <div class="fl">
+                    <div class="vdo_drop"><div title="Windows默认设备" class="vdo_drop_ModifyThe vdo_drop_M1"><i></i><span>Windows默认设备</span></div>
+                        <ul class="vdo_drop_list vdo_drop_l1">
+                            <li title="Windows默认设备">Windows默认设备</li>
+                            <li title="扬声器(Realtek High Ddfinition Audio)">扬声器<i class="vdo_drop_lI">(Realtek High Ddfinition Audio)</i></li>
+                            <li title="禁用">禁用</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="vdo_set_li">
+                <label class="vdo_set_l">扬声器选择</label>
+                <div class="fl">
+                    <div class="vdo_drop"><div title="Windows默认设备" class="vdo_drop_ModifyThe vdo_drop_M2"><i></i><span>Windows默认设备</span></div>
+                        <ul class="vdo_drop_list vdo_drop_l2">
+                            <li title="Windows默认设备">Windows默认设备</li>
+                            <li title="扬声器(Realtek High Ddfinition Audio)">扬声器<i class="vdo_drop_lI">(Realtek High Ddfinition Audio)</i></li>
+                            <li title="禁用">禁用</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+//音量
+var vert = document.querySelector('.js-vertical');
+var initVert = new Powerange(vert, { start: 80, vertical: true });
+</script>
+</body>
+</html>

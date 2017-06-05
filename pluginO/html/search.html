@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>工作文档</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />	<!--默认-->
+<link rel="stylesheet" type="text/css" href="../css/common.css" />	<!--通用-->
+<link rel="stylesheet" type="text/css" href="../css/workdoc.css" />	<!--内容样式：主要内容-->
+<link rel="stylesheet" type="text/css" href="../css/scrollbar.css" />	<!--自定义滚动条-->
+<link rel="stylesheet" type="text/css" href="../css/smartMenu.css" />	<!--右键菜单-->
+<script type="text/javascript" src="../js/jQuery-2.1.4.min.js"></script>
+<script type="text/javascript" src="../js/iscroll-5.1.3.min.js.js"></script>	<!--自定义滚动条-->
+<script type="text/javascript" src="../js/jquery-smartMenu.js"></script>	<!--右键菜单-->
+</head>
+
+<body>
+<div class="doc_main">
+	<div class="doc_L">
+        <ul class="docL_list">
+            <li><em></em><div>工作文档</div></li>
+        </ul>
+    </div>
+    <div class="doc_R">
+		<div class="docR_top">
+            <div class="docR_btnSec"><span class="docR_btn unclick"><a href="javascript:;" class="btn2">上传文件</a><input type="file" /></span></div>
+            <div class="doc_secCon">
+                <div class="doc_secIpt"><em></em><input type="text" id="secText" class="ipt" value="空" /><a href="javascript:;" class="sec_del" style="visibility:visible;"></a></div>
+            </div>
+        </div>
+        <div class="docR_nav"><a href="index.html" class="opc4">工作文档<em></em></a><span>搜索“空”的结果<em></em></span></div>
+        <div class="docR_msgList" id="wrapper">
+            <div class="scroll">
+            	<div class="docR_Con">
+                	<table class="docR_table docR_tableS">
+                    	<thead class="Freezing">
+                            <tr>
+                                <th>名称</th>
+                                <th>文件位置</th>
+                                <th>时间</th>
+                                <th>大小</th>
+                                <th class="miW90">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="docR_audit">
+                                <td>
+                                    <div class="docR_table_file">
+                                        <img src="images/zip.png" />
+                                        <div title="x64-64位.zip">x64-64位.zip</div>
+                                    </div>
+                                </td>
+                                <td>工作文档\需求文档</td>
+                                <td>11-25 11:46</td>
+                                <td>4.2MB</td>
+                                <td>审核中</td>
+                            </tr>
+                            <tr class="docR_download">
+                                <td>
+                                    <div class="docR_table_file">
+                                        <img src="images/pdf.png" />
+                                        <div title="蓝信产品问题需求统计蓝信产品问题需求统计.pdf">蓝信产品问题需求统计蓝信产品问题需求统计.pdf</div>
+                                    </div>
+                                </td>
+                                <td>工作文档\需求文档</td>
+                                <td>27分钟前</td>
+                                <td>8.6MB</td>
+                                <td><a href="javascript:;" class="aV_a docR_downL_btn">下载</a>
+                                	<div class="docR_downL_c disN">
+                                    	<div class="docR_downL_cL">
+                                        	<h4>1.6/3.2MB</h4>
+                                            <p><span style="width:50%;"></span></p>
+                                        </div>
+                                        <a href="javascript:;" class="aV_a docR_cancel">取消</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="docR_open">
+                                <td>
+                                    <div class="docR_table_file">
+                                        <img src="images/doc.png" />
+                                        <div title="蓝信产品需求prd.doc">蓝信产品需求prd.doc</div>
+                                    </div>
+                                </td>
+                                <td>工作文档\需求文档</td>
+                                <td>27分钟前</td>
+                                <td>4.2MB</td>
+                                <td><a href="javascript:;" class="aV_a">打开</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script  type="text/javascript">
+//滚动条
+$(function(){
+	loadScroll();
+});
+var mainScroll;
+function loadScroll(){
+	mainScroll=new iScroll("wrapper",{
+		useTransition: true,
+        scrollbarClass: 'myScrollbar' ,
+		checkDOMChanges:true,
+		bounce:false  //禁止弹跳
+	});
+}
+
+// 搜索
+var secText = "搜索";
+//$("#secText").val(secText);
+$(function(){
+    $("#secText").focusin(function() {
+        if($(this).val() == secText) {
+            $(this).val('');
+			$(this).addClass("ipt")
+        }
+		$(this).parents(".doc_secIpt").addClass("doc_secIpt2")
+		
+    }).focusout(function(){
+		$(this).parents(".doc_secIpt").removeClass("doc_secIpt2")
+        if($(this).val() == ''){
+            $(this).val(secText);
+			$(this).removeClass("ipt")
+			
+        }
+    });
+	$("#secText").each(function(){
+		$(this).keyup(function(){
+			if($(this).val() != secText && $(this).val() != ''){
+				$(".sec_del").css({"visibility":"visible"})
+			}
+			else{
+				$(".sec_del").css({"visibility":"hidden"})
+			}
+		})
+	})
+	
+	//点击删除按钮时，删除按钮隐藏，文本框文字为“搜索”
+	$(".sec_del").on("click",function(){
+		$("#secText").val(secText);
+		$(this).parents(".doc_secIpt").removeClass("doc_secIpt2")
+		$(this).css({"visibility":"hidden"})
+		$(this).siblings("#secText").removeClass("ipt")
+	})
+})
+
+//下载
+$(function(){
+	$(".docR_downL_btn").click(function(){	//点击“下载”
+		$(this).hide();
+		$(this).siblings(".docR_downL_c").removeClass("disN")
+	})
+	$(".docR_cancel").click(function(){	//点击“取消”
+		$(this).parents(".docR_downL_c").addClass("disN")
+		$(this).parents(".docR_downL_c").siblings(".docR_downL_btn").show();
+	})
+})
+
+/*————右键菜单 start————*/
+//鼠标点击右键，tr加背景颜色
+var funTrStyle = function() {
+	$("tr").each(function() {
+		document.onclick = function(){
+			$("tr").removeClass("bg");
+		};
+		$(this).mousedown(function(e){
+			if(3 == e.which){
+				$("tr").removeClass("bg");
+				$(this).addClass("bg");
+			}
+		})
+	});
+}
+funTrStyle();
+
+//审核中
+var docR_audit = [
+    [{
+        text: "打开",
+        func: function() {
+			$("tr").removeClass("bg");
+        }
+    },{
+        text: "另存为",
+        func: function() {
+			$("tr").removeClass("bg");
+        }
+    },{
+        text: "打开文件夹",
+        func: function() {
+			$("tr").removeClass("bg");
+        }
+    },{
+        text: "删除",
+        func: function() {
+			$("tr").removeClass("bg");
+            $(this).remove();
+        }
+    }]
+];
+
+//下载
+var docR_download = [
+    [{
+        text: "另存为",
+        func: function() {
+			$("tr").removeClass("bg");
+        }
+    }]
+];
+
+//打开
+var docR_open = [
+    [{
+        text: "打开",
+        func: function() {
+			$("tr").removeClass("bg");
+        }
+    },{
+        text: "另存为",
+        func: function() {
+			$("tr").removeClass("bg");
+        }
+    },{
+        text: "打开文件夹",
+        func: function() {
+			$("tr").removeClass("bg");
+        }
+    }]
+];
+
+$(".docR_audit").smartMenu(docR_audit, {
+    name: "audit"
+});
+$(".docR_download").smartMenu(docR_download, {
+    name: "download"
+});
+$(".docR_open").smartMenu(docR_open, {
+    name: "open"
+});
+
+/*————右键菜单 end————*/
+</script>
+</body>
+</html>

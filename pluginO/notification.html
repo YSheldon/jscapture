@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head width="982"  height="682">
+    <meta charset="UTF-8">
+    <title>通知</title>
+    <script src="js/jQuery-2.1.4.min.js"></script>
+    <!--//滚动条-->
+    <script src="./js/iscroll-5.1.3.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layer.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/notification.css">
+    <!--表情-->
+    <!--<script src="js/emoji.js"></script>-->
+    <!--<script src="js/emoji-list-with-image.js"></script>-->
+    <!--<script src="js/punycode.js"></script>-->
+    <!--zTree-->
+
+    <link rel="stylesheet" href="css/contacts.css">
+    <link rel="stylesheet" href="css/zTreeStyle.css">
+    <script src="js/jquery.ztree.core.js"></script>
+    <script src="js/jquery.ztree.excheck.js"></script>
+    <script src="js/application.js"></script>
+    <script src="js/contacts.js"></script>
+    <script type="application/javascript" src="js/my_layer.js"></script>
+    <script type="application/javascript" src="js/questionnaire.js"></script>
+    <script src="js/notification.js"></script>
+</head>
+<body>
+<article style="position: relative" class="shadow">
+    <nav class="top_title">
+        <span>通知</span>
+        <ul class="tool">
+            <li class="Winmin"></li>
+            <li class="Winmax"></li>
+            <li class="Winclose"></li>
+        </ul>
+    </nav>
+    <aside class=" nav">
+        <ul>
+            <!--<li class="high"><a class=" receive" typeInfo="1">我收到的 <i></i>-->
+            <li class="high"><a class=" receive" typeInfo="1">我收到的
+                <span class="count receive_left"></span></a></li>
+            <li><a  class="send" typeInfo="2">我发出的</a></li>
+            <!--<li><a href="javascript:return false;" onclick="return false" class="unlink" typeInfo="3">草稿箱(预留)</a></li>-->
+            <!--<li><a href="javascript:return false;" onclick="return false" class="unlink" typeInfo="4">回收站(预留)</a></li>-->
+
+        </ul>
+        <button class="add">写通知</button>
+
+    </aside>
+    <article class="content ">
+        <!--加载页面-->
+        <div style="display: block;height: 100%;width: 100%" class="load" id="load">
+            <img src="./images/ajax-loader.gif" alt="" style="width: 50px;height: 50px;">
+   
+        </div>
+        <!--//我收到的通知-->
+        <div style="display: none;height: 100%;width: 100%;overflow-y: hidden" id="content_Re" class="content_Re" typeInfo="1">
+
+            <div class="content_left" id="wrapper">
+                <div id="scroll">
+
+                </div>
+            </div>
+            <div class="content_right">
+                <div id="wrapperR" class="wrapperR" style="height: 100%">
+                    <div id="scroll2">
+                        <h6 class="title">通知详情<a class="del"></a></h6>
+                        <!--<div class="detail">-->
+                            <!--<p> 闭口去咯 one 快乐<em style="background: url(./images/locationfill.png)" class="att_map"></em><a href="#" class="att_map_con" >北京市朝阳区酒仙桥街道酒仙桥社区大山子南里</a>去咯哦句我哦</p>-->
+
+                        <!--</div>-->
+                        <!--//调查问卷-->
+                        <!--<div class="quest_area">-->
+                            <!--<h5>实名问卷 （全员可见你实名投票结果）</h5>-->
+                            <!--<div class="quest_con">-->
+                                <!--<h6 class="quest_t">Q1. 食堂给你的整体感觉如何？</h6>-->
+                                <!--<ul class="opt_lis">-->
+                                    <!--<li>-->
+                                        <!--<a href="javascript:;" class="aV_radio "></a>-->
+                                        <!--<span>环境舒适整洁、饭菜可口</span>-->
+                                        <!--<img src="./images/defpicture.png" alt="">-->
+                                    <!--</li>-->
+                                    <!--<li><a href="javascript:;" class="aV_radio  aV_radioEd"></a>-->
+                                        <!--<span>环境一般、饭菜一般</span></li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+                            <!--<div class="quest_con">-->
+                                <!--<h6 class="quest_t">Q2. 明日食堂吃什么？</h6>-->
+                                <!--<ul class="opt_lis">-->
+                                    <!--<li>-->
+                                        <!--<a href="javascript:;" class="aV_check " style="height: 12px;width: 12px;"></a>-->
+
+                                        <!--<span>环境舒适整洁、饭菜可口</span>-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                        <!--<a href="javascript:;" class="aV_check  aV_checkEd" style="height: 12px;width: 12px;"></a>-->
+                                        <!--<span>环境一般、饭菜一般</span></li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+
+                </div>
+                <div style="text-align: center" class="btn_container">
+                    <button class="btnOK btn_active" id="btnOk">确认收到</button>
+                </div>
+                <div class="reply_content" style="display: none">
+                    <!--<select class="reply">-->
+                        <!--<option value="1">回复</option>-->
+                        <!--<option value="1">私密回复</option>-->
+                    <!--</select>-->
+                    <select class="reply">
+                        <option value="1" >回复</option>
+                        <option value="2" >私密回复</option>
+                    </select>
+                    <button class="re_con">回复</button>
+                    <div><input type="text" class="reply_input " maxlength="500"></div>
+                </div>
+            </div>
+
+        </div>
+        <!--我发出的通知-->
+        <div style="display: none;height: 100%;width: 100%;overflow-y: hidden" id="content_Se" class="content_Se" typeInfo="2">
+            <div class="content_left" id="wrapper_send">
+                <div id="scroll3">
+
+                </div>
+            </div>
+            <div class="content_right" id="">
+                <div id="wrapperR_send" class="wrapperR" style="height: 100%">
+                    <div id="scroll4">
+                        <h6 class="title">通知详情<span class="back"></span></h6>
+                    </div>
+                </div>
+                <div class="reply_content" style="display: block">
+                    <!--<select class="reply">-->
+                        <!--<option value="1" selected="selected">回复</option>-->
+                        <!--<option value="1">私密回复</option>-->
+                    <!--</select>-->
+                    <select class="reply">
+                        <option value="1" >回复</option>
+                        <option value="2" >私密回复</option>
+                    </select>
+                    <button class="re_con">回复</button>
+                    <div><input type="text" class="reply_input " maxlength="500"></div>
+                </div>
+            </div>
+        </div>
+        <!--//遮罩层用来显示新建通知的页面-->
+        <div class="mark" style="display: none" typeInfo="">
+        </div>
+        <!--//新建通知的页面-->
+        <div class="send_container" style="display: none;" typeInfo="">
+            <div class="send_title">
+                <span>发送通知</span>
+                <span></span>
+                <!--<ul class="tool">-->
+                    <!--<li class="Winmin"></li>-->
+                    <!--<li class="Winmax"></li>-->
+                    <!--<li class="Winclose"></li>-->
+                <!--</ul>-->
+            </div>
+            <div id="send_Scroll" style="overflow: hidden" class="send_Scroll">
+                <div id="send_content">
+                    <ul class="send_content">
+                        <li>
+                            <span>标题</span>
+                            <input type="text" placeholder="请填写通知标题" id="NoticeTheme" maxlength="60">
+                        </li>
+                        <li>
+                            <!--<span style="vertical-align: top">正文</span>-->
+                            <!--<textarea placeholder="请填写通知正文"  id="NoticeContent" maxlength="5000"></textarea>-->
+                            <!--<div class="clear:both"></div>-->
+                            <!--<a class="attach">添加附件</a>-->
+                            <!--<a class="color_h  quest">添加问卷<small>( 只能上传一个附件 )</small></a>-->
+                            <span style="vertical-align: top">正文</span>
+                            <textarea placeholder="请填写通知正文" style="resize: none;height: 154px;width: 645px;outline: none" id="NoticeContent" maxlength="5000" ></textarea>
+                            <div class="clear:both"></div>
+                            <h4 class="attach">添加附件<small>( 只能上传一个附件 )</small></h4>
+                            <a class="color_h  quest">添加问卷</a>
+                            <div class="add_vote disN " id="add_vote">
+
+                                <ul class="aV_question">
+                                    <li class="queCon_Q">
+                                        <div class="aV_queCon">
+                                            <div class="aV_quesL">
+                                                <h4>Q1:</h4>
+                                                <div class="aV_qL_btn"><a href="javascript:;" class="aV_del"></a></div>
+                                            </div>
+                                            <div class="aV_quesR">
+                                                <div class="aV_title aV_t_editable">
+                                                    <div class="aV_issue_title" contenteditable="true">请填写问答题标题</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="queCon_R">
+                                        <div class="aV_queCon">
+                                            <div class="aV_quesL">
+                                                <h4>Q2:</h4>
+                                                <div class="aV_qL_btn"><a href="javascript:;" class="aV_del"></a></div>
+                                            </div>
+                                            <div class="aV_quesR aV_quesRradio">
+                                                <div class="aV_title aV_t_editable">
+                                                    <div class="aV_queTitle T_edit" >请填写单选题标题</div>
+                                                    <!--<div class="add_editDiv">
+                                                        <div class="add_edit th4 q_title" contenteditable="true" style="min-height:20px;"></div>
+                                                    </div>-->
+                                                </div>
+                                                <ul class="aV_qOption">
+                                                    <li class="aV_qOption_li"><div class="aV_radioDiv"><div class="aV_radioDiv_opt"><span class="aV_qOptionType"><a href="javascript:;" class="aV_radio"></a><input type="radio" class="opc0" /></span></div>
+                                                        <div class="aV_title aV_t_editOpa aV_optTitle">
+                                                            <label class="aV_queTitle T_edit" opt="选项1">选项1</label>
+                                                            <!--<div class="add_editDiv">
+                                                                <div class="add_edit th4 q_title" contenteditable="true" style="min-height:20px;">选项1<div id="preview"></div></div>
+                                                                <div class="add_edit_btn"><span class="aV_edit_img"><a href="javascript:;"></a><input type="file" class="opc0" /></span><a href="javascript:;" class="aV_del"></a></div>
+                                                            </div>-->
+                                                        </div>
+                                                    </div>
+                                                    </li>
+                                                    <li class="aV_qOption_li"><div class="aV_radioDiv"><div class="aV_radioDiv_opt"><span class="aV_qOptionType"><a href="javascript:;" class="aV_radio"></a><input type="radio" class="opc0" /></span></div>
+                                                        <div class="aV_title aV_t_editOpa aV_optTitle">
+                                                            <label class="aV_queTitle T_edit" opt="选项2">选项2</label>
+                                                        </div>
+                                                    </div>
+                                                    </li>
+                                                </ul>
+                                                <div class="operationH"><a href="javascript:;" class="cq_add"><i class="add-icon-active"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="queCon_C">
+                                        <div class="aV_queCon">
+                                            <div class="aV_quesL">
+                                                <h4>Q3:</h4>
+                                                <div class="aV_qL_btn"><a href="javascript:;" class="aV_del"></a></div>
+                                            </div>
+                                            <div class="aV_quesR aV_quesRcheck">
+                                                <div class="aV_title aV_t_editable">
+                                                    <div class="aV_queTitle T_edit">请填写多选题标题</div>
+                                                    <!--<div class="add_editDiv">
+                                                        <div class="add_edit th4 q_title" contenteditable="true" style="min-height:20px;"></div>
+                                                    </div>-->
+                                                </div>
+                                                <ul class="aV_qOption">
+                                                    <li class="aV_qOption_li"><div class="aV_radioDiv"><div class="aV_radioDiv_opt"><span class="aV_qOptionType"><a href="javascript:;" class="aV_check"></a><input type="checkbox" class="opc0" /></span></div>
+                                                        <div class="aV_title aV_t_editOpa aV_optTitle">
+                                                            <label class="aV_queTitle T_edit" opt="选项1">选项1</label>
+                                                            <!--<div class="add_editDiv">
+                                                                <div class="add_edit th4 q_title" contenteditable="true" style="min-height:20px;">选项1<div id="preview"></div></div>
+                                                                <div class="add_edit_btn"><span class="aV_edit_img"><a href="javascript:;"></a><input type="file" class="opc0" /></span><a href="javascript:;" class="aV_del"></a></div>
+                                                            </div>-->
+                                                        </div>
+                                                    </div>
+                                                    </li>
+                                                    <li class="aV_qOption_li"><div class="aV_radioDiv"><div class="aV_radioDiv_opt"><span class="aV_qOptionType"><a href="javascript:;" class="aV_check"></a><input type="checkbox" class="opc0" /></span></div>
+                                                        <div class="aV_title aV_t_editOpa aV_optTitle">
+                                                            <label class="aV_queTitle T_edit" opt="选项2">选项2</label>
+                                                        </div>
+                                                    </div>
+                                                    </li>
+                                                </ul>
+                                                <div class="operationH"><a href="javascript:;" class="cq_add"><i class="add-icon-active"></i></a><div class="operationNum"><select><option>最多选2项</option></select></div></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="aV_btn">
+                                    <div class="fl"><a href="javascript:;" class="btn1 add_s">添加单选题</a><a href="javascript:;" class="btn1 add_d">添加多选题</a><a href="javascript:;" class="btn1 add_q">添加问答题</a></div>
+                                    <div class="fr">
+                                        <div class="aV_radioCon radio_clickable">
+                                            <div class="aV_radioDiv"><span class="aV_qOptionType"><a href="javascript:;" class="aV_radio aV_radioEd"></a><input type="radio" class="opc0" /></span><label>实名</label></div>
+                                            <div class="aV_radioDiv"><span class="aV_qOptionType"><a href="javascript:;" class="aV_radio"></a><input type="radio" class="opc0" /></span><label>匿名</label></div>
+                                        </div>
+                                        <a href="javascript:;" class="aV_delVote aV_a">删除问卷</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <span>发给谁</span>
+                            <small>(点击头像可删除)</small>
+                            <ul class="sendTo" style="zoom: 1;overflow: hidden">
+                                <li class="addPerson">
+                                    <div></div>
+                                    <span>添加人</span>
+                                </li>
+                              <li style="clear: both"></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+            <div class="btn_send">
+                <button class="btn_active">发送通知</button>
+            </div>
+
+        </div>
+
+        <div id="addcontacts" class="addcontacts " style="display: none;" typeInfo="">
+        </div>
+        <!--调查问卷的详细情况-->
+        <div class="winBox Quest_box disN">
+            <div class="win_T">
+                <h4 id="ques_tip"></h4>
+                <span class="win_close Quest_clo"></span>
+            </div>
+            <div class="Win_con" id="Win_con">
+<ul class="Quest_con">
+
+</ul>
+            </div>
+            <!--<script>-->
+                <!--var option=scrollSetings()-->
+                <!--console.log($('#Win_con').length)-->
+                <!--var scroll_Que=new IScroll('#Win_con', option);-->
+            <!--</script>-->
+        </div>
+
+
+    </article>
+</article>
+
+</body>
+</html>
