@@ -64,12 +64,18 @@ $(function(){
 					optional: []
 				}
 			}, function(stream) {
+				document.getElementById('videoSnap1').onload = function(e) {
+				  window.URL.revokeObjectURL(document.getElementById('videoSnap1').src); // 清除释放
+				};
 				document.getElementById('videoSnap1').src = window.URL.createObjectURL(stream);
+				document.getElementById('video').onload = function(e) {
+				  window.URL.revokeObjectURL(document.getElementById('video').src); // 清除释放
+				};
 				document.getElementById('video').src = window.URL.createObjectURL(stream);
 			}, function() {
 				console.log('Error, Screen stream is not available.')
 			})
- 
+			
 			navigator.getUserMedia({
 				audio: false,
 				video: {
@@ -84,11 +90,16 @@ $(function(){
 					optional: []
 				}
 			}, function(stream) {
+				document.getElementById('videoSnap2').onload = function(e) {
+					  window.URL.revokeObjectURL(document.getElementById('videoSnap2').src); // 清除释放
+				};
+
 				document.getElementById('videoSnap2').src = window.URL.createObjectURL(stream);
 			}, function() {
 				console.log('Error, Screen stream is not available.')
 			})
 
+			
 			navigator.getUserMedia({
 				audio: false,
 				video: {
@@ -103,6 +114,10 @@ $(function(){
 					optional: []
 				}
 			}, function(stream) {
+				document.getElementById('videoSnap3').onload = function(e) {
+					  window.URL.revokeObjectURL(document.getElementById('videoSnap3').src); // 清除释放
+				};
+
 				document.getElementById('videoSnap3').src = window.URL.createObjectURL(stream);
 			}, function() {
 				console.log('Error, Screen stream is not available.')
@@ -121,6 +136,10 @@ $(function(){
 					optional: []
 				}
 			}, function(stream) {
+				document.getElementById('videoSnap4').onload = function(e) {
+					  window.URL.revokeObjectURL(document.getElementById('videoSnap4').src); // 清除释放
+				};
+			
 				document.getElementById('videoSnap4').src = window.URL.createObjectURL(stream);
 			}, function() {
 				console.log('Error, Screen stream is not available.')
@@ -139,6 +158,9 @@ $(function(){
 					optional: []
 				}
 			}, function(stream) {
+				document.getElementById('videoSnap5').onload = function(e) {
+					  window.URL.revokeObjectURL(document.getElementById('videoSnap5').src); // 清除释放
+				};			
 				document.getElementById('videoSnap5').src = window.URL.createObjectURL(stream);
 			}, function() {
 				console.log('Error, Screen stream is not available.')
@@ -360,14 +382,11 @@ function loaded() {
     	<div class="vdo_l" id="wrapper">
         	<div class="scroll">
                 <div class="vdo_lD">
-                	<video id="videoSnap1" class="vdo_l_video" style="background:#383838;" autoplay><!--视频-->
-						<div class="vdo_lBg_btn"></div>
-					</video>
+                	<video id="videoSnap1" class="vdo_l_video" style="background:#383838;" autoplay/><!--视频-->
                 	<div class="vdo_lD_b">我</div>
                 </div>
                 <div class="vdo_lD">
                 	<video id="videoSnap2" class="vdo_l_video" style="background:#383838;" autoplay><!--视频-->
-						<div class="vdo_lBg_btn"></div>
 					</video>
                 	<div class="vdo_lD_b">李成伟</div>
                 </div>
