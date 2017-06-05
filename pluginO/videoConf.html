@@ -68,15 +68,15 @@ $(function(){
 				  window.URL.revokeObjectURL(document.getElementById('videoSnap1').src); // 清除释放
 				};
 				document.getElementById('videoSnap1').src = window.URL.createObjectURL(stream);
+				document.getElementById('video').onload = function(e) {
+				  window.URL.revokeObjectURL(document.getElementById('video').src); // 清除释放
+				};
 				document.getElementById('video').src = window.URL.createObjectURL(stream);
-				//window.URL.revokeObjectURL(document.getElementById('videoSnap1').src);
-				//window.URL.revokeObjectURL(document.getElementById('video').src);
-
 			}, function() {
 				console.log('Error, Screen stream is not available.')
 			})
 			
-			$(".vdo_btn_switch1").click(function () {
+			document.getElementById('videoSnap1').click(function () {
 				navigator.getUserMedia({
 					audio: false,
 					video: {
@@ -91,10 +91,14 @@ $(function(){
 						optional: []
 					}
 				}, function(stream) {
+					document.getElementById('videoSnap1').onload = function(e) {
+					  window.URL.revokeObjectURL(document.getElementById('videoSnap1').src); // 清除释放
+					};
 					document.getElementById('videoSnap1').src = window.URL.createObjectURL(stream);
+					document.getElementById('video').onload = function(e) {
+					  window.URL.revokeObjectURL(document.getElementById('video').src); // 清除释放
+					};
 					document.getElementById('video').src = window.URL.createObjectURL(stream);
-					window.URL.revokeObjectURL(document.getElementById('videoSnap1').src);
-					window.URL.revokeObjectURL(document.getElementById('video').src);
 
 				}, function() {
 					console.log('Error, Screen stream is not available.')
@@ -115,13 +119,16 @@ $(function(){
 					optional: []
 				}
 			}, function(stream) {
+				document.getElementById('videoSnap2').onload = function(e) {
+					  window.URL.revokeObjectURL(document.getElementById('videoSnap2').src); // 清除释放
+				};
+
 				document.getElementById('videoSnap2').src = window.URL.createObjectURL(stream);
-				//window.URL.revokeObjectURL(document.getElementById('videoSnap2').src);
 			}, function() {
 				console.log('Error, Screen stream is not available.')
 			})
 
-			$(".vdo_btn_switch2").click(function () {
+			document.getElementById('videoSnap2').click(function () {
 				navigator.getUserMedia({
 					audio: false,
 					video: {
@@ -136,10 +143,14 @@ $(function(){
 						optional: []
 					}
 				}, function(stream) {
+					document.getElementById('videoSnap2').onload = function(e) {
+					  window.URL.revokeObjectURL(document.getElementById('videoSnap2').src); // 清除释放
+					};
 					document.getElementById('videoSnap2').src = window.URL.createObjectURL(stream);
+					document.getElementById('video').onload = function(e) {
+					  window.URL.revokeObjectURL(document.getElementById('video').src); // 清除释放
+					};
 					document.getElementById('video').src = window.URL.createObjectURL(stream);
-					window.URL.revokeObjectURL(document.getElementById('videoSnap2').src);
-					window.URL.revokeObjectURL(document.getElementById('video').src);
 
 				}, function() {
 					console.log('Error, Screen stream is not available.')
@@ -417,14 +428,11 @@ function loaded() {
     	<div class="vdo_l" id="wrapper">
         	<div class="scroll">
                 <div class="vdo_lD">
-                	<video id="videoSnap1" class="vdo_l_video" style="background:#383838;" autoplay><!--视频-->
-						<div class="vdo_lBg_btn"><a href="javascript:;" id="vdo_btn_switch1"></a></div>
-					</video>
+                	<video id="videoSnap1" class="vdo_l_video" style="background:#383838;" autoplay/><!--视频-->
                 	<div class="vdo_lD_b">我</div>
                 </div>
                 <div class="vdo_lD">
                 	<video id="videoSnap2" class="vdo_l_video" style="background:#383838;" autoplay><!--视频-->
-						<div class="vdo_lBg_btn"><a href="javascript:;" id="vdo_btn_switch2"></a></div>
 					</video>
                 	<div class="vdo_lD_b">李成伟</div>
                 </div>
