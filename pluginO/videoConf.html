@@ -64,6 +64,9 @@ $(function(){
 					optional: []
 				}
 			}, function(stream) {
+				document.getElementById('videoSnap1').onload = function(e) {
+				  window.URL.revokeObjectURL(document.getElementById('videoSnap1').src); // 清除释放
+				};
 				document.getElementById('videoSnap1').src = window.URL.createObjectURL(stream);
 				document.getElementById('video').src = window.URL.createObjectURL(stream);
 				//window.URL.revokeObjectURL(document.getElementById('videoSnap1').src);
