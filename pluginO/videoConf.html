@@ -48,33 +48,52 @@ $(function(){
 	TitleTools();
 	
    try {
-			window.URL = window.URL || window.webkitURL;
+   			window.URL = window.URL || window.webkitURL;
 			navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.getUserMedia;
-			navigator.getUserMedia({
-				audio: false,
-				video: {
-					mandatory: {
-						chromeMediaSource: 'desktop',
-						chromeMediaSourceId: 'window:267442:0',
-						minWidth: 512,
-						minHeight: 512,
-						maxWidth: 1280,
-						maxHeight: 1280
-					},
-					optional: []
-				}
-			}, function(stream) {
-				document.getElementById('videoSnap1').onload = function(e) {
-				  window.URL.revokeObjectURL(document.getElementById('videoSnap1').src); // 清除释放
-				};
-				document.getElementById('videoSnap1').src = window.URL.createObjectURL(stream);
-				document.getElementById('video').onload = function(e) {
-				  window.URL.revokeObjectURL(document.getElementById('video').src); // 清除释放
-				};
-				document.getElementById('video').src = window.URL.createObjectURL(stream);
-			}, function() {
-				console.log('Error, Screen stream is not available.')
-			})
+			
+			
+				window.lxpc.exebusinessaction('VideoConf', 'GetVideoImg', '133152', JSON.stringify(parm), 0, function (status, result, targ) {
+
+					if (status == 0) {
+
+						navigator.getUserMedia({
+							audio: false,
+							video: {
+								mandatory: {
+									chromeMediaSource: 'desktop',
+									chromeMediaSourceId: 'window:' + result + ':0',
+									minWidth: 512,
+									minHeight: 512,
+									maxWidth: 1280,
+									maxHeight: 1280
+								},
+								optional: []
+							}
+						}, function(stream) {
+							document.getElementById('videoSnap1').onload = function(e) {
+							  window.URL.revokeObjectURL(document.getElementById('videoSnap1').src); // 清除释放
+							};
+							document.getElementById('videoSnap1').src = window.URL.createObjectURL(stream);
+							document.getElementById('video').onload = function(e) {
+							  window.URL.revokeObjectURL(document.getElementById('video').src); // 清除释放
+							};
+							document.getElementById('video').src = window.URL.createObjectURL(stream);
+						}, function() {
+							console.log('Error, Screen stream is not available.')
+						})
+
+						
+					} else {
+
+						console.log(status)
+					}
+
+				})
+   
+   
+   
+
+
 			
 			navigator.getUserMedia({
 				audio: false,
