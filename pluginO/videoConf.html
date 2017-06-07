@@ -24,6 +24,7 @@ function autoHeight() {
 }
 
 var imgData = null;
+var winID = '0';
 $(function(){
 	autoHeight();
 	$(window).resize(autoHeight);
@@ -55,7 +56,6 @@ $(function(){
 				window.lxpc.exebusinessaction('VideoConf', 'GetVideoImg', 'PROCEXPL', JSON.stringify(parm), 0, function (status, result, targ) {
 
 					if (status == 0) {
-						var winID = '0';
 						winID = result;
 						console.log('======================='+ winID)
 						navigator.getUserMedia({
