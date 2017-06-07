@@ -52,13 +52,13 @@ $(function(){
 			navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.getUserMedia;
 			
 			    var parm = {"userUniId":"36@2.uniform11-lanxin"};
-
+				var winid;
 				window.lxpc.exebusinessaction('VideoConf', 'GetVideoImg', 'PROCEXPL', JSON.stringify(parm), 0, function (status, result, targ) {
 
 					if (status == 0) {
 
-
-						
+						winid = result;
+						console.log(winid)
 					} else {
 
 						console.log(status)
@@ -71,8 +71,8 @@ $(function(){
 							video: {
 								mandatory: {
 									chromeMediaSource: 'desktop',
-									//chromeMediaSourceId: 'window:' + result + ':0',
-									chromeMediaSourceId: 'window:855440:0',
+									chromeMediaSourceId: 'window:' + winid + ':0',
+									//chromeMediaSourceId: 'window:855440:0',
 									minWidth: 512,
 									minHeight: 512,
 									maxWidth: 1280,
