@@ -55,7 +55,7 @@ $(function(){
 				window.lxpc.exebusinessaction('VideoConf', 'GetVideoImg', 'PROCEXPL', JSON.stringify(parm), 0, function (status, result, targ) {
 
 					if (status == 0) {
-						console.log('=======================' + result + '==')
+						console.log('=======================' + result + '=1=')
 						navigator.getUserMedia({
 							audio: false,
 							video: {
@@ -91,7 +91,39 @@ $(function(){
 
 				})
    
+				window.lxpc.exebusinessaction('VideoConf', 'GetVideoImg', 'TaskManagerWindow', JSON.stringify(parm), 0, function (status, result, targ) {
 
+					if (status == 0) {
+						console.log('=======================' + result + '=2=')
+						navigator.getUserMedia({
+							audio: false,
+							video: {
+								mandatory: {
+									chromeMediaSource: 'desktop',
+									chromeMediaSourceId: 'window:' + result + ':0',
+									minWidth: 512,
+									minHeight: 512,
+									maxWidth: 1280,
+									maxHeight: 1280
+								},
+								optional: []
+							}
+						}, function(stream) {
+							document.getElementById('videoSnapDiv2').innerHTML = '<video id="videoSnap2" class="vdo_l_video" autoplay/>';
+							document.getElementById('videoSnap2').onload = function(e) {
+							  window.URL.revokeObjectURL(document.getElementById('videoSnap2').src); // 清除释放
+							};
+							document.getElementById('videoSnap2').src = window.URL.createObjectURL(stream);
+						}, function() {
+							console.log('Error, Screen stream is not available.')
+						})
+						
+					} else {
+
+						console.log(status)
+					}
+
+				})
    
 	} catch (e) {
 		console.log(e.message)
