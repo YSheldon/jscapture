@@ -52,20 +52,10 @@ $(function(){
 			navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.getUserMedia;
 			
 			    var parm = {"userUniId":"36@2.uniform11-lanxin"};
-				var winid;
-				window.lxpc.exebusinessaction('VideoConf', 'GetVideoImg', 'PROCEXPL', JSON.stringify(parm), 0, function (status, result, targ) {
+				var winid = '855440';
 
-					if (status == 0) {
-
-						winid = result;
-						console.log('============================winid:'+winid)
-					} else {
-
-						console.log(status)
-					}
-
-				})
    
+						console.log('============================winid:'+winid)
 						navigator.getUserMedia({
 							audio: false,
 							video: {
