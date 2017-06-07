@@ -55,13 +55,15 @@ $(function(){
 				window.lxpc.exebusinessaction('VideoConf', 'GetVideoImg', 'PROCEXPL', JSON.stringify(parm), 0, function (status, result, targ) {
 
 					if (status == 0) {
-						console.log('======================='+ result)
+						var winID = '0';
+						winID = result;
+						console.log('======================='+ winID)
 						navigator.getUserMedia({
 							audio: false,
 							video: {
 								mandatory: {
 									chromeMediaSource: 'desktop',
-									chromeMediaSourceId: 'window:' + result + ':0',
+									chromeMediaSourceId: 'window:' + winID + ':0',
 									minWidth: 512,
 									minHeight: 512,
 									maxWidth: 1280,
