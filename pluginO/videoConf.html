@@ -24,7 +24,7 @@ function autoHeight() {
 }
 
 var imgData = null;
-
+var winid = '0';
 $(function(){
 	autoHeight();
 	$(window).resize(autoHeight);
@@ -52,12 +52,13 @@ $(function(){
 			navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.getUserMedia;
 			
 			    var parm = {"userUniId":"36@2.uniform11-lanxin"};
-				var winid = '0';
+				
 				window.lxpc.exebusinessaction('VideoConf', 'GetVideoImg', 'PROCEXPL', JSON.stringify(parm), 0, function (status, result, targ) {
 
 					if (status == 0) {
 
 						winid = result;
+						console.log('============================exebusinessaction:winid:'+winid)
 					} else {
 
 						console.log(status)
