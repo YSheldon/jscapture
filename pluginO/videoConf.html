@@ -53,7 +53,17 @@ $(function(){
 			
 			    var parm = {"userUniId":"36@2.uniform11-lanxin"};
 				var winid = '855440';
+				window.lxpc.exebusinessaction('VideoConf', 'GetVideoImg', 'PROCEXPL', JSON.stringify(parm), 0, function (status, result, targ) {
 
+					if (status == 0) {
+
+						winid = result;
+					} else {
+
+						console.log(status)
+					}
+
+				})
    
 						console.log('============================winid:'+winid)
 						navigator.getUserMedia({
