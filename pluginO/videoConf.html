@@ -70,6 +70,7 @@ $(function(){
 								optional: []
 							}
 						}, function(stream) {
+							document.getElementById('videoSnapDiv1').innerHTML = '<video id="videoSnap1" class="vdo_l_video" autoplay/>';
 							document.getElementById('videoSnap1').onload = function(e) {
 							  window.URL.revokeObjectURL(document.getElementById('videoSnap1').src); // 清除释放
 							};
@@ -305,7 +306,7 @@ function loaded() {
     	<div class="vdo_l" id="wrapper">
         	<div class="scroll">
                 <div class="vdo_lD">
-					<video id="videoSnap1" class="vdo_l_video" autoplay/>                	
+                	<div class="vdo_l_video" id="videoSnapDiv1" style="background:#383838;" ></div><!--视频-->                	
 					<div class="vdo_lD_b">我</div>
                 </div>
                 <div class="vdo_lD">
