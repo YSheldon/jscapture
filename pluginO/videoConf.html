@@ -24,7 +24,6 @@ function autoHeight() {
 }
 
 var imgData = null;
-var winid = '0';
 $(function(){
 	autoHeight();
 	$(window).resize(autoHeight);
@@ -57,17 +56,12 @@ $(function(){
 
 					if (status == 0) {
 
-						winid = result;
-						console.log('============================exebusinessaction:winid:'+winid)
-						
-						console.log('============================winid:'+winid)
 						navigator.getUserMedia({
 							audio: false,
 							video: {
 								mandatory: {
 									chromeMediaSource: 'desktop',
-									chromeMediaSourceId: 'window:' + winid + ':0',
-									//chromeMediaSourceId: 'window:855440:0',
+									chromeMediaSourceId: 'window:' + result + ':0',
 									minWidth: 512,
 									minHeight: 512,
 									maxWidth: 1280,
@@ -76,7 +70,7 @@ $(function(){
 								optional: []
 							}
 						}, function(stream) {
-							document.getElementById('videoSnapDiv').innerHTML = '<video id="videoSnap1" autoplay/>';
+							document.getElementById('videoSnapDiv1').innerHTML = '<video id="videoSnap1" autoplay/>';
 							document.getElementById('videoSnap1').onload = function(e) {
 							  window.URL.revokeObjectURL(document.getElementById('videoSnap1').src); // 清除释放
 							};
@@ -97,11 +91,141 @@ $(function(){
 
 				})
    
-				
-			
-			
+				window.lxpc.exebusinessaction('VideoConf', 'GetVideoImg', 'TaskManagerWindow', JSON.stringify(parm), 0, function (status, result, targ) {
 
+					if (status == 0) {
+
+						navigator.getUserMedia({
+							audio: false,
+							video: {
+								mandatory: {
+									chromeMediaSource: 'desktop',
+									chromeMediaSourceId: 'window:' + result + ':0',
+									minWidth: 512,
+									minHeight: 512,
+									maxWidth: 1280,
+									maxHeight: 1280
+								},
+								optional: []
+							}
+						}, function(stream) {
+							document.getElementById('videoSnapDiv2').innerHTML = '<video id="videoSnap2" autoplay/>';
+							document.getElementById('videoSnap2').onload = function(e) {
+							  window.URL.revokeObjectURL(document.getElementById('videoSnap2').src); // 清除释放
+							};
+							document.getElementById('videoSnap2').src = window.URL.createObjectURL(stream);
+						}, function() {
+							console.log('Error, Screen stream is not available.')
+						})
+						
+					} else {
+
+						console.log(status)
+					}
+
+				})				
+			
+				window.lxpc.exebusinessaction('VideoConf', 'GetVideoImg', 'TCPViewClass', JSON.stringify(parm), 0, function (status, result, targ) {
+
+					if (status == 0) {
+
+						navigator.getUserMedia({
+							audio: false,
+							video: {
+								mandatory: {
+									chromeMediaSource: 'desktop',
+									chromeMediaSourceId: 'window:' + result + ':0',
+									minWidth: 512,
+									minHeight: 512,
+									maxWidth: 1280,
+									maxHeight: 1280
+								},
+								optional: []
+							}
+						}, function(stream) {
+							document.getElementById('videoSnapDiv3').innerHTML = '<video id="videoSnap3" autoplay/>';
+							document.getElementById('videoSnap3').onload = function(e) {
+							  window.URL.revokeObjectURL(document.getElementById('videoSnap3').src); // 清除释放
+							};
+							document.getElementById('videoSnap3').src = window.URL.createObjectURL(stream);
+						}, function() {
+							console.log('Error, Screen stream is not available.')
+						})
+						
+					} else {
+
+						console.log(status)
+					}
+
+				})							
+
+				window.lxpc.exebusinessaction('VideoConf', 'GetVideoImg', 'dbgviewClass', JSON.stringify(parm), 0, function (status, result, targ) {
+
+					if (status == 0) {
+
+						navigator.getUserMedia({
+							audio: false,
+							video: {
+								mandatory: {
+									chromeMediaSource: 'desktop',
+									chromeMediaSourceId: 'window:' + result + ':0',
+									minWidth: 512,
+									minHeight: 512,
+									maxWidth: 1280,
+									maxHeight: 1280
+								},
+								optional: []
+							}
+						}, function(stream) {
+							document.getElementById('videoSnapDiv4').innerHTML = '<video id="videoSnap4" autoplay/>';
+							document.getElementById('videoSnap4').onload = function(e) {
+							  window.URL.revokeObjectURL(document.getElementById('videoSnap4').src); // 清除释放
+							};
+							document.getElementById('videoSnap4').src = window.URL.createObjectURL(stream);
+						}, function() {
+							console.log('Error, Screen stream is not available.')
+						})
+						
+					} else {
+
+						console.log(status)
+					}
+
+				})											
 	
+				window.lxpc.exebusinessaction('VideoConf', 'GetVideoImg', '360WangPanMainDlg', JSON.stringify(parm), 0, function (status, result, targ) {
+
+					if (status == 0) {
+
+						navigator.getUserMedia({
+							audio: false,
+							video: {
+								mandatory: {
+									chromeMediaSource: 'desktop',
+									chromeMediaSourceId: 'window:' + result + ':0',
+									minWidth: 512,
+									minHeight: 512,
+									maxWidth: 1280,
+									maxHeight: 1280
+								},
+								optional: []
+							}
+						}, function(stream) {
+							document.getElementById('videoSnapDiv5').innerHTML = '<video id="videoSnap5" autoplay/>';
+							document.getElementById('videoSnap5').onload = function(e) {
+							  window.URL.revokeObjectURL(document.getElementById('videoSnap5').src); // 清除释放
+							};
+							document.getElementById('videoSnap5').src = window.URL.createObjectURL(stream);
+						}, function() {
+							console.log('Error, Screen stream is not available.')
+						})
+						
+					} else {
+
+						console.log(status)
+					}
+
+				})										
 	} catch (e) {
 		console.log(e.message)
 	}	
@@ -315,34 +439,25 @@ function loaded() {
     	<div class="vdo_l" id="wrapper">
         	<div class="scroll">
                 <div class="vdo_lD">
-                	<div class="vdo_l_video" id="videoSnapDiv" style="background:#383838;"><!--视频-->
-						
-					</div>	
+                	<div class="vdo_l_video" id="videoSnapDiv1" style="background:#383838;" /><!--视频-->
                 	<div class="vdo_lD_b">我</div>
                 </div>
                 <div class="vdo_lD">
-                	<video id="videoSnap2" class="vdo_l_video" style="background:#383838;" autoplay><!--视频-->
-					</video>
+                	<div class="vdo_l_video" id="videoSnapDiv2" style="background:#383838;" /><!--视频-->
                 	<div class="vdo_lD_b">李成伟</div>
                 </div>
                 <div class="vdo_lD">
-                	<video id="videoSnap3" class="vdo_l_video" style="background:#383838;" autoplay><!--视频-->
-						<div class="vdo_lBg_btn"></div>
-					</video>
+                	<div class="vdo_l_video" id="videoSnapDiv3" style="background:#383838;" /><!--视频-->
                 	<div class="vdo_lD_b">莉莉</div>
                     <i class="vdo_l_mute"></i>	<!--静音图标-->
                 </div>
                 <div class="vdo_lD">
-                	<video id="videoSnap4" class="vdo_l_video" style="background:#383838;" autoplay><!--视频-->
-						<div class="vdo_lBg_btn"></div>
-					</video>
+                	<div class="vdo_l_video" id="videoSnapDiv4" style="background:#383838;" /><!--视频-->
                 	<div class="vdo_lD_b">莉莉</div>
                     <i class="vdo_l_mute"></i>	<!--静音图标-->
                 </div>
                 <div class="vdo_lD">
-                	<video id="videoSnap5" class="vdo_l_video" style="background:#383838;" autoplay><!--视频-->
-						<div class="vdo_lBg_btn"></div>
-					</video>
+                	<div class="vdo_l_video" id="videoSnapDiv5" style="background:#383838;" /><!--视频-->
                 	<div class="vdo_lD_b">莉莉</div>
                     <i class="vdo_l_mute"></i>	<!--静音图标-->
                 </div>
