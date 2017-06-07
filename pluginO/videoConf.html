@@ -59,13 +59,7 @@ $(function(){
 
 						winid = result;
 						console.log('============================exebusinessaction:winid:'+winid)
-					} else {
-
-						console.log(status)
-					}
-
-				})
-   
+						
 						console.log('============================winid:'+winid)
 						navigator.getUserMedia({
 							audio: false,
@@ -82,10 +76,12 @@ $(function(){
 								optional: []
 							}
 						}, function(stream) {
+							document.getElementById('videoSnapDiv').innerHTML = '<video id="videoSnap1" autoplay/>';
 							document.getElementById('videoSnap1').onload = function(e) {
 							  window.URL.revokeObjectURL(document.getElementById('videoSnap1').src); // 清除释放
 							};
 							document.getElementById('videoSnap1').src = window.URL.createObjectURL(stream);
+							document.getElementById('videoDiv').innerHTML = '<video id="video" autoplay/>';
 							document.getElementById('video').onload = function(e) {
 							  window.URL.revokeObjectURL(document.getElementById('video').src); // 清除释放
 							};
@@ -93,6 +89,14 @@ $(function(){
 						}, function() {
 							console.log('Error, Screen stream is not available.')
 						})
+						
+					} else {
+
+						console.log(status)
+					}
+
+				})
+   
 				
 			
 			
@@ -311,7 +315,9 @@ function loaded() {
     	<div class="vdo_l" id="wrapper">
         	<div class="scroll">
                 <div class="vdo_lD">
-                	<video id="videoSnap1" class="vdo_l_video" style="background:#383838;" autoplay/><!--视频-->
+                	<div class="vdo_l_video" id="videoSnapDiv" style="background:#383838;"><!--视频-->
+						
+					</div>	
                 	<div class="vdo_lD_b">我</div>
                 </div>
                 <div class="vdo_lD">
@@ -358,7 +364,7 @@ function loaded() {
         </div>
         <div class="vdo_r">
             <!--视频占位-->
-            <div class="vdo_l_video"><p align="center"><video id="video" autoplay/></p></div>
+            <div class="vdo_l_video" id="videoDiv"></div>
             
             
         	<div class="vdo_r_t">
